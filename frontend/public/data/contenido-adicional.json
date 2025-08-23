@@ -3,32 +3,32 @@
         "id": 1,
         "proyectoId": 1,
         "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/BG_card.svg",
-        "titulo": "example_titulo",
-        "descripcion": "example_descripcion",
+        "titulo": "example_titulo1",
+        "descripcion": "example_descripcion1",
         "enlace": "https://www.linkedin.com/in/marco-antonn/details/projects/"
       },
       {
         "id": 2,
         "proyectoId": 1,
-        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/BG_card.svg",
-        "titulo": "example_titulo",
-        "descripcion": "example_descripcion",
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/BG.svg",
+        "titulo": "example_titulo2",
+        "descripcion": "example_descripcion2",
         "enlace": "example_enlace"
       },
       {
         "id": 3,
         "proyectoId": 1,
         "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/BG_card.svg",
-        "titulo": "example_titulo",
-        "descripcion": "example_descripcion",
+        "titulo": "example_titulo3",
+        "descripcion": "example_descripcion3",
         "enlace": "example_enlace"
       },
       {
         "id": 4,
         "proyectoId": 1,
         "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/BG_card.svg",
-        "titulo": "example_titulo",
-        "descripcion": "example_descripcion",
+        "titulo": "example_titulo4",
+        "descripcion": "example_descripcion4",
         "enlace": "example_enlace"
       }
 ]

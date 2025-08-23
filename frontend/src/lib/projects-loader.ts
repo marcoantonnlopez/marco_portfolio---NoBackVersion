@@ -1,4 +1,4 @@
-    // src/lib/projects-loader.ts
+// src/lib/projects-loader.ts
 export type Area = "liderazgo" | "desarrollo" | "diseno";
 
 export interface UIResultado {
@@ -33,7 +33,6 @@ export interface UIProject {
   descripcionBreve?: string;
   backgroundUrl?: string;
   logoUrl?: string;
-  // área “principal” inferida por las tablas hijas (opcional)
   area?: Area;
   liderazgo?: UISubSection;
   desarrollo?: UISubSection;
@@ -45,9 +44,11 @@ export interface UIProject {
 
 // -------- utils ----------
 const F = {
-  async json<T=any>(url: string): Promise<T | null> {
+  async json<T = any>(url: string): Promise<T | null> {
     try {
-      const r = await fetch(url, { cache: "force-cache" });
+      const r = await fetch(url, {
+        cache: process.env.NODE_ENV === "development" ? "no-store" : "force-cache",
+      });
       if (!r.ok) return null;
       return (await r.json()) as T;
     } catch {
@@ -81,7 +82,7 @@ const PATHS = {
   contenidoAdicional: ["/data/contenido-adicional.json"],
 };
 
-async function loadFirst<T=any>(candidates: string[]): Promise<T | null> {
+async function loadFirst<T = any>(candidates: string[]): Promise<T | null> {
   for (const u of candidates) {
     const data = await F.json<T>(u);
     if (data) return data;
@@ -101,14 +102,16 @@ function normalizeProjectRow(row: any) {
 }
 
 export async function getProjects(): Promise<UIProject[]> {
-  // 1) tablas base
+  // 1) Proyectos base
   const proyectosRaw = await loadFirst<any>(PATHS.proyectos);
-  const proyectos = F.arr(proyectosRaw?.projects ?? proyectosRaw?.proyectos ?? proyectosRaw).map(normalizeProjectRow);
+  const proyectos = F.arr(
+    proyectosRaw?.projects ?? proyectosRaw?.proyectos ?? proyectosRaw
+  ).map(normalizeProjectRow);
 
   const byId = new Map<string, UIProject>();
   for (const p of proyectos) byId.set(p.id, { ...p });
 
-  // 2) liderazgo + highlights
+  // 2) Liderazgo + highlights
   const liderRaw = await loadFirst<any[]>(PATHS.liderazgo);
   const lider = F.arr(liderRaw).map((r) => ({
     proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
@@ -117,10 +120,13 @@ export async function getProjects(): Promise<UIProject[]> {
     id: String(r?.id ?? ""),
   }));
   const liderHlRaw = await loadFirst<any[]>(PATHS.liderazgoHighlights);
-  const liderHlByLid = F.group(F.arr(liderHlRaw).map((h) => ({
-    liderazgo_id: String(h?.liderazgo_id ?? h?.liderazgoId ?? ""),
-    texto: String(h?.texto ?? h?.text ?? ""),
-  })), "liderazgo_id");
+  const liderHlByLid = F.group(
+    F.arr(liderHlRaw).map((h) => ({
+      liderazgo_id: String(h?.liderazgo_id ?? h?.liderazgoId ?? ""),
+      texto: String(h?.texto ?? h?.text ?? ""),
+    })),
+    "liderazgo_id"
+  );
 
   for (const l of lider) {
     const p = byId.get(l.proyecto_id);
@@ -133,7 +139,7 @@ export async function getProjects(): Promise<UIProject[]> {
     p.area ??= "liderazgo";
   }
 
-  // 3) desarrollo + highlights + tech stack
+  // 3) Desarrollo + highlights + tech stack
   const devRaw = await loadFirst<any[]>(PATHS.desarrollo);
   const dev = F.arr(devRaw).map((r) => ({
     proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
@@ -145,15 +151,21 @@ export async function getProjects(): Promise<UIProject[]> {
     queHice: String(r?.que_hice ?? r?.queHice ?? ""),
   }));
   const devHlRaw = await loadFirst<any[]>(PATHS.desarrolloHighlights);
-  const devHlByDev = F.group(F.arr(devHlRaw).map((h) => ({
-    desarrollo_id: String(h?.desarrollo_id ?? h?.desarrolloId ?? ""),
-    texto: String(h?.texto ?? h?.text ?? ""),
-  })), "desarrollo_id");
+  const devHlByDev = F.group(
+    F.arr(devHlRaw).map((h) => ({
+      desarrollo_id: String(h?.desarrollo_id ?? h?.desarrolloId ?? ""),
+      texto: String(h?.texto ?? h?.text ?? ""),
+    })),
+    "desarrollo_id"
+  );
   const devTsRaw = await loadFirst<any[]>(PATHS.devTechStack);
-  const devTsByDev = F.group(F.arr(devTsRaw).map((t) => ({
-    desarrollo_id: String(t?.desarrollo_id ?? t?.desarrolloId ?? ""),
-    tech: String(t?.tech ?? t?.stack ?? ""),
-  })), "desarrollo_id");
+  const devTsByDev = F.group(
+    F.arr(devTsRaw).map((t) => ({
+      desarrollo_id: String(t?.desarrollo_id ?? t?.desarrolloId ?? ""),
+      tech: String(t?.tech ?? t?.stack ?? ""),
+    })),
+    "desarrollo_id"
+  );
 
   for (const d of dev) {
     const p = byId.get(d.proyecto_id);
@@ -170,7 +182,7 @@ export async function getProjects(): Promise<UIProject[]> {
     p.area ??= "desarrollo";
   }
 
-  // 4) diseño + highlights
+  // 4) Diseño + highlights
   const dizRaw = await loadFirst<any[]>(PATHS.diseno);
   const diz = F.arr(dizRaw).map((r) => ({
     proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
@@ -179,10 +191,13 @@ export async function getProjects(): Promise<UIProject[]> {
     queHice: String(r?.que_hice ?? r?.queHice ?? ""),
   }));
   const dizHlRaw = await loadFirst<any[]>(PATHS.disenoHighlights);
-  const dizHlByDid = F.group(F.arr(dizHlRaw).map((h) => ({
-    diseno_id: String(h?.diseno_id ?? h?.diseño_id ?? h?.disenoId ?? ""),
-    texto: String(h?.texto ?? h?.text ?? ""),
-  })), "diseno_id");
+  const dizHlByDid = F.group(
+    F.arr(dizHlRaw).map((h) => ({
+      diseno_id: String(h?.diseno_id ?? h?.diseño_id ?? h?.disenoId ?? ""),
+      texto: String(h?.texto ?? h?.text ?? ""),
+    })),
+    "diseno_id"
+  );
 
   for (const d of diz) {
     const p = byId.get(d.proyecto_id);
@@ -195,15 +210,18 @@ export async function getProjects(): Promise<UIProject[]> {
     p.area ??= "diseno";
   }
 
-  // 5) resultados (ordenados)
+  // 5) Resultados
   const resRaw = await loadFirst<any[]>(PATHS.resultados);
-  const resByPid = F.group(F.arr(resRaw).map((r) => ({
-    proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
-    id: String(r?.id ?? ""),
-    orden: typeof r?.orden === "number" ? r.orden : Number(r?.orden ?? 0),
-    valor: r?.valor,
-    descripcion: r?.descripcion,
-  })), "proyecto_id");
+  const resByPid = F.group(
+    F.arr(resRaw).map((r) => ({
+      proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
+      id: String(r?.id ?? ""),
+      orden: typeof r?.orden === "number" ? r.orden : Number(r?.orden ?? 0),
+      valor: r?.valor,
+      descripcion: r?.descripcion,
+    })),
+    "proyecto_id"
+  );
 
   for (const [pid, arr] of resByPid) {
     const p = byId.get(pid);
@@ -224,16 +242,21 @@ export async function getProjects(): Promise<UIProject[]> {
     (byId.get(pid)!).resultados = mapped;
   }
 
-  // 6) contenido adicional
+  // 6) Contenido adicional  <-- FIX: soporta "imagenUrl" y no-store en dev
   const caRaw = await loadFirst<any[]>(PATHS.contenidoAdicional);
-  const caByPid = F.group(F.arr(caRaw).map((r) => ({
-    proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
-    id: String(r?.id ?? ""),
-    imageUrl: String(r?.imagen_url ?? r?.image_url ?? r?.imageUrl ?? ""),
-    title: String(r?.titulo ?? r?.title ?? ""),
-    description: String(r?.descripcion ?? r?.description ?? ""),
-    href: String(r?.enlace ?? r?.link ?? r?.url ?? ""),
-  })), "proyecto_id");
+  const caByPid = F.group(
+    F.arr(caRaw).map((r) => ({
+      proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
+      id: String(r?.id ?? ""),
+      imageUrl: String(
+        r?.imagen_url ?? r?.image_url ?? r?.imageUrl ?? r?.imagenUrl ?? "" // <-- añadido imagenUrl
+      ),
+      title: String(r?.titulo ?? r?.title ?? ""),
+      description: String(r?.descripcion ?? r?.description ?? ""),
+      href: String(r?.enlace ?? r?.link ?? r?.url ?? ""),
+    })),
+    "proyecto_id"
+  );
 
   for (const [pid, arr] of caByPid) {
     const p = byId.get(pid);
@@ -244,7 +267,7 @@ export async function getProjects(): Promise<UIProject[]> {
   return [...byId.values()];
 }
 
-// Helpers por área (para tus componentes)
+// Helpers por área
 export async function getProjectsByArea(area: Area): Promise<UIProject[]> {
   const all = await getProjects();
   return all.filter((p) => Boolean(p[area]));
