@@ -1,0 +1,124 @@
+{
+  "admins": [
+    {
+      "id": 1,
+      "email": "marcoantoniolopez.dev@gmail.com",
+      "passwordHash": "exemploPassWord",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    }
+  ],
+  "proyectos": [
+    {
+      "id": 1, 
+      "admin": "marco",
+      "adminId": 1,
+      "logoUrl": "https://github.com/marcoantonnlopez/portfolioContent/blob/master/pages/3_projects/studevs/logo.svg",
+      "backgroundUrl": "https://github.com/marcoantonnlopez/portfolioContent/blob/master/pages/3_projects/studevs/BG.svg",
+      "proyectoUrl": "https://studevs-landing.vercel.app/",
+      "instagramUrl": "https://www.instagram.com/studevs_official/",
+      "linkedinUrl": "https://www.linkedin.com/company/studevs",
+      "twitterUrl": "https://twitter.com/StuDevsOfficial",
+      "youtubeUrl": "https://www.youtube.com/@StuDevsOfficial",
+      "facebookUrl": "https://www.facebook.com/profile.php?id=100094110701290",
+      "descripcionBreve": "A launchpad turning curious CS students into tech builders.",
+      "proposito": "To unlock top-tier experiences and growth through tech challenges.",
+      "inicio": "Started after our first hackathon, fueled by the desire to do more.",
+      "historiaBreve": "I founded Studevs with my friends at 19 when I realized no one was going to open doors for us, so I kicked them open.In one year, we turned a small hackathon squad into a 160+ member launchpad.Now, our alumni are working at top tech companies, winning national competitions, and building products that matter. Studevs wasn’t a club. It was a rebellion.",
+      "segundaImagenUrl": "https://github.com/marcoantonnlopez/portfolioContent/blob/master/pages/3_projects/studevs/studevs.svg",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    }
+  ],
+  "resultadoproyectos": [
+    {
+      "id": 1,
+      "proyecto": "1",
+      "proyectoId": 1,
+      "orden": 1,
+      "valor": "+ 160",
+      "descripcion": "members in the community."
+    },
+    {
+      "id": 2,
+      "proyecto": "1",
+      "proyectoId": 2,
+      "orden": 2,
+      "valor": "+ 12",
+      "descripcion": "hackathons participated"
+    },
+    {
+      "id": 3,
+      "proyecto": "1",
+      "proyectoId": 3,
+      "orden": 3,
+      "valor": "+ 13",
+      "descripcion": "awards earned."
+    }
+  ],
+  "liderazgo": [
+    {
+      "id": 1,
+      "proyectoId": 1,
+      "videoUrl": "example_videoUrl",
+      "queHice": "example_queHice"
+    }
+  ],
+  "liderazgoHighlight": [
+    {
+      "id": 1,
+      "liderazgoId": 1,
+      "texto": "example_texto"
+    }
+  ],
+  "desarrollo": [
+    {
+      "id": 1,
+      "proyectoId": 1,
+      "videoUrl": "example_videoUrl",
+      "enlaceProyecto": "example_enlaceProyecto",
+      "githubUrl": "example_githubUrl",
+      "figmaUrl": "example_figmaUrl",
+      "queHice": "example_queHice"
+    }
+  ],
+  "devTechStack": [
+    {
+      "id": 1,
+      "desarrolloId": 1,
+      "tech": "example_tech"
+    }
+  ],
+  "desarrolloHighlight": [
+    {
+      "id": 1,
+      "desarrolloId": 1,
+      "texto": "example_texto"
+    }
+  ],
+  "diseno": [
+    {
+      "id": 1,
+      "proyectoId": 1,
+      "figmaUrl": "example_figmaUrl",
+      "queHice": "example_queHice"
+    }
+  ],
+  "disenoHighlight": [
+    {
+      "id": 1,
+      "disenoId": 1,
+      "texto": "example_texto"
+    }
+  ],
+  "contenidoAdicional": [
+    {
+      "id": 1,
+      "proyectoId": 1,
+      "imagenUrl": "example_imagenUrl",
+      "titulo": "example_titulo",
+      "descripcion": "example_descripcion",
+      "enlace": "example_enlace"
+    }
+  ]
+}

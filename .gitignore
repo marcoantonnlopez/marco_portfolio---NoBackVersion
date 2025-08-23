@@ -1,0 +1,41 @@
+# --- DEPENDENCIAS ---
+node_modules/
+.pnpm/
+.pnpm-debug.log*
+
+# --- YARN / PNPM / NPM ---
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+.pnp*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- MONOREPO OUTPUTS ---
+dist/
+build/
+out/
+.next/
+coverage/
+
+# --- ARCHIVOS DE CONFIGURACIÓN TEMPORALES ---
+*.tsbuildinfo
+*.log
+*.pem
+.DS_Store
+
+# --- ENTORNOS ---
+.env*
+.vercel/
+
+# --- ARCHIVOS DE NEXT.JS ---
+next-env.d.ts
+
+# --- VSCODE (opcional pero útil si compartes el proyecto) ---
+.vscode/
+
+# --- MACOS ---
+._*

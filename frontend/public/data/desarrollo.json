@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "proyecto_id": 1,
+    "video_url": "https://www.youtube.com/watch?v=bUAbUkfjUac",
+    "enlace_proyecto": "",
+    "github_url": "https://github.com/marcoantonnlopez/Studevs_webpage",
+    "figma_url": "https://www.figma.com/design/tW4sTHbavpV6xrcAq9TvhA/Landing-Page?node-id=0-1&t=J1lKCTqGCxIYJiRp-1",
+    "que_hice": "API, auth, websockets, deploy."
+  }
+]

@@ -1,0 +1,1 @@
+//* pages/ -> páginas finales (HomeHero, AboutMe)

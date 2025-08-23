@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "desarrolloId": 1,
+        "disenoId": "",
+        "tech": "AngularJS"
+      },
+      {
+        "id": 2,
+        "desarrolloId": "",
+        "disenoId": 1,
+        "tech": "Figma"
+      },
+      {
+        "id": 3,
+        "desarrolloId": "",
+        "disenoId": 1,
+        "tech": "Atomic design"
+      },
+      {
+        "id": 4,
+        "desarrolloId": 1,
+        "disenoId": "",
+        "tech": "MongoDB"
+      }
+]
