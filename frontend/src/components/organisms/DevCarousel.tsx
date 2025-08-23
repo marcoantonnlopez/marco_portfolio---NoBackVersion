@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import ProjectCard from "../molecules/ProjectCard";
 
 // === IDs FIJOS PARA ESTE CARRUSEL (elige aquí los 3) ===
-const SELECTED_PROJECT_IDS: Array<string | number> = [2, 4, 6];
+const SELECTED_PROJECT_IDS: Array<string | number> = [4, 5, 6];
 
 interface ProjectCardProps {
   id: string | number;

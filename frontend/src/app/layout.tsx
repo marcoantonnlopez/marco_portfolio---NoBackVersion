@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MarcoLopez.com",
+  title: "MarcoLopez.dev",
   description: "Marco Lopez Portfolio",
 };
 
