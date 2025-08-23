@@ -214,7 +214,7 @@ export default function HomeHero() {
             </h1>
 
             <p className="mt-4 max-w-xl text-white/80">
-              Full-stack problem solver with product taste. I ship fast, design systems that scale,
+              I´m Marco López. Full-stack problem solver with product taste. I ship fast, design systems that scale,
               and lead teams with heart. If you need momentum, I’m your builder.
             </p>
 
