@@ -117,10 +117,11 @@ export default function ProjectPage({ params }: PageProps) {
       {showDesign && design && (
         <DesignRoleSection
           title="My rol as a designer."
-          previewUrl={(design as any).previewUrl ?? project.backgroundUrl /* fallback */}
+          previewUrl={(design.previewUrl?? "") /* fallback */}
+          // previewUrl={(design as any).previewUrl ?? project.backgroundUrl /* fallback */}
           figmaUrl={design.figmaUrl}
           queHice={design.queHice}
-          tools={(design as any).tools ?? []}
+          tools={design.techStack ?? []}
           highlights={design.highlights ?? []}
         />
       )}

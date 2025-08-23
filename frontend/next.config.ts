@@ -1,11 +1,10 @@
+// next.config.ts
 import type { NextConfig } from "next";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE ??
-  (process.env.NODE_ENV === "development" ? "http://localhost:3001" : undefined);
-
 const nextConfig: NextConfig = {
-  // (temporal) evita que ESLint/TS rompan el build
+  reactStrictMode: true,
+
+  // (Opcional mientras limpias errores de TS/ESLint en producción)
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
 
@@ -16,24 +15,39 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Proxy opcional para usar /api/* → backend (dev/prod)
-  // En prod, si no hay API_BASE, no proxees a localhost por accidente
-  // async rewrites() {
-  //   if (!API_BASE) return [];
-  //   return [
-  //     {
-  //       source: "/api/:path*",
-  //       destination: `${API_BASE}/:path*`, // usa Render en prod, localhost en dev
-  //     },
-  //   ];
-  // },
+  // Control fino del caché para los JSON estáticos en /public/data
+  async headers() {
+    // En prod/previews cachea 10 min en navegador y CDN; en dev no cachea.
+    const isProd = process.env.NODE_ENV === "production";
+    const cache = isProd
+      ? "public, max-age=600, s-maxage=600, stale-while-revalidate=300"
+      : "no-store";
+
+    return [
+      {
+        source: "/data/:path*",
+        headers: [
+          { key: "Cache-Control", value: cache },
+        ],
+      },
+    ];
+  },
 
   images: {
-    // Dominios que sí usas (sin limitar por pathname para evitar problemas de mayúsculas)
+    // Necesario porque usas SVG remotos (jsDelivr, GitHub raw)
+    dangerouslyAllowSVG: true,
+    // Endurece la política al permitir SVG remotos
+    contentSecurityPolicy:
+      "default-src 'self'; img-src * data: blob:; media-src 'none'; script-src 'none'; sandbox;",
+
+    // Dominios desde los que cargas imágenes
     remotePatterns: [
       { protocol: "https", hostname: "cdn.jsdelivr.net" },
       { protocol: "https", hostname: "raw.githubusercontent.com" },
       { protocol: "https", hostname: "github.com" },
+      // añade otros si los usas (unsplash, vercel, etc.)
+      // { protocol: "https", hostname: "images.unsplash.com" },
+      // { protocol: "https", hostname: "*.vercel.app" },
     ],
   },
 };

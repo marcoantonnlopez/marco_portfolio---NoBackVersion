@@ -20,11 +20,12 @@ export interface UIContenido {
 export interface UISubSection {
   videoUrl?: string;
   queHice?: string;
+  previewUrl?: string;   // <-- importante para diseño
   figmaUrl?: string;
   githubUrl?: string;
   projectUrl?: string;
   highlights?: string[];
-  techStack?: string[];
+  techStack?: string[];  // <-- techs para dev o para diseño
 }
 
 export interface UIProject {
@@ -139,7 +140,7 @@ export async function getProjects(): Promise<UIProject[]> {
     p.area ??= "liderazgo";
   }
 
-  // 3) Desarrollo + highlights + tech stack
+  // 3) Desarrollo + highlights + tech stack (por desarrolloId)
   const devRaw = await loadFirst<any[]>(PATHS.desarrollo);
   const dev = F.arr(devRaw).map((r) => ({
     proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
@@ -150,6 +151,7 @@ export async function getProjects(): Promise<UIProject[]> {
     figmaUrl: String(r?.figma_url ?? r?.figmaUrl ?? ""),
     queHice: String(r?.que_hice ?? r?.queHice ?? ""),
   }));
+
   const devHlRaw = await loadFirst<any[]>(PATHS.desarrolloHighlights);
   const devHlByDev = F.group(
     F.arr(devHlRaw).map((h) => ({
@@ -158,14 +160,27 @@ export async function getProjects(): Promise<UIProject[]> {
     })),
     "desarrollo_id"
   );
+
+  // --- Tech stack: agrupar por desarrolloId Y por disenoId ---
   const devTsRaw = await loadFirst<any[]>(PATHS.devTechStack);
-  const devTsByDev = F.group(
-    F.arr(devTsRaw).map((t) => ({
-      desarrollo_id: String(t?.desarrollo_id ?? t?.desarrolloId ?? ""),
-      tech: String(t?.tech ?? t?.stack ?? ""),
-    })),
-    "desarrollo_id"
-  );
+  const devTsByDev = new Map<string, string[]>();
+  const devTsByDesign = new Map<string, string[]>();
+  for (const t of F.arr(devTsRaw)) {
+    const tech = String(t?.tech ?? t?.stack ?? "").trim();
+    if (!tech) continue;
+
+    const devId = String(t?.desarrollo_id ?? t?.desarrolloId ?? "").trim();
+    if (devId) {
+      if (!devTsByDev.has(devId)) devTsByDev.set(devId, []);
+      devTsByDev.get(devId)!.push(tech);
+    }
+
+    const dizId = String(t?.diseno_id ?? t?.diseño_id ?? t?.disenoId ?? "").trim();
+    if (dizId) {
+      if (!devTsByDesign.has(dizId)) devTsByDesign.set(dizId, []);
+      devTsByDesign.get(dizId)!.push(tech);
+    }
+  }
 
   for (const d of dev) {
     const p = byId.get(d.proyecto_id);
@@ -177,16 +192,17 @@ export async function getProjects(): Promise<UIProject[]> {
       figmaUrl: d.figmaUrl,
       queHice: d.queHice,
       highlights: (devHlByDev.get(d.id) || []).map((x) => x.texto),
-      techStack: (devTsByDev.get(d.id) || []).map((x) => x.tech),
+      techStack: devTsByDev.get(d.id) || [],
     };
     p.area ??= "desarrollo";
   }
 
-  // 4) Diseño + highlights
+  // 4) Diseño + highlights  (AHORA con previewUrl y techStack por disenoId)
   const dizRaw = await loadFirst<any[]>(PATHS.diseno);
   const diz = F.arr(dizRaw).map((r) => ({
     proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
     id: String(r?.id ?? ""),
+    previewUrl: String(r?.preview_url ?? r?.previewUrl ?? r?.preview ?? ""), // <-- NUEVO
     figmaUrl: String(r?.figma_url ?? r?.figmaUrl ?? ""),
     queHice: String(r?.que_hice ?? r?.queHice ?? ""),
   }));
@@ -203,9 +219,11 @@ export async function getProjects(): Promise<UIProject[]> {
     const p = byId.get(d.proyecto_id);
     if (!p) continue;
     p.diseno = {
+      previewUrl: d.previewUrl,               // <-- ahora disponible
       figmaUrl: d.figmaUrl,
       queHice: d.queHice,
       highlights: (dizHlByDid.get(d.id) || []).map((x) => x.texto),
+      techStack: devTsByDesign.get(d.id) || [],  // <-- techs por disenoId
     };
     p.area ??= "diseno";
   }
@@ -242,14 +260,14 @@ export async function getProjects(): Promise<UIProject[]> {
     (byId.get(pid)!).resultados = mapped;
   }
 
-  // 6) Contenido adicional  <-- FIX: soporta "imagenUrl" y no-store en dev
+  // 6) Contenido adicional
   const caRaw = await loadFirst<any[]>(PATHS.contenidoAdicional);
   const caByPid = F.group(
     F.arr(caRaw).map((r) => ({
       proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
       id: String(r?.id ?? ""),
       imageUrl: String(
-        r?.imagen_url ?? r?.image_url ?? r?.imageUrl ?? r?.imagenUrl ?? "" // <-- añadido imagenUrl
+        r?.imagen_url ?? r?.image_url ?? r?.imageUrl ?? r?.imagenUrl ?? ""
       ),
       title: String(r?.titulo ?? r?.title ?? ""),
       description: String(r?.descripcion ?? r?.description ?? ""),
