@@ -35,7 +35,7 @@ const childPassThrough = { hidden: {}, show: { transition: { when: "beforeChildr
 // ---- Utils de fetch robustos (aceptan distintos shapes) ----
 async function loadJson<T = any>(url: string): Promise<T | null> {
   try {
-    const r = await fetch(url, { 
+    const r = await fetch(url, {
       cache: process.env.NODE_ENV === "development" ? "no-store" : "force-cache",
     });
     if (!r.ok) return null;
@@ -64,9 +64,10 @@ function normalizeProjectRow(row: any) {
 type Tag = { id: string; label: string; count?: number };
 
 async function buildLeaderTagsMap(): Promise<Map<string, Tag[]>> {
-  // resultados: [{ id, proyectoId|proyecto_id, orden, valor, descripcion }]
-  const raw = (await loadJson<any[]>("/data/resultado-proyecto.json")) ||
-              (await loadJson<any[]>("/data/resultados.json")) || [];
+  const raw =
+    (await loadJson<any[]>("/data/resultado-proyecto.json")) ||
+    (await loadJson<any[]>("/data/resultados.json")) ||
+    [];
   const grouped = new Map<string, any[]>();
   for (const r of arr(raw)) {
     const pid = asId(r?.proyectoId ?? r?.proyecto_id ?? r?.project_id);
@@ -77,11 +78,8 @@ async function buildLeaderTagsMap(): Promise<Map<string, Tag[]>> {
 
   const out = new Map<string, Tag[]>();
   for (const [pid, rows] of grouped) {
-    const ordered = rows.sort(
-      (a, b) => (Number(a?.orden ?? 0) - Number(b?.orden ?? 0))
-    );
+    const ordered = rows.sort((a, b) => Number(a?.orden ?? 0) - Number(b?.orden ?? 0));
     const tags = ordered.slice(0, 3).map((r: any, i: number) => {
-      // label: usa descripcion si existe; si no, valor
       const label = String(r?.descripcion ?? r?.valor ?? "");
       const valNum = Number(r?.valor);
       const count = Number.isFinite(valNum) ? valNum : undefined;
@@ -93,31 +91,32 @@ async function buildLeaderTagsMap(): Promise<Map<string, Tag[]>> {
 }
 
 async function buildDevTagsMap(): Promise<Map<string, Tag[]>> {
-  // dev-tech-stack: [{ id, desarrolloId, disenoId, tech }]
   const raw = await loadJson<any[]>("/data/dev-tech-stack.json");
   const byDev = new Map<string, Tag[]>();
   for (const r of arr(raw)) {
     const did = asId(r?.desarrolloId);
-    if (!did) continue; // solo los que son de desarrollo
+    if (!did) continue;
     if (!byDev.has(did)) byDev.set(did, []);
     const list = byDev.get(did)!;
-    if (list.length < 3) list.push({ id: `${did}-tech-${list.length}`, label: String(r?.tech ?? "") });
+    if (list.length < 3)
+      list.push({ id: `${did}-tech-${list.length}`, label: String(r?.tech ?? "") });
   }
   return byDev;
 }
 
 async function buildDesignTagsMap(): Promise<Map<string, Tag[]>> {
-  // diseno-highlight: [{ id, disenoId, texto }]
-  const raw = (await loadJson<any[]>("/data/diseno-highlight.json")) ||
-              (await loadJson<any[]>("/data/diseño-highlight.json")) ||
-              (await loadJson<any[]>("/data/diseno-highlights.json"));
+  const raw =
+    (await loadJson<any[]>("/data/diseno-highlight.json")) ||
+    (await loadJson<any[]>("/data/diseño-highlight.json")) ||
+    (await loadJson<any[]>("/data/diseno-highlights.json"));
   const byDesign = new Map<string, Tag[]>();
   for (const r of arr(raw)) {
     const did = asId(r?.disenoId ?? r?.diseñoId);
     if (!did) continue;
     if (!byDesign.has(did)) byDesign.set(did, []);
     const list = byDesign.get(did)!;
-    if (list.length < 2) list.push({ id: `${did}-dhl-${list.length}`, label: String(r?.texto ?? "") });
+    if (list.length < 2)
+      list.push({ id: `${did}-dhl-${list.length}`, label: String(r?.texto ?? "") });
   }
   return byDesign;
 }
@@ -134,7 +133,8 @@ export default function SectionProjectsGrid({ area, title, limit }: Props) {
       // 1) Cargar proyectos
       const proyectosRaw =
         (await loadJson<any[]>("/data/proyectos.json")) ||
-        (await loadJson<any[]>("/data/db.json")) || [];
+        (await loadJson<any[]>("/data/db.json")) ||
+        [];
       const proyectos = arr(proyectosRaw).map(normalizeProjectRow);
 
       // 2) Filtrar por área declarada en cada proyecto
@@ -161,7 +161,9 @@ export default function SectionProjectsGrid({ area, title, limit }: Props) {
       if (!cancelled) setProjects(finalList);
     })();
 
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [area, limit]);
 
   if (projects === null) {
@@ -199,11 +201,11 @@ export default function SectionProjectsGrid({ area, title, limit }: Props) {
           <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8">{effectiveTitle}</h2>
         )}
 
+        {/* 👇 cambia whileInView por animate para que no quede oculto hasta hacer scroll */}
         <motion.div
           variants={gridStagger}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
+          animate="show"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {projects.map((p) => (
