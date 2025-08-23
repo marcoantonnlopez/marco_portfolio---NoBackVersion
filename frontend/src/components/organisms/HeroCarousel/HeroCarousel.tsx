@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, ArrowRight, Github, Linkedin, Play, Download } from "lucide-react";
 
-// === Slides (igual que antes) ===
+// === Slides ===
 const slides = [
   {
     src: "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/1_main.svg",
@@ -28,23 +28,43 @@ const ROLES = ["Leader", "Engineer", "Designer"];
 const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/marcoantonnlopez";
 const LINKEDIN_URL = process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://www.linkedin.com/in/marco-antonn/";
 const RESUME_URL = process.env.NEXT_PUBLIC_RESUME_URL ?? "";
-const DEFAULT_RESUME = "/resume.pdf"; // coloca tu archivo en /public/resume.pdf
+const DEFAULT_RESUME = "/resume.pdf";
 const RESUME_HREF = RESUME_URL && RESUME_URL.trim().length > 0 ? RESUME_URL : DEFAULT_RESUME;
 
-// --- Helpers para clasificar proyectos ---
-function hasAnyTag(p: any, regex: RegExp): boolean {
-  return Array.isArray(p?.tags) && p.tags.some((t: any) => regex.test(String(t).toLowerCase()));
-}
+/* ================= Helpers de clasificación ================= */
+
+const toLowerNoAccents = (v: any) =>
+  String(v ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
 function getMainTag(p: any): string {
-  return String(p?.type ?? p?.area ?? p?.category ?? p?.categoria ?? "").toLowerCase();
+  return toLowerNoAccents(p?.type ?? p?.area ?? p?.category ?? p?.categoria ?? "");
+}
+
+function hasAnyTag(p: any, regex: RegExp): boolean {
+  return Array.isArray(p?.tags) && p.tags.some((t: any) => regex.test(toLowerNoAccents(t)));
+}
+
+function hasArea(p: any, target: "liderazgo" | "desarrollo" | "diseno"): boolean {
+  if (!Array.isArray(p?.areas)) return false;
+  const normalized = p.areas.map(toLowerNoAccents);
+  const syn: Record<typeof target, string[]> = {
+    liderazgo: ["liderazgo", "lider", "lideres", "liderar", "leader", "leadership", "líder"],
+    desarrollo: ["desarrollo", "dev", "development", "software", "backend", "frontend", "fullstack", "web"],
+    diseno: ["diseno", "diseño", "design", "ui", "ux", "product design"],
+  } as const;
+  const wanted = syn[target];
+  return normalized.some((a) => wanted.some((w) => a.includes(w)));
 }
 
 function isLeaderProject(p: any): boolean {
+  if (hasArea(p, "liderazgo")) return true;
   const tag = getMainTag(p);
   const tagged =
     tag.includes("leader") ||
     tag.includes("leadership") ||
-    tag.includes("líder") ||
     tag.includes("lider") ||
     tag.includes("liderazgo") ||
     tag.includes("community") ||
@@ -59,12 +79,13 @@ function isLeaderProject(p: any): boolean {
 
   const inTags = hasAnyTag(
     p,
-    /leader|leadership|líder|lider|liderazgo|community|organizer|founder|volunteer|mentorship|club|team lead|president|coordinator/
+    /leader|leadership|lider|liderazgo|community|organizer|founder|volunteer|mentorship|club|team lead|president|coordinator/
   );
   return tagged || inTags;
 }
 
 function isDevProject(p: any): boolean {
+  if (hasArea(p, "desarrollo")) return true;
   const tag = getMainTag(p);
   const tagged =
     tag.includes("dev") ||
@@ -81,24 +102,26 @@ function isDevProject(p: any): boolean {
 }
 
 function isDesignProject(p: any): boolean {
+  if (hasArea(p, "diseno")) return true;
   const tag = getMainTag(p);
-  const tagged = tag.includes("design") || tag.includes("diseño") || tag.includes("ui") || tag.includes("ux");
-  const inTags = hasAnyTag(p, /design|diseño|ui|ux/);
+  const tagged = tag.includes("design") || tag.includes("diseno") || tag.includes("ui") || tag.includes("ux");
+  const inTags = hasAnyTag(p, /design|diseno|ui|ux/);
   return tagged || inTags;
 }
+
+/* ================= Component ================= */
 
 export default function HomeHero() {
   const [roleIdx, setRoleIdx] = useState(0);
   const [imgIdx, setImgIdx] = useState(0);
   const timerRef = useRef<number | null>(null);
 
-  // counters (lazy, safe) — ya SIN servicios
+  // counters
   const [counts, setCounts] = useState<{ leader: number; dev: number; design: number } | null>(null);
 
   useEffect(() => {
     let mounted = true;
-
-    const CANDIDATES = ["/data/proyectos.json", "/data/projects.json"]; // JSON en /public/data/
+    const CANDIDATES = ["/data/proyectos.json", "/data/projects.json"];
 
     (async () => {
       try {
@@ -106,20 +129,20 @@ export default function HomeHero() {
 
         for (const url of CANDIDATES) {
           try {
-            const r = await fetch(url, { cache: "force-cache" });
+            const r = await fetch(url, {
+              cache: process.env.NODE_ENV === "development" ? "no-store" : "force-cache",
+            });
             if (!r.ok) continue;
             const raw = await r.json();
-
             const arr: any[] = Array.isArray(raw)
               ? raw
-              : (raw?.projects || raw?.proyectos || raw?.items || raw?.data || []);
-
+              : raw?.projects || raw?.proyectos || raw?.items || raw?.data || [];
             if (Array.isArray(arr) && arr.length) {
               loaded = arr;
               break;
             }
           } catch {
-            // intenta siguiente candidato
+            /* try next */
           }
         }
 
@@ -252,7 +275,6 @@ export default function HomeHero() {
 
           {/* Right: layered gallery */}
           <div className="relative h-[44vh] min-h-[320px] w-full select-none sm:h-[52vh]">
-            {/* ring */}
             <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" />
 
             <AnimatePresence initial={false} mode="wait">
@@ -268,7 +290,6 @@ export default function HomeHero() {
               />
             </AnimatePresence>
 
-            {/* foreground chip */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-3 py-1.5 text-xs backdrop-blur">
                 <Play className="h-3.5 w-3.5" />

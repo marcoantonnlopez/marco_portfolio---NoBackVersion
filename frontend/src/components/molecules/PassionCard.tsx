@@ -1,14 +1,16 @@
+// src/components/molecules/PassionCard.tsx
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { getCounts } from "@/lib/projects-loader";
 
 export interface PassionCardProps {
   title: string;
-  /** e.g., "4 projects" */
+  /** e.g., "4 projects" — si no se provee, la card lo calculará sola por área */
   meta?: string;
   /** optional subline under meta if you still want it */
   subtitle?: string;
@@ -16,14 +18,30 @@ export interface PassionCardProps {
   description?: string;
   imgSrc: string;
   href: string;
-  /** small badge aligned to the top‑right */
+  /** small badge aligned to the top-right */
   chip?: string;
   /** chips rendered at the bottom area */
   tags?: string[];
   /** CTA text */
   ctaLabel?: string;
-  /** pass true for above‑the‑fold images */
+  /** pass true for above-the-fold images */
   priority?: boolean;
+}
+
+type Area = "liderazgo" | "desarrollo" | "diseno";
+
+function inferAreaFromHrefOrTitle(href: string, title: string): Area | null {
+  const h = href.toLowerCase();
+  if (h.includes("type=leader")) return "liderazgo";
+  if (h.includes("type=dev")) return "desarrollo";
+  if (h.includes("type=designer") || h.includes("type=design")) return "diseno";
+
+  const t = title.toLowerCase();
+  if (t.includes("leader")) return "liderazgo";
+  if (t.includes("developer") || t.includes("engineer") || t.includes("dev")) return "desarrollo";
+  if (t.includes("designer") || t.includes("design")) return "diseno";
+
+  return null;
 }
 
 export function PassionCard({
@@ -38,6 +56,42 @@ export function PassionCard({
   ctaLabel = "See projects",
   priority = false,
 }: PassionCardProps) {
+  const [autoMeta, setAutoMeta] = useState<string | undefined>(undefined);
+
+  // Si no nos pasan `meta`, calcularla automáticamente por área.
+  useEffect(() => {
+    let cancelled = false;
+    if (meta) {
+      setAutoMeta(undefined);
+      return;
+    }
+    const area = inferAreaFromHrefOrTitle(href, title);
+    if (!area) {
+      setAutoMeta(undefined);
+      return;
+    }
+    (async () => {
+      try {
+        const counts = await getCounts(); // lee /public/data/* usando el loader
+        let n = 0;
+        if (area === "liderazgo") n = counts.leader;
+        else if (area === "desarrollo") n = counts.dev;
+        else if (area === "diseno") n = counts.design;
+
+        if (!cancelled) {
+          setAutoMeta(`${n} project${n === 1 ? "" : "s"}`);
+        }
+      } catch {
+        if (!cancelled) setAutoMeta(undefined);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [href, title, meta]);
+
+  const metaText = meta ?? autoMeta;
+
   return (
     <Link href={href} aria-label={`Open ${title}`} className="group block">
       <motion.article
@@ -73,8 +127,8 @@ export function PassionCard({
               >
                 {title}
               </h3>
-              {meta && (
-                <div className="text-white/90 text-lg font-semibold">{meta}</div>
+              {metaText && (
+                <div className="text-white/90 text-lg font-semibold">{metaText}</div>
               )}
               {subtitle && (
                 <p className="text-white/85 text-sm md:text-[15px]">{subtitle}</p>

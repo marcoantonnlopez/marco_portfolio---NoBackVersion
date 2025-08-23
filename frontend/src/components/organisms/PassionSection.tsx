@@ -37,19 +37,38 @@ const CARDS = [
   },
 ];
 
-// --- Helpers para clasificar proyectos desde JSON ---
-function hasAnyTag(p: any, regex: RegExp): boolean {
-  return Array.isArray(p?.tags) && p.tags.some((t: any) => regex.test(String(t).toLowerCase()));
-}
+/* ===== Helpers de clasificación (con soporte para `areas`) ===== */
+
+const toLowerNoAccents = (v: any) =>
+  String(v ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
 function getMainTag(p: any): string {
-  return String(p?.type ?? p?.area ?? p?.category ?? p?.categoria ?? "").toLowerCase();
+  return toLowerNoAccents(p?.type ?? p?.area ?? p?.category ?? p?.categoria ?? "");
 }
+function hasAnyTag(p: any, regex: RegExp): boolean {
+  return Array.isArray(p?.tags) && p.tags.some((t: any) => regex.test(toLowerNoAccents(t)));
+}
+function hasArea(p: any, target: "liderazgo" | "desarrollo" | "diseno"): boolean {
+  if (!Array.isArray(p?.areas)) return false;
+  const normalized = p.areas.map(toLowerNoAccents);
+  const syn: Record<typeof target, string[]> = {
+    liderazgo: ["liderazgo", "lider", "leader", "leadership", "líder"],
+    desarrollo: ["desarrollo", "dev", "development", "software", "backend", "frontend", "fullstack", "web"],
+    diseno: ["diseno", "diseño", "design", "ui", "ux", "product design"],
+  };
+  const wanted = syn[target];
+  return normalized.some((a) => wanted.some((w) => a.includes(w)));
+}
+
 function isLeaderProject(p: any): boolean {
+  if (hasArea(p, "liderazgo")) return true;
   const tag = getMainTag(p);
   const tagged =
     tag.includes("leader") ||
     tag.includes("leadership") ||
-    tag.includes("líder") ||
     tag.includes("lider") ||
     tag.includes("liderazgo") ||
     tag.includes("community") ||
@@ -63,11 +82,12 @@ function isLeaderProject(p: any): boolean {
     tag.includes("coordinator");
   const inTags = hasAnyTag(
     p,
-    /leader|leadership|líder|lider|liderazgo|community|organizer|founder|volunteer|mentorship|club|team lead|president|coordinator/
+    /leader|leadership|lider|liderazgo|community|organizer|founder|volunteer|mentorship|club|team lead|president|coordinator/
   );
   return tagged || inTags;
 }
 function isDevProject(p: any): boolean {
+  if (hasArea(p, "desarrollo")) return true;
   const tag = getMainTag(p);
   const tagged =
     tag.includes("dev") ||
@@ -82,9 +102,10 @@ function isDevProject(p: any): boolean {
   return tagged || inTags;
 }
 function isDesignProject(p: any): boolean {
+  if (hasArea(p, "diseno")) return true;
   const tag = getMainTag(p);
-  const tagged = tag.includes("design") || tag.includes("diseño") || tag.includes("ui") || tag.includes("ux");
-  const inTags = hasAnyTag(p, /design|diseño|ui|ux/);
+  const tagged = tag.includes("design") || tag.includes("diseno") || tag.includes("ui") || tag.includes("ux");
+  const inTags = hasAnyTag(p, /design|diseno|ui|ux/);
   return tagged || inTags;
 }
 
@@ -101,18 +122,20 @@ export default function PassionSection() {
 
         for (const url of CANDIDATES) {
           try {
-            const r = await fetch(url, { cache: "force-cache" });
+            const r = await fetch(url, {
+              cache: process.env.NODE_ENV === "development" ? "no-store" : "force-cache",
+            });
             if (!r.ok) continue;
             const raw = await r.json();
             const arr: any[] = Array.isArray(raw)
               ? raw
-              : (raw?.projects || raw?.proyectos || raw?.items || raw?.data || []);
+              : raw?.projects || raw?.proyectos || raw?.items || raw?.data || [];
             if (Array.isArray(arr) && arr.length) {
               loaded = arr;
               break;
             }
           } catch {
-            // probar siguiente
+            /* try next */
           }
         }
 
@@ -133,9 +156,10 @@ export default function PassionSection() {
   }, []);
 
   const getMeta = (key: keyof Counts) => {
-    if (!counts) return undefined; // evita “0 projects” en carga
+    if (!counts) return undefined; // evita “0 projects” durante carga
     const n = counts[key];
     return `${n} project${n === 1 ? "" : "s"}`;
+    // si prefieres mostrar "—" en lugar de ocultar mientras carga, devuelve n ?? "—"
   };
 
   return (
