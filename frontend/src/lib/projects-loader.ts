@@ -91,6 +91,55 @@ async function loadFirst<T = any>(candidates: string[]): Promise<T | null> {
   return null;
 }
 
+// function normalizeProjectRow(row: any) {
+//   return {
+//     id: String(row?.id ?? row?.uuid ?? row?.slug ?? ""),
+//     title: String(row?.title ?? row?.nombre ?? row?.name ?? "Untitled"),
+//     descripcionBreve: String(row?.descripcion_breve ?? row?.descripcionBreve ?? row?.summary ?? ""),
+//     backgroundUrl: String(row?.background_url ?? row?.backgroundUrl ?? row?.background ?? row?.cover ?? ""),
+//     logoUrl: String(row?.logo_url ?? row?.logoUrl ?? row?.logo ?? ""),
+//     tags: Array.isArray(row?.tags) ? row.tags.map((t: any) => String(t)) : undefined,
+//   };
+// }
+
+// export async function getProjects(): Promise<UIProject[]> {
+//   // 1) Proyectos base
+//   const proyectosRaw = await loadFirst<any>(PATHS.proyectos);
+//   const proyectos = F.arr(
+//     proyectosRaw?.projects ?? proyectosRaw?.proyectos ?? proyectosRaw
+//   ).map(normalizeProjectRow);
+
+//   const byId = new Map<string, UIProject>();
+//   for (const p of proyectos) byId.set(p.id, { ...p });
+
+//   // 2) Liderazgo + highlights
+//   const liderRaw = await loadFirst<any[]>(PATHS.liderazgo);
+//   const lider = F.arr(liderRaw).map((r) => ({
+//     proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
+//     videoUrl: String(r?.video_url ?? r?.videoUrl ?? ""),
+//     queHice: String(r?.que_hice ?? r?.queHice ?? ""),
+//     id: String(r?.id ?? ""),
+//   }));
+//   const liderHlRaw = await loadFirst<any[]>(PATHS.liderazgoHighlights);
+//   const liderHlByLid = F.group(
+//     F.arr(liderHlRaw).map((h) => ({
+//       liderazgo_id: String(h?.liderazgo_id ?? h?.liderazgoId ?? ""),
+//       texto: String(h?.texto ?? h?.text ?? ""),
+//     })),
+//     "liderazgo_id"
+//   );
+
+//   for (const l of lider) {
+//     const p = byId.get(l.proyecto_id);
+//     if (!p) continue;
+//     p.liderazgo = {
+//       videoUrl: l.videoUrl,
+//       queHice: l.queHice,
+//       highlights: (liderHlByLid.get(l.id) || []).map((x) => x.texto),
+//     };
+//     p.area ??= "liderazgo";
+//   }
+
 function normalizeProjectRow(row: any) {
   return {
     id: String(row?.id ?? row?.uuid ?? row?.slug ?? ""),
@@ -105,30 +154,49 @@ function normalizeProjectRow(row: any) {
 export async function getProjects(): Promise<UIProject[]> {
   // 1) Proyectos base
   const proyectosRaw = await loadFirst<any>(PATHS.proyectos);
-  const proyectos = F.arr(
-    proyectosRaw?.projects ?? proyectosRaw?.proyectos ?? proyectosRaw
-  ).map(normalizeProjectRow);
+  const proyectos = (Array.isArray(proyectosRaw?.projects ?? proyectosRaw?.proyectos)
+    ? (proyectosRaw?.projects ?? proyectosRaw?.proyectos)
+    : proyectosRaw) as any[];
+  const base = (Array.isArray(proyectos) ? proyectos : []).map(normalizeProjectRow);
 
   const byId = new Map<string, UIProject>();
-  for (const p of proyectos) byId.set(p.id, { ...p });
+  for (const p of base) byId.set(p.id, { ...p });
 
-  // 2) Liderazgo + highlights
+  // 2) Liderazgo + highlights  *** FIXED ***
   const liderRaw = await loadFirst<any[]>(PATHS.liderazgo);
-  const lider = F.arr(liderRaw).map((r) => ({
+  const lider = (Array.isArray(liderRaw) ? liderRaw : []).map((r) => ({
     proyecto_id: String(r?.proyecto_id ?? r?.proyectoId ?? r?.project_id ?? ""),
-    videoUrl: String(r?.video_url ?? r?.videoUrl ?? ""),
-    queHice: String(r?.que_hice ?? r?.queHice ?? ""),
-    id: String(r?.id ?? ""),
+    id:         String(r?.id ?? ""),
+    videoUrl:   String(r?.video_url ?? r?.videoUrl ?? ""),
+    queHice:    String(r?.que_hice ?? r?.queHice ?? "")
   }));
-  const liderHlRaw = await loadFirst<any[]>(PATHS.liderazgoHighlights);
-  const liderHlByLid = F.group(
-    F.arr(liderHlRaw).map((h) => ({
-      liderazgo_id: String(h?.liderazgo_id ?? h?.liderazgoId ?? ""),
-      texto: String(h?.texto ?? h?.text ?? ""),
-    })),
-    "liderazgo_id"
-  );
 
+  // map project -> liderazgo.id to support highlights that come with proyectoId
+  const liderByProjectId = new Map<string, string>();
+  for (const l of lider) {
+    if (l.proyecto_id && l.id) liderByProjectId.set(l.proyecto_id, l.id);
+  }
+
+  const liderHlRaw = await loadFirst<any[]>(PATHS.liderazgoHighlights);
+  // normalize highlights and compute a key that is ALWAYS liderazgo_id
+  const liderHlNorm = (Array.isArray(liderHlRaw) ? liderHlRaw : []).map((h) => {
+    const lid = String(h?.liderazgo_id ?? h?.liderazgoId ?? "");
+    const pid = String(h?.proyecto_id ?? h?.proyectoId ?? "");
+    const key = lid || (pid ? (liderByProjectId.get(pid) ?? "") : "");
+    return {
+      liderazgo_id: key,                           // final consistent key
+      texto: String(h?.texto ?? h?.text ?? "")
+    };
+  }).filter((h) => h.liderazgo_id); // drop rows we couldn't map
+
+  // group by liderazgo_id
+  const liderHlByLid = new Map<string, { texto: string }[]>();
+  for (const h of liderHlNorm) {
+    if (!liderHlByLid.has(h.liderazgo_id)) liderHlByLid.set(h.liderazgo_id, []);
+    liderHlByLid.get(h.liderazgo_id)!.push({ texto: h.texto });
+  }
+
+  // attach liderazgo to projects
   for (const l of lider) {
     const p = byId.get(l.proyecto_id);
     if (!p) continue;
@@ -139,6 +207,8 @@ export async function getProjects(): Promise<UIProject[]> {
     };
     p.area ??= "liderazgo";
   }
+
+
 
   // 3) Desarrollo + highlights + tech stack (por desarrolloId)
   const devRaw = await loadFirst<any[]>(PATHS.desarrollo);
