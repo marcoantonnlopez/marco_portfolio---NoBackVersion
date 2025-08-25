@@ -6,6 +6,15 @@
     "enlace_proyecto": "",
     "github_url": "https://github.com/marcoantonnlopez/Studevs_webpage",
     "figma_url": "https://www.figma.com/design/tW4sTHbavpV6xrcAq9TvhA/Landing-Page?node-id=0-1&t=J1lKCTqGCxIYJiRp-1",
-    "que_hice": "API, auth, websockets, deploy."
+    "que_hice": "Built the Studevs website (v1): full-stack foundation using Angular with a MongoDB-backed data model for members, projects, events, and awards. Designed the database schema; implemented REST endpoints and data access patterns. Hand-coded UI components and state flows; implemented routing, lazy loading, and responsive layouts. Established a clean module structure and reusable component library (Atomic principles) to speed future contributions."
+  },
+  {
+    "id": 2,
+    "proyecto_id": 6,
+    "video_url": "https://www.youtube.com/watch?v=BGU5cQRmhpc",
+    "enlace_proyecto": "https://devpost.com/software/edu-ard",
+    "github_url": "https://github.com/RodrigoJC20/Edu-ard/tree/main",
+    "figma_url": "https://www.figma.com/design/QtcSyI6qejadldnYhobLxW/Edu-ard?node-id=0-1&t=AZ4oAc8btOrsH9fe-1",
+    "que_hice": "Implemented ~65% of the frontend: Next.js file-based routing (e.g., /class/[id]), join-with-code flow, chat layout, message cards, and topic chips. Built a reusable component set (cards, inputs, nav, modals) and responsive styles; mixed Tailwind utility classes with hand-rolled CSS where needed. Wired placeholder services and state for future AI/analytics integration; kept the frontend backend-ready for rapid hooking."
   }
 ]

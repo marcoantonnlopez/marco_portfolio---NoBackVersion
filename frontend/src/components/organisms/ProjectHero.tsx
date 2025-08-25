@@ -5,58 +5,95 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Link2, Instagram, Linkedin, Twitter, Youtube, Facebook } from "lucide-react";
-// (opcional) si usas el loader que te di:
 import type { UIProject } from "@/lib/projects-loader";
 
-// Tipo mínimo que usa este componente (sin servicios)
-type ProjectHeroData = (UIProject | {
-  // si no usas el loader, igual funciona con este shape
-  id?: string;
-  title: string;
-  descripcionBreve?: string;
-  backgroundUrl?: string;
-  logoUrl?: string;
-}) & {
-  slogan?: string;
-  proyectoUrl?: string;
-  instagramUrl?: string;
-  linkedinUrl?: string;
-  twitterUrl?: string;
-  youtubeUrl?: string;
-  facebookUrl?: string;
+// Tipo mínimo que usa este componente (compatible con UIProject y objetos “sueltos”)
+type ProjectHeroData =
+  | UIProject
+  | ({
+      id?: string | number;
+      title: string;
+      descripcionBreve?: string;
+      backgroundUrl?: string;
+      logoUrl?: string;
+      slogan?: string;
+      // enlaces toplevel
+      proyectoUrl?: string;
+      projectUrl?: string;
+      instagramUrl?: string;
+      linkedinUrl?: string;
+      twitterUrl?: string;
+      youtubeUrl?: string;
+      facebookUrl?: string;
+      // opcional: contenedor de links
+      links?: Partial<{
+        website: string;
+        instagram: string;
+        linkedin: string;
+        twitter: string;
+        youtube: string;
+        facebook: string;
+      }>;
+      // por si vienen anidados desde sub-secciones
+      desarrollo?: Partial<{ projectUrl: string }>;
+    } & Record<string, any>);
+
+const fadeIn = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.8 } } };
+const zoomIn = { hidden: { scale: 1.06, opacity: 0 }, show: { scale: 1, opacity: 1, transition: { duration: 1 } } };
+const slideUp = {
+  hidden: { y: 20, opacity: 0 },
+  show: { y: 0, opacity: 1, transition: { duration: 0.6, delay: 0.1 } },
 };
 
-const fadeIn  = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.8 } } };
-const zoomIn  = { hidden: { scale: 1.06, opacity: 0 }, show: { scale: 1, opacity: 1, transition: { duration: 1 } } };
-const slideUp = { hidden: { y: 20, opacity: 0 }, show: { y: 0, opacity: 1, transition: { duration: 0.6, delay: 0.1 } } };
+// helper para leer con múltiples llaves/fallbacks
+function pick(...vals: Array<any>) {
+  for (const v of vals) {
+    const s = typeof v === "string" ? v : "";
+    if (s && s.trim().length > 0) return s;
+  }
+  return "";
+}
 
 export default function ProjectHero({ project }: { project: ProjectHeroData }) {
-  const brand = (project.title || "").split("|")[0].trim().toLowerCase();
+  const brand = String(project.title || "").split("|")[0].trim();
+  const brandSlugForAlt = brand.toLowerCase();
+
+  // Website puede venir con distintos nombres o anidado
+  const website = pick(
+    (project as any).proyectoUrl,
+    (project as any).projectUrl,
+    (project as any)?.desarrollo?.projectUrl,
+    (project as any)?.links?.website
+  );
+
+  // Redes sociales: aceptar toplevel o en "links"
+  const instagram = pick((project as any).instagramUrl, (project as any)?.links?.instagram);
+  const linkedin = pick((project as any).linkedinUrl, (project as any)?.links?.linkedin);
+  const twitter = pick((project as any).twitterUrl, (project as any)?.links?.twitter);
+  const youtube = pick((project as any).youtubeUrl, (project as any)?.links?.youtube);
+  const facebook = pick((project as any).facebookUrl, (project as any)?.links?.facebook);
 
   const socials = [
-    { href: project.proyectoUrl, Icon: Link2, label: "Website" },
-    { href: project.instagramUrl, Icon: Instagram, label: "Instagram" },
-    { href: project.linkedinUrl,  Icon: Linkedin,  label: "LinkedIn" },
-    { href: project.twitterUrl,   Icon: Twitter,   label: "Twitter/X" },
-    { href: project.youtubeUrl,   Icon: Youtube,   label: "YouTube" },
-    { href: project.facebookUrl,  Icon: Facebook,  label: "Facebook" },
-  ].filter(s => !!s.href);
+    { href: website, Icon: Link2, label: "Website" },
+    { href: instagram, Icon: Instagram, label: "Instagram" },
+    { href: linkedin, Icon: Linkedin, label: "LinkedIn" },
+    { href: twitter, Icon: Twitter, label: "Twitter/X" },
+    { href: youtube, Icon: Youtube, label: "YouTube" },
+    { href: facebook, Icon: Facebook, label: "Facebook" },
+  ].filter((s) => Boolean(s.href));
 
   return (
-    <motion.section
-      initial="hidden"
-      animate="show"
-      className="relative w-full h-[420px] md:h-[380px] lg:h-[420px] overflow-hidden"
-    >
+    <motion.section initial="hidden" animate="show" className="relative w-full h-[420px] md:h-[380px] lg:h-[420px] overflow-hidden">
       {/* Fondo con zoom-in */}
       <motion.div variants={zoomIn} className="absolute inset-0">
         {project.backgroundUrl && (
           <Image
             src={project.backgroundUrl}
-            alt={`${project.title} background`}
+            alt={`${brand} background`}
             fill
             priority
             className="object-cover"
+            sizes="100vw"
           />
         )}
       </motion.div>
@@ -66,36 +103,30 @@ export default function ProjectHero({ project }: { project: ProjectHeroData }) {
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(1200px_400px_at_50%_55%,rgba(255,255,255,0.06),transparent_60%)]" />
 
       {/* Contenido */}
-      <div className="relative z-10 h-full flex items.end md:items-end items-center pb-16">
+      <div className="relative z-10 h-full flex items-end pb-16">
         <div className="mx-auto w-full max-w-4xl px-6 text-center">
           {/* Logo */}
           {project.logoUrl && (
             <motion.div variants={slideUp} className="mx-auto mb-3 relative w-16 h-16 md:w-20 md:h-20">
-              <Image src={project.logoUrl} alt={`${brand} logo`} fill className="object-contain" />
+              <Image src={project.logoUrl} alt={`${brandSlugForAlt} logo`} fill className="object-contain" sizes="80px" />
             </motion.div>
           )}
 
-          {/* Marca */}
+          {/* Título + Slogan (slogan bajo el título) */}
           <motion.div variants={slideUp} className="mb-4">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
-              {project.title}
-            </h1>
-            {project.slogan && (
-              <p className="text-lg md:text-xl text-gray-200">{project.slogan}</p>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">{brand}</h1>
+            {/* usar slogan; si falta, no mostramos nada aquí (la descripción va en ProjectDetails) */}
+            {Boolean((project as any).slogan) && (
+              <p className="text-white/80 leading-snug text-center">{(project as any).slogan}</p>
             )}
           </motion.div>
 
-          {/* Descripción */}
-          {project.descripcionBreve && (
-            <motion.p variants={slideUp} className="text-base md:text-lg text-gray-300 mb-6 max-w-2xl mx-auto">
-              {project.descripcionBreve}
-            </motion.p>
-          )}
+          {/* Descripción breve: NO va aquí; se muestra en ProjectDetails (“What is …?”) */}
 
           {/* Social Links */}
           {socials.length > 0 && (
-            <motion.div variants={slideUp} className="flex justify-center gap-4">
-              {socials.map((social, index) => (
+            <motion.div variants={slideUp} className="flex justify-center gap-3">
+              {socials.map((social) => (
                 <Link
                   key={social.label}
                   href={social.href!}

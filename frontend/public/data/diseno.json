@@ -4,6 +4,13 @@
         "proyectoId": 1,
         "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/webStudevs.svg",
         "figmaUrl": "https://www.figma.com/design/tW4sTHbavpV6xrcAq9TvhA/Landing-Page?node-id=0-1&t=J1lKCTqGCxIYJiRp-1",
-        "queHice": "example_queHice111"
+        "queHice": "Defined the brand identity and design language; created a scalable component system in Figma based on Atomic Design. Ran 6 feedback cycles with 4 admin reviewers; iterated IA, navigation, and card systems for projects and member stories. Wrote UI guidelines (spacing, typography, component states) and accessibility checks to ensure clarity and trust."
+      },
+      {
+        "id": 2,
+        "proyectoId": 6,
+        "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/Edu-ard/BG.svg",
+        "figmaUrl": "https://www.figma.com/design/QtcSyI6qejadldnYhobLxW/Edu-ard?node-id=0-1&t=AZ4oAc8btOrsH9fe-1",
+        "queHice": "End-to-end design in ~3 hours: logo, brand palette, typography scale, and UX writing for professor and student voices. Prototyped the syllabus → room → insight IA; produced lightweight flows in Figma to guide development. Balanced clarity and speed (no full atomic system, hackathon-optimized)."
       }
     ]

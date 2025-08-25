@@ -2,26 +2,31 @@
   {
       "id": 1,
       "disenoId": 1,
-      "texto": "example_texto"
+      "texto": "Increased task clarity (discover projects, join, apply) by shipping a card-based IA and consistent component states, validated through 6 iteration rounds with core admins."
     },
     {
       "id": 2,
       "disenoId": 1,
-      "texto": "example_texto"
+      "texto": "Reduced visual inconsistency by introducing a tokenized design system and component library, streamlining future page builds."
     },
     {
       "id": 3,
       "disenoId": 1,
-      "texto": "example_texto"
+      "texto": "Strengthened brand trust by unifying identity across site and socials, supporting organic impressions and higher event conversion."
     },
     {
       "id": 4,
-      "disenoId": 5,
-      "texto": "example_texto"
+      "disenoId": 2,
+      "texto": "Reduced handoff time by delivering a compact UI kit + UX copy up front, enabling engineers to implement net-new screens in minutes, not hours."
     },
     {
-      "id": 4,
-      "disenoId": 6,
-      "texto": "example_texto"
+      "id": 5,
+      "disenoId": 2,
+      "texto": "Increased task clarity (join via course ID, post question, review insights) by tightening labels and microcopy across core flows."
+    },
+    {
+      "id": 6,
+      "disenoId": 2,
+      "texto": "Strengthened judge comprehension with a clean visual hierarchy that mapped directly to the pitch storyline."
     }
 ]

@@ -22,5 +22,59 @@
         "desarrolloId": 1,
         "disenoId": "",
         "tech": "MongoDB"
+      },
+      {
+        "id": 5,
+        "desarrolloId": 1,
+        "disenoId": "",
+        "tech": "AngularRouter"
+      },
+      {
+        "id": 6,
+        "desarrolloId": 1,
+        "disenoId": "",
+        "tech": "HTML/CSS"
+      },
+      {
+        "id": 7,
+        "desarrolloId": 1,
+        "disenoId": "",
+        "tech": "Node.js"
+      },
+      {
+        "id": 8,
+        "desarrolloId": 1,
+        "disenoId": "",
+        "tech": "Git"
+      },
+      {
+        "id": 9,
+        "desarrolloId": 1,
+        "disenoId": "",
+        "tech": "GitHub"
+      },
+      {
+        "id": 10,
+        "desarrolloId": 1,
+        "disenoId": "",
+        "tech": "npm"
+      },
+      {
+        "id": 11,
+        "desarrolloId": 1,
+        "disenoId": "",
+        "tech": "DTOs"
+      },
+      {
+        "id": 12,
+        "desarrolloId": 1,
+        "disenoId": "",
+        "tech": "REST services"
+      },
+      {
+        "id": 13,
+        "desarrolloId": "",
+        "disenoId": 1,
+        "tech": "Figma tokens"
       }
 ]
