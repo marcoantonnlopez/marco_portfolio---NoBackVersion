@@ -3,10 +3,21 @@
   { "id": 2, "proyectoId": 1, "orden": 2, "valor": "12",  "descripcion": "hackathons participated… and counting." },
   { "id": 3, "proyectoId": 1, "orden": 3, "valor": "13",  "descripcion": "awards earned… and counting." },
   { "id": 4, "proyectoId": 1, "orden": 4, "valor": "10",  "descripcion": "full mitacs GRI scholarships in the community… and counting." },
-  { "id": 5, "proyectoId": 1, "orden": 5, "valor": "+6",  "descripcion": "studevs are now in big Tech companies or YC startups… and counting." },
-  { "id": 6, "proyectoId": 1, "orden": 6, "valor": "+30",  "descripcion": "projects created by studevs… and counting." },
-  { "id": 7, "proyectoId": 2, "orden": 1, "valor": "+9",  "descripcion": "desc_ejemplo1" },
-  { "id": 8, "proyectoId": 2, "orden": 2, "valor": "9",  "descripcion": "desc_ejemplo2" },
-  { "id": 9, "proyectoId": 2, "orden": 3, "valor": "09",  "descripcion": "desc_ejemplo3" },
-  { "id": 10, "proyectoId": 2, "orden": 4, "valor": "94",  "descripcion": "desc_ejemplo4" }
+  { "id": 5, "proyectoId": 1, "orden": 5, "valor": "6",  "descripcion": "studevs are now in big Tech companies or YC startups… and counting." },
+  { "id": 6, "proyectoId": 1, "orden": 6, "valor": "30",  "descripcion": "projects created by studevs… and counting." },
+  
+  { "id": 7, "proyectoId": 2, "orden": 1, "valor": "4000",  "descripcion": "cigarette butts collected during city walk-throughs" },
+  { "id": 8, "proyectoId": 2, "orden": 2, "valor": "5000",  "descripcion": "cigarette butts gathered via campus drop-boxes and delivered to SEGAM SLP." },
+  { "id": 9, "proyectoId": 2, "orden": 3, "valor": "8640",  "descripcion": "batteries gathered via campus drop-boxes and delivered to SEGAM SLP." },
+  { "id": 10, "proyectoId": 2, "orden": 4, "valor": "4",  "descripcion": "Reforestations with Viernes Verde, CONAFOR, and “Voluntarios Modelo” across multiple urban zones." },
+  { "id": 11, "proyectoId": 2, "orden": 5, "valor": "600",  "descripcion": "KG of plastic caps collected through a multi-school effort" },
+  { "id": 12, "proyectoId": 2, "orden": 6, "valor": "15",  "descripcion": "persons making the #ColillasChallenge picking up cigarette butts and garbage in their bottles." },
+  { "id": 13, "proyectoId": 2, "orden": 7, "valor": "200",  "descripcion": "attendees reached in a STEP talk conference at Colegio Valladolid’s entrepreneurship fair." },
+
+  { "id": 14, "proyectoId": 3, "orden": 8, "valor": "600",  "descripcion": "KG of plastic caps collected through a multi-school effort (≈ 216,000 pieces) in 12 weeks" },
+  { "id": 15, "proyectoId": 3, "orden": 9, "valor": "5",  "descripcion": "institutions collaborating (Valladolid, Sembradores de Amistad, San Luis Rey de Francia, UASLP Psychology, Tecnológico de SLP)." },
+  { "id": 16, "proyectoId": 3, "orden": 10, "valor": "25",  "descripcion": "toys donated to a girls’ shelter." },
+  { "id": 17, "proyectoId": 3, "orden": 11, "valor": "2",  "descripcion": "holiday events delivered (AMANC + shelter)." },
+  { "id": 18, "proyectoId": 3, "orden": 12, "valor": "20",  "descripcion": "volunteers involved across stages." }
+
 ]

@@ -20,13 +20,64 @@
       "texto": "Spearheaded the development of a hierarchical admin system, establishing roles for founders, admins, alumni, and participants to ensure long-term continuity. The system has remained active for 2.5 years, sustaining 3 generations of leadership... and counting."
     },
     {
-      "id": 4,
+      "id": 5,
       "liderazgoId": 1,
       "texto": "Reached 300+ organic impressions by deploying narrative-first content and alumni spotlights, increasing event sign-ups and partner interest."
     },
     {
-      "id": 4,
+      "id": 6,
       "liderazgoId": 1,
       "texto": "Catalyzed 10 Mitacs GRI wins & 6 Big Tech/YC placements via targeted mentorship, application playbooks, and mock interviews."
+    },
+
+    {
+      "id": 7,
+      "liderazgoId": 2,
+      "texto": "Collected ~600 kg of plastic caps by launching a multi-campus drop-box program and weekly pickups over the run, documented with partner receipts."
+    },
+    {
+      "id": 8,
+      "liderazgoId": 2,
+      "texto": "Delivered 8,640 batteries + 5,000 cigarette butts to SEGAM by standardizing collection → storage → handoff, ensuring safe disposal."
+    },
+    {
+      "id": 9,
+      "liderazgoId": 2,
+      "texto": "Mobilized 50+ volunteers for clean-up initiatives and community challenges by coordinating schools and volunteers, coupling advocacy with real cleanup."
+    },
+    {
+      "id": 10,
+      "liderazgoId": 2,
+      "texto": "Reached ~200 students with a sustainability talk at an entrepreneurship fair by packaging “act-measure-share” playbooks teens could replicate."
+    },
+    {
+      "id": 11,
+      "liderazgoId": "3",
+      "texto": "Delivered 600 kg (≈216,000 caps) in 12 weeks by installing collection containers across 5 schools and running weekly campus-captain pickups, surpassing the 28 kg baseline by ~21×, validated via weigh-in and AMANC handoff."
+    },
+    {
+      "id": 12,
+      "liderazgoId": "3",
+      "texto": "Mobilized up to 20 volunteers by defining roles, shifts, and checklists, achieving zero missed pickups and an on-time campaign close."
+    },
+    {
+      "id": 13,
+      "liderazgoId": "3",
+      "texto": "Executed 2 holiday events (AMANC + girls’ shelter) by coordinating logistics and partners (incl. TecMilenio robotics), enabling the donation of ~25 toys and structured activities."
+    },
+    {
+      "id": 14,
+      "liderazgoId": "3",
+      "texto": "Standardized cross-campus execution with a simple starter kit (what/where/how), reducing setup friction and keeping all five sites active for the full 12 weeks."
+    },
+    {
+      "id": 15,
+      "liderazgoId": "",
+      "texto": ""
+    },
+    {
+      "id": 16,
+      "liderazgoId": "",
+      "texto": ""
     }
 ]

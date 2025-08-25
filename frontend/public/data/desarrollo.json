@@ -16,5 +16,14 @@
     "github_url": "https://github.com/RodrigoJC20/Edu-ard/tree/main",
     "figma_url": "https://www.figma.com/design/QtcSyI6qejadldnYhobLxW/Edu-ard?node-id=0-1&t=AZ4oAc8btOrsH9fe-1",
     "que_hice": "Implemented ~65% of the frontend: Next.js file-based routing (e.g., /class/[id]), join-with-code flow, chat layout, message cards, and topic chips. Built a reusable component set (cards, inputs, nav, modals) and responsive styles; mixed Tailwind utility classes with hand-rolled CSS where needed. Wired placeholder services and state for future AI/analytics integration; kept the frontend backend-ready for rapid hooking."
+  },
+  {
+    "id": 2,
+    "proyecto_id": 2,
+    "video_url": "https://www.youtube.com/watch?v=UvdldxRbkYE&feature=youtu.be",
+    "enlace_proyecto": "https://marcoantonn.github.io/STEP-webpage/",
+    "github_url": "https://github.com/marcoantonnlopez/STEP-webpage.git",
+    "figma_url": "https://www.figma.com/design/tN4nVBCdm1A5GioPExLa6A/STEP-web?node-id=0-1&t=GIBk5HI1dI8veIJC-1",
+    "que_hice": "Built the STEP website from scratch at 15 with HTML, CSS, and vanilla JS to showcase initiatives, publish updates, and centralize contact/info. Hand-coded responsive components; organized sections for actions (cleanups, reforestations, drives) and partners."
   }
 ]

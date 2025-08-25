@@ -12,5 +12,12 @@
         "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/Edu-ard/BG.svg",
         "figmaUrl": "https://www.figma.com/design/QtcSyI6qejadldnYhobLxW/Edu-ard?node-id=0-1&t=AZ4oAc8btOrsH9fe-1",
         "queHice": "End-to-end design in ~3 hours: logo, brand palette, typography scale, and UX writing for professor and student voices. Prototyped the syllabus → room → insight IA; produced lightweight flows in Figma to guide development. Balanced clarity and speed (no full atomic system, hackathon-optimized)."
+      },
+      {
+        "id": 2,
+        "proyectoId": 2,
+        "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/step/diseno.png",
+        "figmaUrl": "https://www.figma.com/design/tN4nVBCdm1A5GioPExLa6A/STEP-web?node-id=0-1&t=GIBk5HI1dI8veIJC-1",
+        "queHice": "Created the brand identity (logo, palette, typography) and campaign collateral (posters, social posts, box signage). Designed a lightweight Atomic Design kit in Figma (for web + print) to keep assets consistent across drives and events."
       }
     ]

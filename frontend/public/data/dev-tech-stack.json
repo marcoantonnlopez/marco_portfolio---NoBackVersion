@@ -8,13 +8,13 @@
       {
         "id": 2,
         "desarrolloId": "",
-        "disenoId": "1, 6",
+        "disenoId": "1, 6, 2",
         "tech": "Figma"
       },
       {
         "id": 3,
         "desarrolloId": "",
-        "disenoId": 1,
+        "disenoId": "1, 2",
         "tech": "Atomic design"
       },
       {
@@ -37,7 +37,7 @@
       },
       {
         "id": 6,
-        "desarrolloId": 1,
+        "desarrolloId": "1, 2",
         "disenoId": "",
         "tech": "HTML/CSS"
       },
@@ -80,7 +80,13 @@
       {
         "id": 13,
         "desarrolloId": "",
-        "disenoId": 1,
-        "tech": "Figma tokens"
+        "disenoId": "1",
+        "tech": "Design tokens"
+      },
+      {
+        "id": 14,
+        "desarrolloId": "2",
+        "disenoId": "",
+        "tech": "JavaScript"
       }
 ]

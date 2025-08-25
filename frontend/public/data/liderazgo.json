@@ -3,6 +3,18 @@
     "id": 1,
     "proyecto_id": 1,
     "video_url": "https://www.youtube.com/watch?v=u6XUd89Eyws&t=524s",
-    "que_hice": "Set vision, operating cadence, and quality bars; created a challenge-to-product funnel. Recruited and developed the founding ops/mentor team; built peer-led pods. Pitched and secured university sponsorship; handled budgeting and event ops. Built our brand narrative; led content and growth experiments. Mentored students on portfolios, scholarships (e.g., Mitacs GRI), and interview prep.."
+    "que_hice": "Set vision, operating cadence, and quality bars; created a challenge-to-product funnel. Recruited and developed the founding ops/mentor team; built peer-led pods. Pitched and secured university sponsorship; handled budgeting and event ops. Built our brand narrative; led content and growth experiments. Mentored students on portfolios, scholarships (e.g., Mitacs GRI), and interview prep."
+  },
+  {
+    "id": 2,
+    "proyecto_id": 2,
+    "video_url": "https://www.youtube.com/watch?v=c74oAYSY1So",
+    "que_hice": "Founded and coordinated operations (routes, materials, permissions, safety). Built partnerships with SEGAM, CONAFOR, 4 schools, and local volunteer groups. Planned events (collection drives, reforestations, marches) and handled on-site logistics. Created the communications cadence (Instagram, challenges, reporting)."
+  },
+  {
+    "id": 3,
+    "proyecto_id": 3,
+    "video_url": "https://www.youtube.com/watch?v=c74oAYSY1So",
+    "que_hice": "Founded and directed a 12-week, five-school donation campaign end-to-end (planning, approvals, logistics, closeout). Set the operating model: campus captains, weekly pickup cadence, storage and transport plan, and a simple SOP for collect → weigh → deliver. Aligned five institutions (Valladolid, Sembradores de Amistad, San Luis Rey de Francia, UASLP Psychology, Tec de SLP) with a clear starter kit (what to collect, where to place containers, who owns pickups). Coordinated partners for delivery and events: AMANC SLP (caps handoff) and a girls’ shelter (toy donation + holiday event). Mobilized up to 20 volunteers across stages (setup, weekly pickups, sorting, delivery, event staffing) with role-based checklists. Managed communications and progress tracking (collection targets by campus, weekly totals, final weigh-in) to keep momentum visible and accountable. Executed two holiday events (piñata, games) with on-site roles, materials, and timing; invited TecMilenio’s robotics group to support at the shelter. Ensured a clean close: verified weigh-in (~600 kg ≈ 216,000 caps), documented handoff to AMANC, and summarized outcomes for replication."
   }
 ]

@@ -28,5 +28,15 @@
         "id": 6,
         "desarrolloId": 6,
         "texto": "Improved demo reliability via defensive UI states (loading/empty/error) so flows stayed smooth under time pressure."
+      },
+      {
+        "id": 7,
+        "desarrolloId": 2,
+        "texto": "Launched the public site in weeks by building reusable CSS/JS components, enabling quick publishing of new campaigns and results."
+      },
+      {
+        "id": 8,
+        "desarrolloId": 2,
+        "texto": "Increased volunteer clarity by structuring pages around “how to help” and “what we collected,” improving credibility with schools and agencies."
       }
 ]

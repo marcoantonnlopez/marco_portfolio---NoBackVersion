@@ -17,11 +17,11 @@
       },
       {
         "id": 3,
-        "proyectoId": 1,
-        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/BG_card.svg",
-        "titulo": "example_titulo3",
-        "descripcion": "example_descripcion3",
-        "enlace": "example_enlace"
+        "proyectoId": "1, 6",
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/Hackmty.png",
+        "titulo": "HackMty 2023",
+        "descripcion": "See how 7 students changed the game in 24 hrs...",
+        "enlace": "https://www.linkedin.com/pulse/24-hours-innovation-studevs-hackmty-odyssey-studevs"
       },
       {
         "id": 4,
@@ -30,5 +30,13 @@
         "titulo": "example_titulo4",
         "descripcion": "example_descripcion4",
         "enlace": "example_enlace"
+      },
+      {
+        "id": 5,
+        "proyectoId": 2,
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/step/maracha.JPG",
+        "titulo": "STEP and FridaysforFuture",
+        "descripcion": "SLP environmental march...",
+        "enlace": "https://www.instagram.com/p/B27xgqaAjXh/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
       }
 ]
