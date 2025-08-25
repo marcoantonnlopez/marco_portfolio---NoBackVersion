@@ -9,7 +9,7 @@
     "que_hice": "Built the Studevs website (v1): full-stack foundation using Angular with a MongoDB-backed data model for members, projects, events, and awards. Designed the database schema; implemented REST endpoints and data access patterns. Hand-coded UI components and state flows; implemented routing, lazy loading, and responsive layouts. Established a clean module structure and reusable component library (Atomic principles) to speed future contributions."
   },
   {
-    "id": 2,
+    "id": 6,
     "proyecto_id": 6,
     "video_url": "https://www.youtube.com/watch?v=BGU5cQRmhpc",
     "enlace_proyecto": "https://devpost.com/software/edu-ard",

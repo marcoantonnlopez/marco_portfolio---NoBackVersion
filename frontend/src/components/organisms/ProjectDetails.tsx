@@ -328,7 +328,7 @@ function AnimatedNumber({ value }: { value: number }) {
 
   useEffect(() => {
     count.set(0);
-    animate(count, value, { duration: 1.8, ease: "easeOut" });
+    animate(count, value, { duration: 3.2, ease: "easeOut" });
   }, [value]);
 
   return (
@@ -605,9 +605,6 @@ export default function ProjectDetails({ project }: { project: any }) {
                 <motion.div key={r.id} variants={metric} className="flex flex-col">
                   <AnimatedNumber value={value} />
                   <div className="w-4/5 h-[2px] bg-white/40 mt-3 mb-2 mx-auto" />
-                  {/* Always show the main label */}
-                  <p className="text-white/80 leading-snug text-center">{r.label}</p>
-                  {/* Optional supporting text */}
                   {r.description && (
                     <p className="text-white/60 text-sm mt-1 text-center">
                       {r.description}

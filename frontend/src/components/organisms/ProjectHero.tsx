@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Link2, Instagram, Linkedin, Twitter, Youtube, Facebook } from "lucide-react";
 import type { UIProject } from "@/lib/projects-loader";
+import { link } from "node:fs";
 
 // Tipo mínimo que usa este componente (compatible con UIProject y objetos “sueltos”)
 type ProjectHeroData =
@@ -67,6 +68,7 @@ export default function ProjectHero({ project }: { project: ProjectHeroData }) {
   );
 
   // Redes sociales: aceptar toplevel o en "links"
+  const proyectoUrl = pick((project as any).proyectoUrl, (project as any)?.links?.proyectoUrl);
   const instagram = pick((project as any).instagramUrl, (project as any)?.links?.instagram);
   const linkedin = pick((project as any).linkedinUrl, (project as any)?.links?.linkedin);
   const twitter = pick((project as any).twitterUrl, (project as any)?.links?.twitter);
@@ -75,6 +77,7 @@ export default function ProjectHero({ project }: { project: ProjectHeroData }) {
 
   const socials = [
     { href: website, Icon: Link2, label: "Website" },
+    // { href: proyectoUrl, Icon: Link2, label: "proyectoUrl" },
     { href: instagram, Icon: Instagram, label: "Instagram" },
     { href: linkedin, Icon: Linkedin, label: "LinkedIn" },
     { href: twitter, Icon: Twitter, label: "Twitter/X" },
@@ -117,7 +120,7 @@ export default function ProjectHero({ project }: { project: ProjectHeroData }) {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">{brand}</h1>
             {/* usar slogan; si falta, no mostramos nada aquí (la descripción va en ProjectDetails) */}
             {Boolean((project as any).slogan) && (
-              <p className="text-white/80 leading-snug text-center">{(project as any).slogan}</p>
+              <p className="text-white/80  text-center">{(project as any).slogan}</p>
             )}
           </motion.div>
 

@@ -16,17 +16,17 @@
       },
       {
         "id": 4,
-        "desarrolloId": 2,
+        "desarrolloId": 6,
         "texto": "Shipped 65% of UI (routes, chat, dashboards) by building a small component library, reducing duplicate code and speeding page assembly during the hack."
       },
       {
         "id": 5,
-        "desarrolloId": 2,
+        "desarrolloId": 6,
         "texto": "Cut integration friction by keeping the frontend API-contract ready, enabling backend hookup without redesign."
       },
       {
         "id": 6,
-        "desarrolloId": 2,
+        "desarrolloId": 6,
         "texto": "Improved demo reliability via defensive UI states (loading/empty/error) so flows stayed smooth under time pressure."
       }
 ]

@@ -90,19 +90,42 @@ async function buildLeaderTagsMap(): Promise<Map<string, Tag[]>> {
   return out;
 }
 
-async function buildDevTagsMap(): Promise<Map<string, Tag[]>> {
+async function buildDevTagsMap(): Promise<Map<string, { id: string; label: string; count?: number }[]>> {
   const raw = await loadJson<any[]>("/data/dev-tech-stack.json");
-  const byDev = new Map<string, Tag[]>();
-  for (const r of arr(raw)) {
-    const did = asId(r?.desarrolloId);
-    if (!did) continue;
-    if (!byDev.has(did)) byDev.set(did, []);
-    const list = byDev.get(did)!;
-    if (list.length < 3)
-      list.push({ id: `${did}-tech-${list.length}`, label: String(r?.tech ?? "") });
+  const byDev = new Map<string, { id: string; label: string; count?: number }[]>();
+
+  const idList = (v: any): string[] => {
+    if (Array.isArray(v)) return v.map((x) => String(x ?? "").trim()).filter(Boolean);
+    if (typeof v === "number") return [String(v)];
+    if (typeof v === "string") {
+      return v.split(/[,\s;|]+/g).map((x) => x.trim()).filter(Boolean);
+    }
+    return [];
+  };
+
+  for (const row of Array.isArray(raw) ? raw : []) {
+    const tech = String(row?.tech ?? row?.stack ?? "").trim();
+    if (!tech) continue;
+
+    const devIds = [
+      ...idList(row?.desarrollo_id),
+      ...idList(row?.desarrolloId),
+      ...idList(row?.desarrolloIds),
+    ];
+
+    for (const did of devIds) {
+      if (!byDev.has(did)) byDev.set(did, []);
+      const list = byDev.get(did)!;
+
+      // evita duplicados de label
+      if (!list.some((t) => t.label === tech)) {
+        if (list.length < 3) list.push({ id: `${did}-tech-${list.length}`, label: tech });
+      }
+    }
   }
   return byDev;
 }
+
 
 async function buildDesignTagsMap(): Promise<Map<string, Tag[]>> {
   const raw =

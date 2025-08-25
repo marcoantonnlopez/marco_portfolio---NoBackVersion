@@ -16,17 +16,17 @@
     },
     {
       "id": 4,
-      "disenoId": 2,
+      "disenoId": 6,
       "texto": "Reduced handoff time by delivering a compact UI kit + UX copy up front, enabling engineers to implement net-new screens in minutes, not hours."
     },
     {
       "id": 5,
-      "disenoId": 2,
+      "disenoId": 6,
       "texto": "Increased task clarity (join via course ID, post question, review insights) by tightening labels and microcopy across core flows."
     },
     {
       "id": 6,
-      "disenoId": 2,
+      "disenoId": 6,
       "texto": "Strengthened judge comprehension with a clean visual hierarchy that mapped directly to the pitch storyline."
     }
 ]

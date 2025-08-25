@@ -8,7 +8,7 @@
       {
         "id": 2,
         "desarrolloId": "",
-        "disenoId": 1,
+        "disenoId": "1, 6",
         "tech": "Figma"
       },
       {
@@ -18,8 +18,14 @@
         "tech": "Atomic design"
       },
       {
+        "id": 14,
+        "desarrolloId": 6,
+        "disenoId": "",
+        "tech": "NextJS"
+      },
+      {
         "id": 4,
-        "desarrolloId": 1,
+        "desarrolloId": "1",
         "disenoId": "",
         "tech": "MongoDB"
       },
@@ -37,7 +43,7 @@
       },
       {
         "id": 7,
-        "desarrolloId": 1,
+        "desarrolloId": "1, 6",
         "disenoId": "",
         "tech": "Node.js"
       },
@@ -49,13 +55,13 @@
       },
       {
         "id": 9,
-        "desarrolloId": 1,
+        "desarrolloId": "1, 6",
         "disenoId": "",
         "tech": "GitHub"
       },
       {
         "id": 10,
-        "desarrolloId": 1,
+        "desarrolloId": "1, 6",
         "disenoId": "",
         "tech": "npm"
       },
