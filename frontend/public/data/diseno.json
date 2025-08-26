@@ -26,5 +26,12 @@
         "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/skinScan/design.png",
         "figmaUrl": "https://www.figma.com/design/QEjP3iljq7vGCtlDhrN3PX/skin-cancer?node-id=0-1&t=FGEaEpClYr0rCWEF-1",
         "queHice": "Figma system (Atomic Design): components for result cards, class chips, upload flows, and “How it works” diagram. Design Thinking: guided by two dermatologists—3 interviews, insight synthesis, and iteration cycles; explicit medical disclaimer language. Authored two explainer videos to communicate the UX and the pipeline to non-technical judges and stakeholders."
+      },
+      {
+        "id": 7,
+        "proyectoId": 7,
+        "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/Eat-it/design.png",
+        "figmaUrl": "https://www.figma.com/design/ijbY8kMEgKH48kMMutFPv0/Eat-It?node-id=0-1&t=WuUTK6n4SqYBtGLz-1",
+        "queHice": "Atomic Design in Figma: tokens, components (cards, chips, wheels), and motion cues for the roulette. Produced end-to-end user flows; branding and tone to inspire, not intimidate"
       }
     ]

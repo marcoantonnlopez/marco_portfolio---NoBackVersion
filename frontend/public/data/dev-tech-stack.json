@@ -8,13 +8,13 @@
       {
         "id": 2,
         "desarrolloId": "",
-        "disenoId": "1, 6, 2, 5",
+        "disenoId": "1, 6, 2, 5, 7",
         "tech": "Figma"
       },
       {
         "id": 3,
         "desarrolloId": "",
-        "disenoId": "1, 2, 5",
+        "disenoId": "1, 2, 5, 7",
         "tech": "Atomic design"
       },
       {
@@ -56,7 +56,7 @@
       {
         "id": 13,
         "desarrolloId": "",
-        "disenoId": "1, 5",
+        "disenoId": "1, 5, 7",
         "tech": "Design tokens"
       },
       {
@@ -73,7 +73,7 @@
       },
       {
         "id": 8,
-        "desarrolloId": "1, 2",
+        "desarrolloId": "1, 2, 7",
         "disenoId": "",
         "tech": "Git"
       },
@@ -85,7 +85,7 @@
       },
       {
         "id": 9,
-        "desarrolloId": "1, 6, 2",
+        "desarrolloId": "1, 6, 2, 7",
         "disenoId": "",
         "tech": "GitHub"
       },
@@ -127,7 +127,7 @@
       },
       {
         "id": 21,
-        "desarrolloId": "5",
+        "desarrolloId": "5, 7",
         "disenoId": "",
         "tech": "Flutter/Dart"
       },
@@ -148,5 +148,23 @@
         "desarrolloId": "5",
         "disenoId": "",
         "tech": "Matplotlib"
+      },
+      {
+        "id": 25,
+        "desarrolloId": "7",
+        "disenoId": "",
+        "tech": "FlutterFlow"
+      },
+      {
+        "id": 26,
+        "desarrolloId": "7",
+        "disenoId": "",
+        "tech": "Firebase"
+      },
+      {
+        "id": 27,
+        "desarrolloId": "7",
+        "disenoId": "",
+        "tech": "Firebase Auth"
       }
 ]

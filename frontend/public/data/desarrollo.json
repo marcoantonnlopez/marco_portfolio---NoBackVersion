@@ -34,5 +34,14 @@
     "github_url": "https://github.com/isaimorenolara/SkinScan-PC.git",
     "figma_url": "https://www.figma.com/design/QEjP3iljq7vGCtlDhrN3PX/skin-cancer?node-id=0-1&t=FGEaEpClYr0rCWEF-1",
     "que_hice": "Flutter front end: implemented routers and reusable components for image input, result screen, and disclaimers. Paper support: co-wrote methods/dataset sections; produced architecture and distribution figures. Data engineering: rebalanced the ~10k-image dataset; created before/after distribution plots; implemented stratified 80/20 (20% test) with fixed seeds."
+  },
+  {
+    "id": 7,
+    "proyecto_id": 7,
+    "video_url": "https://www.youtube.com/watch?v=rjRddtjtgus",
+    "enlace_proyecto": "https://github.com/isaimorenolara/eat-it",
+    "github_url": "https://github.com/isaimorenolara/SkinScan-PC.git",
+    "figma_url": "https://www.figma.com/design/ijbY8kMEgKH48kMMutFPv0/Eat-It?node-id=0-1&t=WuUTK6n4SqYBtGLz-1",
+    "que_hice": "Defined the Flutter(+FlutterFlow) + Firebase stack; implemented routing, auth wiring, and reusable UI components. Built patient flows: onboarding → plan select → meal roulette → challenge tracking → rewards. Stubbed nutritionist flows: create plans, schedule facts, weekly challenges; structured Firestore collections for quick iteration."
   }
 ]

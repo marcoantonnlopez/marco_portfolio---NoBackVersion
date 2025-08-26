@@ -53,5 +53,20 @@
       "id": 11,
       "disenoId": 5,
       "texto": "Accelerated sign-off from clinical advisors by converting interview insights into concrete component updates within 48-hour cycles."
+    },
+    {
+      "id": 12,
+      "disenoId": 7,
+      "texto": "Reduced cognitive load by introducing a meal roulette and compact plan cards, shortening decision time in tests."
+    },
+    {
+      "id": 13,
+      "disenoId": 7,
+      "texto": "Accelerated build by handing off a tokenized component library, enabling rapid Flutter implementation."
+    },
+    {
+      "id": 14,
+      "disenoId": 7,
+      "texto": "Increased perceived attainability via supportive copy and light gamification (challenges/rewards), aligning with interview insights."
     }
 ]

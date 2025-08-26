@@ -112,6 +112,21 @@
     },
     {
       "id": 23,
+      "liderazgoId": "7",
+      "texto": "Delivered a two-sided MVP in 4 days by sequencing research → atomic design → Flutter build, enabling a clean live demo on time."
+    },
+    {
+      "id": 24,
+      "liderazgoId": "7",
+      "texto": "Increased judge resonance by reframing “dieting” into choice + reward loops, landing a top-4 highlight in Salud Digna."
+    },
+    {
+      "id": 25,
+      "liderazgoId": "7",
+      "texto": "De-risked scope with explicit acceptance criteria (must: plan match, roulette, challenges, rewards), keeping a 4-person team aligned under hackathon pressure."
+    },
+    {
+      "id": 26,
       "liderazgoId": "",
       "texto": ""
     }

@@ -48,5 +48,20 @@
       "id": 10,
       "desarrolloId": 5,
       "texto": "Enabled balanced learning across 7 classes by re-distributing a ~10k-image dataset and enforcing a seeded 80/20 split, stabilizing evaluation and comparison."
+    },
+    {
+      "id": 11,
+      "desarrolloId": 7,
+      "texto": "Cut build time by composing an atomic component kit in Flutter/FlutterFlow, reducing new screen assembly to minutes."
+    },
+    {
+      "id": 12,
+      "desarrolloId": 7,
+      "texto": "Enabled real demo data by wiring Firebase Auth/Firestore and defining collections for plans, meals, and challenges."
+    },
+    {
+      "id": 13,
+      "desarrolloId": 7,
+      "texto": "Improved navigation reliability with explicit router structure and guarded routes for patient vs. nutritionist flows."
     }
 ]

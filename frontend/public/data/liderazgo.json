@@ -28,5 +28,11 @@
     "proyecto_id": 5,
     "video_url": "https://www.youtube.com/watch?v=dvdaPz2LGbE",
     "que_hice": "PM of a 4-person team; set milestones, risks, and review cadence; owned cross-track integration (ML ↔ UX ↔ paper). Requirements to acceptance: captured the client needs and converted them into scope, non-diagnostic disclaimers, and success criteria. Coordinated with two dermatologists (3 interviews + ongoing feedback) to align classes, UI language, and ethical boundaries. Drove delivery across tracks; personally contributed a major share of execution (research/design/dev)."
+  },
+  {
+    "id": 7,
+    "proyecto_id": 7,
+    "video_url": "https://www.youtube.com/watch?v=u6XUd89Eyws&t=331s",
+    "que_hice": "PM: recruited team, set milestones, and ran daily stand-ups and risk burn-down. Turned 6 interviews into personas, JTBDs, and acceptance criteria (adherence, autonomy, positive reinforcement). Owned submission strategy and demo narrative."
   }
 ]
