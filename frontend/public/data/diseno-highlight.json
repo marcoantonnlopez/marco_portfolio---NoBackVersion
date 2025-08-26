@@ -38,5 +38,20 @@
       "id": 8,
       "disenoId": 2,
       "texto": "Improved recognition and trust with a cohesive identity (site, signage, social), aiding partner onboarding and school approvals."
+    },
+    {
+      "id": 9,
+      "disenoId": 5,
+      "texto": "Increased result comprehension by redesigning the readout to top-1 + alternates with confidence and disclaimer, shortening scan time in demos."
+    },
+    {
+      "id": 10,
+      "disenoId": 5,
+      "texto": "Reduced cognitive load with consistent color chips and typography scale across the 7 classes, improving recognition in user walk-throughs."
+    },
+    {
+      "id": 11,
+      "disenoId": 5,
+      "texto": "Accelerated sign-off from clinical advisors by converting interview insights into concrete component updates within 48-hour cycles."
     }
 ]

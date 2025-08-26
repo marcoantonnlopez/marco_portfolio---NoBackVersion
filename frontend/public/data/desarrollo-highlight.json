@@ -1,42 +1,52 @@
 [
+  {
+      "id": 1,
+      "desarrolloId": 1,
+      "texto": "Shipped v1 full-stack site (Angular + MongoDB) by designing the data model and building reusable components."
+    },
     {
-        "id": 1,
-        "desarrolloId": 1,
-        "texto": "Shipped v1 full-stack site (Angular + MongoDB) by designing the data model and building reusable components."
-      },
-      {
-        "id": 2,
-        "desarrolloId": 1,
-        "texto": "Increased contributor velocity by creating an internal component library and Atomic guidelines, reducing UI build time for new sections."
-      },
-      {
-        "id": 3,
-        "desarrolloId": 1,
-        "texto": "Improved perceived performance via route-level code-splitting and asset hygiene, raising engagement on project/gallery pages."
-      },
-      {
-        "id": 4,
-        "desarrolloId": 6,
-        "texto": "Shipped 65% of UI (routes, chat, dashboards) by building a small component library, reducing duplicate code and speeding page assembly during the hack."
-      },
-      {
-        "id": 5,
-        "desarrolloId": 6,
-        "texto": "Cut integration friction by keeping the frontend API-contract ready, enabling backend hookup without redesign."
-      },
-      {
-        "id": 6,
-        "desarrolloId": 6,
-        "texto": "Improved demo reliability via defensive UI states (loading/empty/error) so flows stayed smooth under time pressure."
-      },
-      {
-        "id": 7,
-        "desarrolloId": 2,
-        "texto": "Launched the public site in weeks by building reusable CSS/JS components, enabling quick publishing of new campaigns and results."
-      },
-      {
-        "id": 8,
-        "desarrolloId": 2,
-        "texto": "Increased volunteer clarity by structuring pages around “how to help” and “what we collected,” improving credibility with schools and agencies."
-      }
+      "id": 2,
+      "desarrolloId": 1,
+      "texto": "Increased contributor velocity by creating an internal component library and Atomic guidelines, reducing UI build time for new sections."
+    },
+    {
+      "id": 3,
+      "desarrolloId": 1,
+      "texto": "Improved perceived performance via route-level code-splitting and asset hygiene, raising engagement on project/gallery pages."
+    },
+    {
+      "id": 4,
+      "desarrolloId": 6,
+      "texto": "Shipped 65% of UI (routes, chat, dashboards) by building a small component library, reducing duplicate code and speeding page assembly during the hack."
+    },
+    {
+      "id": 5,
+      "desarrolloId": 6,
+      "texto": "Cut integration friction by keeping the frontend API-contract ready, enabling backend hookup without redesign."
+    },
+    {
+      "id": 6,
+      "desarrolloId": 6,
+      "texto": "Improved demo reliability via defensive UI states (loading/empty/error) so flows stayed smooth under time pressure."
+    },
+    {
+      "id": 7,
+      "desarrolloId": 2,
+      "texto": "Launched the public site in weeks by building reusable CSS/JS components, enabling quick publishing of new campaigns and results."
+    },
+    {
+      "id": 8,
+      "desarrolloId": 2,
+      "texto": "Increased volunteer clarity by structuring pages around “how to help” and “what we collected,” improving credibility with schools and agencies."
+    },
+    {
+      "id": 9,
+      "desarrolloId": 5,
+      "texto": "Shipped a Flutter demo with routing + reusable components, cutting integration time between ML outputs and the UX surface."
+    },
+    {
+      "id": 10,
+      "desarrolloId": 5,
+      "texto": "Enabled balanced learning across 7 classes by re-distributing a ~10k-image dataset and enforcing a seeded 80/20 split, stabilizing evaluation and comparison."
+    }
 ]

@@ -8,13 +8,13 @@
       {
         "id": 2,
         "desarrolloId": "",
-        "disenoId": "1, 6, 2",
+        "disenoId": "1, 6, 2, 5",
         "tech": "Figma"
       },
       {
         "id": 3,
         "desarrolloId": "",
-        "disenoId": "1, 2",
+        "disenoId": "1, 2, 5",
         "tech": "Atomic design"
       },
       {
@@ -36,34 +36,10 @@
         "tech": "AngularRouter"
       },
       {
-        "id": 6,
-        "desarrolloId": "1, 2",
-        "disenoId": "",
-        "tech": "HTML/CSS"
-      },
-      {
         "id": 7,
         "desarrolloId": "1, 6",
         "disenoId": "",
         "tech": "Node.js"
-      },
-      {
-        "id": 8,
-        "desarrolloId": 1,
-        "disenoId": "",
-        "tech": "Git"
-      },
-      {
-        "id": 9,
-        "desarrolloId": "1, 6",
-        "disenoId": "",
-        "tech": "GitHub"
-      },
-      {
-        "id": 10,
-        "desarrolloId": "1, 6",
-        "disenoId": "",
-        "tech": "npm"
       },
       {
         "id": 11,
@@ -80,13 +56,97 @@
       {
         "id": 13,
         "desarrolloId": "",
-        "disenoId": "1",
+        "disenoId": "1, 5",
         "tech": "Design tokens"
+      },
+      {
+        "id": 15,
+        "desarrolloId": "6",
+        "disenoId": "",
+        "tech": "ChatGPT 4"
+      },
+      {
+        "id": 10,
+        "desarrolloId": "1, 6",
+        "disenoId": "",
+        "tech": "npm"
+      },
+      {
+        "id": 8,
+        "desarrolloId": "1, 2",
+        "disenoId": "",
+        "tech": "Git"
       },
       {
         "id": 14,
         "desarrolloId": "2",
         "disenoId": "",
         "tech": "JavaScript"
+      },
+      {
+        "id": 9,
+        "desarrolloId": "1, 6, 2",
+        "disenoId": "",
+        "tech": "GitHub"
+      },
+      {
+        "id": 6,
+        "desarrolloId": "1, 2",
+        "disenoId": "",
+        "tech": "HTML/CSS"
+      },
+      {
+        "id": 16,
+        "desarrolloId": "5",
+        "disenoId": "",
+        "tech": "Python"
+      },
+      {
+        "id": 17,
+        "desarrolloId": "5",
+        "disenoId": "",
+        "tech": "TensorFlow"
+      },
+      {
+        "id": 18,
+        "desarrolloId": "5",
+        "disenoId": "",
+        "tech": "NumPy"
+      },
+      {
+        "id": 19,
+        "desarrolloId": "5",
+        "disenoId": "",
+        "tech": "Pandas"
+      },
+      {
+        "id": 20,
+        "desarrolloId": "5",
+        "disenoId": "",
+        "tech": "scikit-learn"
+      },
+      {
+        "id": 21,
+        "desarrolloId": "5",
+        "disenoId": "",
+        "tech": "Flutter/Dart"
+      },
+      {
+        "id": 22,
+        "desarrolloId": "5",
+        "disenoId": "",
+        "tech": "LateX"
+      },
+      {
+        "id": 23,
+        "desarrolloId": "",
+        "disenoId": "5",
+        "tech": "Design thinking"
+      },
+      {
+        "id": 24,
+        "desarrolloId": "5",
+        "disenoId": "",
+        "tech": "Matplotlib"
       }
 ]

@@ -72,11 +72,46 @@
     },
     {
       "id": 15,
-      "liderazgoId": "",
-      "texto": ""
+      "liderazgoId": "4",
+      "texto": "Launched a student coordination from 0 → enduring (6 generations) by formalizing mission, rules, and succession, evidenced by the group’s continuity as Sociedad Estudiantil CSA."
     },
     {
       "id": 16,
+      "liderazgoId": "4",
+      "texto": "Delivered two campus-wide events on time (Día de Muertos contest, Talent Show) by instituting a repeatable playbook and role clarity, achieving smooth execution with no incidents."
+    },
+    {
+      "id": 17,
+      "liderazgoId": "4",
+      "texto": "Reduced approval friction by creating a formal student ↔ Catholic Mothers leadership channel, accelerating cultural initiatives from proposal to execution."
+    },
+    {
+      "id": 18,
+      "liderazgoId": "4",
+      "texto": "Increased organizational durability by documenting processes and executing a structured handoff, enabling new cohorts to scale on a proven base."
+    },
+    {
+      "id": 19,
+      "liderazgoId": "5",
+      "texto": "Delivered 70% of total work across research, design, and app dev in 4 months by running weekly check-ins and risk burn-down, keeping a 4-member team on track to demo on time."
+    },
+    {
+      "id": 20,
+      "liderazgoId": "5",
+      "texto": "Reduced clinical ambiguity by formalizing a dermatologist-guided Design Thinking loop (3 interviews → insights → UI revisions), improving result-screen clarity."
+    },
+    {
+      "id": 21,
+      "liderazgoId": "5",
+      "texto": "De-risked evaluation with a seeded, stratified 80/20 split and a documented augmentation pipeline, enabling consistent comparison across runs."
+    },
+    {
+      "id": 22,
+      "liderazgoId": "5",
+      "texto": "Won 1st place (national) at University Entrepreneur Battle 2023 @ Talent Land by packaging a clear story: balanced data, lean CNN, and clinician-centric UX."
+    },
+    {
+      "id": 23,
       "liderazgoId": "",
       "texto": ""
     }

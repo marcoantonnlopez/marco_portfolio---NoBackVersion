@@ -16,5 +16,17 @@
     "proyecto_id": 3,
     "video_url": "https://www.youtube.com/watch?v=c74oAYSY1So",
     "que_hice": "Founded and directed a 12-week, five-school donation campaign end-to-end (planning, approvals, logistics, closeout). Set the operating model: campus captains, weekly pickup cadence, storage and transport plan, and a simple SOP for collect → weigh → deliver. Aligned five institutions (Valladolid, Sembradores de Amistad, San Luis Rey de Francia, UASLP Psychology, Tec de SLP) with a clear starter kit (what to collect, where to place containers, who owns pickups). Coordinated partners for delivery and events: AMANC SLP (caps handoff) and a girls’ shelter (toy donation + holiday event). Mobilized up to 20 volunteers across stages (setup, weekly pickups, sorting, delivery, event staffing) with role-based checklists. Managed communications and progress tracking (collection targets by campus, weekly totals, final weigh-in) to keep momentum visible and accountable. Executed two holiday events (piñata, games) with on-site roles, materials, and timing; invited TecMilenio’s robotics group to support at the shelter. Ensured a clean close: verified weigh-in (~600 kg ≈ 216,000 caps), documented handoff to AMANC, and summarized outcomes for replication."
+  },
+  {
+    "id": 4,
+    "proyecto_id": 4,
+    "video_url": "https://www.youtube.com/watch?v=c74oAYSY1So",
+    "que_hice": "Founded and presided over CSA; defined vision, scope, and baseline bylaws. Aligned stakeholders (students, faculty, Catholic Mothers leadership) and stood up a permanent dialogue channel. Designed the playbook: calendar, approval criteria, logistics and comms checklists. Organized and executed two school-wide events end-to-end (sign-ups, programming, judges, safety, timing). Recruited and coordinated student volunteers with role clarity and an intentional succession plan. Documented and handed off the operation to the next cohort to ensure continuity."
+  },
+  {
+    "id": 5,
+    "proyecto_id": 5,
+    "video_url": "https://www.youtube.com/watch?v=dvdaPz2LGbE",
+    "que_hice": "PM of a 4-person team; set milestones, risks, and review cadence; owned cross-track integration (ML ↔ UX ↔ paper). Requirements to acceptance: captured the client needs and converted them into scope, non-diagnostic disclaimers, and success criteria. Coordinated with two dermatologists (3 interviews + ongoing feedback) to align classes, UI language, and ethical boundaries. Drove delivery across tracks; personally contributed a major share of execution (research/design/dev)."
   }
 ]

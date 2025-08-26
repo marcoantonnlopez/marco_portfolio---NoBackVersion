@@ -18,6 +18,13 @@
   { "id": 15, "proyectoId": 3, "orden": 9, "valor": "5",  "descripcion": "institutions collaborating (Valladolid, Sembradores de Amistad, San Luis Rey de Francia, UASLP Psychology, Tecnológico de SLP)." },
   { "id": 16, "proyectoId": 3, "orden": 10, "valor": "25",  "descripcion": "toys donated to a girls’ shelter." },
   { "id": 17, "proyectoId": 3, "orden": 11, "valor": "2",  "descripcion": "holiday events delivered (AMANC + shelter)." },
-  { "id": 18, "proyectoId": 3, "orden": 12, "valor": "20",  "descripcion": "volunteers involved across stages." }
+  { "id": 18, "proyectoId": 3, "orden": 12, "valor": "20",  "descripcion": "volunteers involved across stages." },
+
+  { "id": 19, "proyectoId": 4, "orden": 13, "valor": "4",  "descripcion": "flagship, school-wide events delivered end-to-end." },
+  { "id": 20, "proyectoId": 4, "orden": 14, "valor": "6",  "descripcion": "generations continued as Sociedad Estudiantil CSA." },
+
+  { "id": 21, "proyectoId": 5, "orden": 15, "valor": "7",  "descripcion": "class problem defined and operationalized end-to-end." },
+  { "id": 22, "proyectoId": 5, "orden": 16, "valor": "10000",  "descripcion": "image public dataset re-distributed to near balance (before/after plots)." },
+  { "id": 23, "proyectoId": 5, "orden": 17, "valor": "1",  "descripcion": "1st place (national) — University Entrepreneur Battle 2023 @ Talent Land, category Technological Development." }
 
 ]

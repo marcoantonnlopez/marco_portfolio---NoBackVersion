@@ -25,5 +25,14 @@
     "github_url": "https://github.com/marcoantonnlopez/STEP-webpage.git",
     "figma_url": "https://www.figma.com/design/tN4nVBCdm1A5GioPExLa6A/STEP-web?node-id=0-1&t=GIBk5HI1dI8veIJC-1",
     "que_hice": "Built the STEP website from scratch at 15 with HTML, CSS, and vanilla JS to showcase initiatives, publish updates, and centralize contact/info. Hand-coded responsive components; organized sections for actions (cleanups, reforestations, drives) and partners."
+  },
+  {
+    "id": 5,
+    "proyecto_id": 5,
+    "video_url": "https://www.youtube.com/watch?v=JkLoXIx7dsw",
+    "enlace_proyecto": "",
+    "github_url": "https://github.com/isaimorenolara/SkinScan-PC.git",
+    "figma_url": "https://www.figma.com/design/QEjP3iljq7vGCtlDhrN3PX/skin-cancer?node-id=0-1&t=FGEaEpClYr0rCWEF-1",
+    "que_hice": "Flutter front end: implemented routers and reusable components for image input, result screen, and disclaimers. Paper support: co-wrote methods/dataset sections; produced architecture and distribution figures. Data engineering: rebalanced the ~10k-image dataset; created before/after distribution plots; implemented stratified 80/20 (20% test) with fixed seeds."
   }
 ]

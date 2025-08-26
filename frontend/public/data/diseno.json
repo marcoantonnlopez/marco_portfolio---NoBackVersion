@@ -19,5 +19,12 @@
         "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/step/diseno.png",
         "figmaUrl": "https://www.figma.com/design/tN4nVBCdm1A5GioPExLa6A/STEP-web?node-id=0-1&t=GIBk5HI1dI8veIJC-1",
         "queHice": "Created the brand identity (logo, palette, typography) and campaign collateral (posters, social posts, box signage). Designed a lightweight Atomic Design kit in Figma (for web + print) to keep assets consistent across drives and events."
+      },
+      {
+        "id": 5,
+        "proyectoId": 5,
+        "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/skinScan/design.png",
+        "figmaUrl": "https://www.figma.com/design/QEjP3iljq7vGCtlDhrN3PX/skin-cancer?node-id=0-1&t=FGEaEpClYr0rCWEF-1",
+        "queHice": "Figma system (Atomic Design): components for result cards, class chips, upload flows, and “How it works” diagram. Design Thinking: guided by two dermatologists—3 interviews, insight synthesis, and iteration cycles; explicit medical disclaimer language. Authored two explainer videos to communicate the UX and the pipeline to non-technical judges and stakeholders."
       }
     ]
