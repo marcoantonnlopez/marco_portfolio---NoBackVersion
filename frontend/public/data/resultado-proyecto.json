@@ -25,7 +25,9 @@
 
   { "id": 21, "proyectoId": 5, "orden": 15, "valor": "7",  "descripcion": "class problem defined and operationalized end-to-end." },
   { "id": 22, "proyectoId": 5, "orden": 16, "valor": "10000",  "descripcion": "image public dataset re-distributed to near balance (before/after plots)." },
-  { "id": 23, "proyectoId": 5, "orden": 17, "valor": "1",  "descripcion": "1st place (national) — University Entrepreneur Battle 2023 @ Talent Land, category Technological Development." }
+  { "id": 23, "proyectoId": 5, "orden": 17, "valor": "1",  "descripcion": "1st place (national) — University Entrepreneur Battle 2023 @ Talent Land, category Technological Development." },
 
+  { "id": 24, "proyectoId": 8, "orden": 18, "valor": "1",  "descripcion": "Winner (1st place) — Tulum Crypto Fest Hackathon, ChatGPT Challenge." },
+  { "id": 25, "proyectoId": 8, "orden": 19, "valor": "12000",  "descripcion": "mx of investment for a second phase of the project." }
 
 ]

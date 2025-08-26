@@ -33,5 +33,12 @@
         "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/Eat-it/design.png",
         "figmaUrl": "https://www.figma.com/design/ijbY8kMEgKH48kMMutFPv0/Eat-It?node-id=0-1&t=WuUTK6n4SqYBtGLz-1",
         "queHice": "Atomic Design in Figma: tokens, components (cards, chips, wheels), and motion cues for the roulette. Produced end-to-end user flows; branding and tone to inspire, not intimidate"
+      },
+      {
+        "id": 8,
+        "proyectoId": 8,
+        "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/ANY/Design.png",
+        "figmaUrl": "https://www.figma.com/design/4BMi1FenpC1J85EzHmL0da/Untitled?node-id=0-1&t=Sjmy1mEooX7rVulv-1",
+        "queHice": "Created the brand, minimalist visual system, and copy tone for an “anyone can” feel. Designed the four-step flow to optimize for zero-learning-curve completion. Prototyped the bubble weighting interaction (Step 4) to make prioritization visual and tactile."
       }
     ]

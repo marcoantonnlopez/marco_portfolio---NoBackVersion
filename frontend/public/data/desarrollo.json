@@ -43,5 +43,14 @@
     "github_url": "https://github.com/isaimorenolara/SkinScan-PC.git",
     "figma_url": "https://www.figma.com/design/ijbY8kMEgKH48kMMutFPv0/Eat-It?node-id=0-1&t=WuUTK6n4SqYBtGLz-1",
     "que_hice": "Defined the Flutter(+FlutterFlow) + Firebase stack; implemented routing, auth wiring, and reusable UI components. Built patient flows: onboarding → plan select → meal roulette → challenge tracking → rewards. Stubbed nutritionist flows: create plans, schedule facts, weekly challenges; structured Firestore collections for quick iteration."
+  },
+  {
+    "id": 8,
+    "proyecto_id": 8,
+    "video_url": "",
+    "enlace_proyecto": "https://any-lime.vercel.app/",
+    "github_url": "https://github.com/MisterChief53/Any",
+    "figma_url": "https://www.figma.com/design/4BMi1FenpC1J85EzHmL0da/Untitled?node-id=0-1&t=Sjmy1mEooX7rVulv-1",
+    "que_hice": "Built the entire frontend in HTML/CSS/vanilla JS (no frameworks) for maximum speed and control. Implemented the keyword “bubble” weighting: each click updates an in-memory priority map (object) that the composer translates into prompt weights. Wrote the prompt composer that merges goal, audience, tone/format, and weights into a single GPT-ready payload (image brief + caption + hashtags). Prepared backend integration: defined endpoint stub, request/response schema, and fallbacks for offline demo. Ensured responsive layout and minimal surface area to keep users in flow."
   }
 ]

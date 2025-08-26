@@ -63,5 +63,25 @@
       "id": 13,
       "desarrolloId": 7,
       "texto": "Improved navigation reliability with explicit router structure and guarded routes for patient vs. nutritionist flows."
+    },
+    {
+      "id": 14,
+      "desarrolloId": 8,
+      "texto": "Won 1st place by delivering a working front end in ~12 hours, achieved by coding a framework-free stack and a four-step prompt pipeline that judges could test live."
+    },
+    {
+      "id": 15,
+      "desarrolloId": 8,
+      "texto": "Increased prompt quality by introducing a click-weighted keyword model (priority map → composer), producing richer, more controllable prompts than a single free-text field."
+    },
+    {
+      "id": 16,
+      "desarrolloId": 8,
+      "texto": "Reduced integration time for the future backend by defining a clean payload schema (goal/audience/tone/weights → promptParts), enabling drop-in GPT-4 calls without refactors."
+    },
+    {
+      "id": 17,
+      "desarrolloId": "",
+      "texto": ""
     }
 ]

@@ -68,5 +68,25 @@
       "id": 14,
       "disenoId": 7,
       "texto": "Increased perceived attainability via supportive copy and light gamification (challenges/rewards), aligning with interview insights."
+    },
+    {
+      "id": 15,
+      "disenoId": 8,
+      "texto": "Reduced cognitive load by collapsing creation into four discrete decisions, increasing first-try completion in demo sessions."
+    },
+    {
+      "id": 16,
+      "disenoId": 8,
+      "texto": "Improved control without complexity via the bubble weighting UI, letting users up-weight ideas with a tap instead of sliders or forms."
+    },
+    {
+      "id": 17,
+      "disenoId": 8,
+      "texto": "Accelerated build by designing directly for HTML/CSS (no design-system overhead), enabling a same-night ship."
+    },
+    {
+      "id": 18,
+      "disenoId": "",
+      "texto": ""
     }
 ]

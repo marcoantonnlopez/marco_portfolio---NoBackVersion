@@ -6,9 +6,15 @@
         "tech": "AngularJS"
       },
       {
+        "id": 28,
+        "desarrolloId": "8",
+        "disenoId": "",
+        "tech": "Flask"
+      },
+      {
         "id": 2,
         "desarrolloId": "",
-        "disenoId": "1, 6, 2, 5, 7",
+        "disenoId": "1, 6, 2, 5, 7, 8",
         "tech": "Figma"
       },
       {
@@ -61,7 +67,7 @@
       },
       {
         "id": 15,
-        "desarrolloId": "6",
+        "desarrolloId": "6, 8",
         "disenoId": "",
         "tech": "ChatGPT 4"
       },
@@ -72,26 +78,8 @@
         "tech": "npm"
       },
       {
-        "id": 8,
-        "desarrolloId": "1, 2, 7",
-        "disenoId": "",
-        "tech": "Git"
-      },
-      {
-        "id": 14,
-        "desarrolloId": "2",
-        "disenoId": "",
-        "tech": "JavaScript"
-      },
-      {
-        "id": 9,
-        "desarrolloId": "1, 6, 2, 7",
-        "disenoId": "",
-        "tech": "GitHub"
-      },
-      {
         "id": 6,
-        "desarrolloId": "1, 2",
+        "desarrolloId": "1, 2, 8",
         "disenoId": "",
         "tech": "HTML/CSS"
       },
@@ -166,5 +154,35 @@
         "desarrolloId": "7",
         "disenoId": "",
         "tech": "Firebase Auth"
+      },
+      {
+        "id": 29,
+        "desarrolloId": "8",
+        "disenoId": "",
+        "tech": "Dreamer studio"
+      },
+      {
+        "id": 8,
+        "desarrolloId": "1, 2, 7, 8",
+        "disenoId": "",
+        "tech": "Git"
+      },
+      {
+        "id": 14,
+        "desarrolloId": "2, 8",
+        "disenoId": "",
+        "tech": "JavaScript"
+      },
+      {
+        "id": 9,
+        "desarrolloId": "1, 6, 2, 7, 8",
+        "disenoId": "",
+        "tech": "GitHub"
+      },
+      {
+        "id": 30,
+        "desarrolloId": "8",
+        "disenoId": "",
+        "tech": "Bootostrap"
       }
 ]
