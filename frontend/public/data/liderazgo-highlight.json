@@ -127,6 +127,21 @@
     },
     {
       "id": 26,
+      "liderazgoId": "10",
+      "texto": "Increased team productivity 30% by rolling out SCRUM (Jira/Slack/Confluence) and Figma libraries, measured by story points completed/sprint vs. the first two sprints."
+    },
+    {
+      "id": 27,
+      "liderazgoId": "10",
+      "texto": "Improved user acceptance 40% by executing 4 usability cycles and pivoting to shorter acronym loops with clearer rewards, measured via prototype “would-use weekly” responses from test participants."
+    },
+    {
+      "id": 28,
+      "liderazgoId": "10",
+      "texto": "Compressed approval cycles by instituting weekly design crit + decision logs, keeping stakeholders aligned and eliminating rework late in the program."
+    },
+    {
+      "id": 29,
       "liderazgoId": "",
       "texto": ""
     }

@@ -52,5 +52,14 @@
     "github_url": "https://github.com/MisterChief53/Any",
     "figma_url": "https://www.figma.com/design/4BMi1FenpC1J85EzHmL0da/Untitled?node-id=0-1&t=Sjmy1mEooX7rVulv-1",
     "que_hice": "Built the entire frontend in HTML/CSS/vanilla JS (no frameworks) for maximum speed and control. Implemented the keyword “bubble” weighting: each click updates an in-memory priority map (object) that the composer translates into prompt weights. Wrote the prompt composer that merges goal, audience, tone/format, and weights into a single GPT-ready payload (image brief + caption + hashtags). Prepared backend integration: defined endpoint stub, request/response schema, and fallbacks for offline demo. Ensured responsive layout and minimal surface area to keep users in flow."
+  },
+  {
+    "id": 9,
+    "proyecto_id": 9,
+    "video_url": "https://www.youtube.com/watch?v=njD0lvMaYkE",
+    "enlace_proyecto": "",
+    "github_url": "https://github.com/MisterChief53/Hide.it",
+    "figma_url": "https://www.figma.com/design/GBsxVv1WVCUgKn19UGFWwC/hide.it.?node-id=301-56&t=O7uytzXatCsbIXEa-1",
+    "que_hice": "Built the entire front end in HTML/CSS/vanilla JS (no framework): modular event bus, state store, and view components. Implemented the results viewer (select/toggle candidates), generating a single maskConfig object the renderer consumes. Added robust progress, empty, error states; handled file drag-and-drop and basic preview. Created API stubs and a local fixtures layer so the UI behaves identically with/without a live model."
   }
 ]

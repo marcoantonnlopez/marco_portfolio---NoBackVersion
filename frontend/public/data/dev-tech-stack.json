@@ -7,20 +7,20 @@
       },
       {
         "id": 28,
-        "desarrolloId": "8",
+        "desarrolloId": "8, 9",
         "disenoId": "",
         "tech": "Flask"
       },
       {
         "id": 2,
         "desarrolloId": "",
-        "disenoId": "1, 6, 2, 5, 7, 8",
+        "disenoId": "1, 6, 2, 5, 7, 8, 9, 10",
         "tech": "Figma"
       },
       {
         "id": 3,
         "desarrolloId": "",
-        "disenoId": "1, 2, 5, 7",
+        "disenoId": "1, 2, 5, 7, 10",
         "tech": "Atomic design"
       },
       {
@@ -62,7 +62,7 @@
       {
         "id": 13,
         "desarrolloId": "",
-        "disenoId": "1, 5, 7",
+        "disenoId": "1, 5, 7, 10",
         "tech": "Design tokens"
       },
       {
@@ -85,7 +85,7 @@
       },
       {
         "id": 16,
-        "desarrolloId": "5",
+        "desarrolloId": "5, 9",
         "disenoId": "",
         "tech": "Python"
       },
@@ -128,7 +128,7 @@
       {
         "id": 23,
         "desarrolloId": "",
-        "disenoId": "5",
+        "disenoId": "5, 10",
         "tech": "Design thinking"
       },
       {
@@ -169,7 +169,7 @@
       },
       {
         "id": 14,
-        "desarrolloId": "2, 8",
+        "desarrolloId": "2, 8, 9",
         "disenoId": "",
         "tech": "JavaScript"
       },
@@ -181,8 +181,50 @@
       },
       {
         "id": 30,
-        "desarrolloId": "8",
+        "desarrolloId": "8, 9",
         "disenoId": "",
         "tech": "Bootostrap"
+      },
+      {
+        "id": 31,
+        "desarrolloId": "8",
+        "disenoId": "",
+        "tech": "Vercel"
+      },
+      {
+        "id": 31,
+        "desarrolloId": "9",
+        "disenoId": "",
+        "tech": "OpenCV"
+      },
+      {
+        "id": 32,
+        "desarrolloId": "9",
+        "disenoId": "",
+        "tech": "YoloV3"
+      },
+      {
+        "id": 33,
+        "desarrolloId": "",
+        "disenoId": "10",
+        "tech": "Double diamond"
+      },
+      {
+        "id": 34,
+        "desarrolloId": "",
+        "disenoId": "10",
+        "tech": "Jira"
+      },
+      {
+        "id": 35,
+        "desarrolloId": "",
+        "disenoId": "10",
+        "tech": "Confluence"
+      },
+      {
+        "id": 36,
+        "desarrolloId": "",
+        "disenoId": "10",
+        "tech": "Slack"
       }
 ]

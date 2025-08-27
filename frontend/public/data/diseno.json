@@ -40,5 +40,19 @@
         "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/ANY/Design.png",
         "figmaUrl": "https://www.figma.com/design/4BMi1FenpC1J85EzHmL0da/Untitled?node-id=0-1&t=Sjmy1mEooX7rVulv-1",
         "queHice": "Created the brand, minimalist visual system, and copy tone for an “anyone can” feel. Designed the four-step flow to optimize for zero-learning-curve completion. Prototyped the bubble weighting interaction (Step 4) to make prioritization visual and tactile."
+      },
+      {
+        "id": 9,
+        "proyectoId": 9,
+        "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/Hide.it/diseno.png",
+        "figmaUrl": "https://www.figma.com/design/GBsxVv1WVCUgKn19UGFWwC/hide.it.?node-id=301-56&t=O7uytzXatCsbIXEa-1",
+        "queHice": "Designed a minimal, single-path UX in Figma: large drop-zone, three-step progress header, and preview with clear CTAs. Established visual language (contrast, spacing, hit-areas) optimized for quick comprehension in live demos. Mapped states (loading/empty/error/success) and microcopy to guide first-time users."
+      },
+      {
+        "id": 10,
+        "proyectoId": 10,
+        "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/TheRADAR/design.png",
+        "figmaUrl": "https://www.figma.com/design/E5ZLECQRn6bQUUPU2mrZOP/UI-The-RADAR?node-id=1-326&t=YOk3N9o2Mi01RB6f-1",
+        "queHice": "Ran Design Thinking end-to-end: discovery, synthesis (personas/empathy maps), ideation, prototyping, validation. Mapped IA and core gameplay loop; designed onboarding, session flow, rewards, and progress cues. Built a hi-fi Figma prototype with component variants and tokens; prepared a handoff packet (flows, specs, copy)."
       }
     ]

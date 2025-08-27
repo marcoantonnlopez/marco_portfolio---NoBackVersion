@@ -86,6 +86,36 @@
     },
     {
       "id": 18,
+      "disenoId": "9",
+      "texto": "Reduced cognitive load by compressing redaction into three explicit steps, increasing first-try task completion in judge run-throughs."
+    },
+    {
+      "id": 19,
+      "disenoId": "9",
+      "texto": "Accelerated engineering by designing directly for HTML/CSS (no design-system overhead), enabling same-day implementation."
+    },
+    {
+      "id": 20,
+      "disenoId": "9",
+      "texto": "Improved selection accuracy with a clean candidates list and explicit toggles, lowering mis-clicks during demos"
+    },
+    {
+      "id": 21,
+      "disenoId": "10",
+      "texto": "Reduced cognitive load by streamlining the acronym flow to single-task screens, increasing task completion in the final two usability rounds."
+    },
+    {
+      "id": 22,
+      "disenoId": "10",
+      "texto": "Raised learnability with clearer onboarding tooltips and immediate feedback, improving first-session success in tests."
+    },
+    {
+      "id": 23,
+      "disenoId": "10",
+      "texto": "Accelerated iteration by standing up a component library + tokens, cutting screen build time and enabling consistent changes across the prototype."
+    },
+    {
+      "id": 24,
       "disenoId": "",
       "texto": ""
     }

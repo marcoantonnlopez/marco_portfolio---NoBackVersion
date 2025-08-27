@@ -81,6 +81,21 @@
     },
     {
       "id": 17,
+      "desarrolloId": "9",
+      "texto": "Increased delivery speed by shipping a framework-free UI with a small state store, enabling overnight assembly and easy handoff."
+    },
+    {
+      "id": 18,
+      "desarrolloId": "9",
+      "texto": "Reduced backend coupling by centralizing selection into a maskConfig (ids, timestamps, geometry), cutting future integration time."
+    },
+    {
+      "id": 19,
+      "desarrolloId": "9",
+      "texto": "Improved demo reliability via deterministic fixtures and defensive UI states, avoiding failed flows under hackathon pressure."
+    },
+    {
+      "id": 20,
       "desarrolloId": "",
       "texto": ""
     }

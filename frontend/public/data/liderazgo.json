@@ -34,5 +34,11 @@
     "proyecto_id": 7,
     "video_url": "https://www.youtube.com/watch?v=u6XUd89Eyws&t=331s",
     "que_hice": "PM: recruited team, set milestones, and ran daily stand-ups and risk burn-down. Turned 6 interviews into personas, JTBDs, and acceptance criteria (adherence, autonomy, positive reinforcement). Owned submission strategy and demo narrative."
+  },
+  {
+    "id": 10,
+    "proyecto_id": 10,
+    "video_url": "",
+    "que_hice": "Led a 3-person design team; defined goals, risks, and the weekly sprint ritual (planning, stand-up, crit, retro). Operationalized SCRUM for design with Jira boards (DoR/DoD), Slack channels, Confluence research hub, and Figma libraries. Planned and moderated 4 usability studies; turned findings into prioritized design changes each sprint. Drove stakeholder comms and kept a visible decision log linking evidence → design moves."
   }
 ]
