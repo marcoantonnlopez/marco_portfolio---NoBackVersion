@@ -40,5 +40,11 @@
     "proyecto_id": 10,
     "video_url": "",
     "que_hice": "Led a 3-person design team; defined goals, risks, and the weekly sprint ritual (planning, stand-up, crit, retro). Operationalized SCRUM for design with Jira boards (DoR/DoD), Slack channels, Confluence research hub, and Figma libraries. Planned and moderated 4 usability studies; turned findings into prioritized design changes each sprint. Drove stakeholder comms and kept a visible decision log linking evidence → design moves."
+  },
+  {
+    "id": 11,
+    "proyecto_id": 11,
+    "video_url": "https://www.youtube.com/watch?v=ubtAEzUTtjM",
+    "que_hice": "Helped running requirements → prioritization with 6 client reviews. Implemented Scrum (2-week sprints, DoR/DoD, boards, rituals). Orchestrated the delivery sequence: Requirements → Figma (atomic) → Dev → Docs."
   }
 ]

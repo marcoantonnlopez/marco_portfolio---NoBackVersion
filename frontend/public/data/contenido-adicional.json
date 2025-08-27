@@ -1,19 +1,20 @@
 [
-    {
+  
+      {
         "id": 1,
-        "proyectoId": 1,
-        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/BG_card.svg",
-        "titulo": "example_titulo1",
-        "descripcion": "example_descripcion1",
-        "enlace": "https://www.linkedin.com/in/marco-antonn/details/projects/"
+        "proyectoId": "1",
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/5_additionalContent/NASAToronto.jpeg",
+        "titulo": "NASA hackathon in Toronto!",
+        "descripcion": "During this amazing event, our team developed ExoPana, a web-based app...",
+        "enlace": "https://www.linkedin.com/posts/marco-antonn_nasa-spaceapps-toronto-activity-7248911685237764096-POTR?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADF7u4IBk6QyZwrDi-50qCf-zu_bTWtR8t4"
       },
       {
         "id": 2,
-        "proyectoId": 1,
-        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/BG.svg",
-        "titulo": "example_titulo2",
-        "descripcion": "example_descripcion2",
-        "enlace": "example_enlace"
+        "proyectoId": "1, 10",
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/5_additionalContent/mitacs.jpeg",
+        "titulo": "mitacs 100% scholarship",
+        "descripcion": "See how studevs are getting a 100% scholasrhip to work in Canada.",
+        "enlace": "https://wp.uaslp.mx/noticias/investigacion/estudiantes-de-la-facultad-de-ingenieria-obtienen-beca-para-estancia-de-investigacion-en-canada/"
       },
       {
         "id": 3,
@@ -26,10 +27,10 @@
       {
         "id": 4,
         "proyectoId": 1,
-        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/BG_card.svg",
-        "titulo": "example_titulo4",
-        "descripcion": "example_descripcion4",
-        "enlace": "example_enlace"
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/5_additionalContent/spaceapps.svg",
+        "titulo": "Studevs in NASA",
+        "descripcion": "More than 30 Studevs go to NASA Space Apps",
+        "enlace": "https://www.linkedin.com/posts/studevs_newera-studevs-studevs-activity-7121192540745146369-qStW?utm_source=share&utm_medium=member_desktop&rcm=ACoAADF7u4IBk6QyZwrDi-50qCf-zu_bTWtR8t4"
       },
       {
         "id": 5,
@@ -38,5 +39,53 @@
         "titulo": "STEP and FridaysforFuture",
         "descripcion": "SLP environmental march...",
         "enlace": "https://www.instagram.com/p/B27xgqaAjXh/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+      },
+      {
+        "id": 6,
+        "proyectoId": 1,
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/5_additionalContent/etherfuse.svg",
+        "titulo": "Etherfuse hackathon",
+        "descripcion": "Studevs Rocks EtherFuse Hackathon!",
+        "enlace": "https://www.linkedin.com/posts/studevs_studevs-etherfusehackathon-innovation-activity-7101359596971143168-ELlF?utm_source=share&utm_medium=member_desktop&rcm=ACoAADF7u4IBk6QyZwrDi-50qCf-zu_bTWtR8t4"
+      },
+      {
+        "id": 7,
+        "proyectoId": "1, 9",
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/5_additionalContent/hackathonsOnline.svg",
+        "titulo": "Studevs in international hackathons",
+        "descripcion": "This summer, Studevs joined three international hackathons...",
+        "enlace": "https://www.linkedin.com/posts/studevs_studevs-hackathontriumphs-innovation-activity-7101323312198213632-S2g-?utm_source=share&utm_medium=member_desktop&rcm=ACoAADF7u4IBk6QyZwrDi-50qCf-zu_bTWtR8t4"
+      },
+      {
+        "id": 8,
+        "proyectoId": "1,8",
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/5_additionalContent/tulum.svg",
+        "titulo": "Tulum Crypto Fest",
+        "descripcion": "Studevs conquered the Tulum Crypto Fest Hackathon...",
+        "enlace": "https://www.linkedin.com/posts/studevs_studevs-innovation-hackathonwinners-activity-7101301366723076099-L26S?utm_source=share&utm_medium=member_desktop&rcm=ACoAADF7u4IBk6QyZwrDi-50qCf-zu_bTWtR8t4"
+      },
+      {
+        "id": 9,
+        "proyectoId": "1, 7",
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/5_additionalContent/skinscan.svg",
+        "titulo": "Proud Winners at Talent Land's University Entrepreneur Battle 2023!",
+        "descripcion": "Exciting news! Studevs emerged triumphant in the Development Technology...",
+        "enlace": "https://www.linkedin.com/posts/studevs_studevs-innovation-talentland-activity-7101183132233515008-96u3?utm_source=share&utm_medium=member_desktop&rcm=ACoAADF7u4IBk6QyZwrDi-50qCf-zu_bTWtR8t4"
+      },
+      {
+        "id": 10,
+        "proyectoId": 1,
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/5_additionalContent/talent.png",
+        "titulo": "Studevs Shines at Talent Land Hackathon",
+        "descripcion": "Seven students from Universidad Autónoma de San Luis Potosí...",
+        "enlace": "https://www.linkedin.com/posts/studevs_studevs-techinnovation-studentprojects-activity-7099993982805360640-vBdy?utm_source=share&utm_medium=member_desktop&rcm=ACoAADF7u4IBk6QyZwrDi-50qCf-zu_bTWtR8t4"
+      },
+      {
+        "id": 10,
+        "proyectoId": 1,
+        "imagenUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/studevs/BG_card.svg",
+        "titulo": "L44t Hacks",
+        "descripcion": "Studevs Unleashes Innovation at L44t Hacks Hackathon!",
+        "enlace": "https://www.linkedin.com/posts/studevs_studevs-l44thacks-blockchaingaming-activity-7101646939238064128-csBZ?utm_source=share&utm_medium=member_desktop&rcm=ACoAADF7u4IBk6QyZwrDi-50qCf-zu_bTWtR8t4"
       }
 ]

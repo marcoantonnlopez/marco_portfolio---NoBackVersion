@@ -229,5 +229,28 @@
         "createdAt": "2025-01-01T00:00:00.000Z",
         "updatedAt": "2025-01-01T00:00:00.000Z",
         "areas": [ "diseno", "liderazgo"]
+      },
+      {
+        "id": 11, 
+        "title": "Employer Survey Platform (UASLP)",
+        "admin": "marco",
+        "adminId": 1,
+        "logoUrl": "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/3_projects/SEE/logo.svg",
+        "slogan": "Close the loop between industry and curriculum",
+        "backgroundUrl": "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/3_projects/SEE/BG.png",
+        "proyectoUrl": "",
+        "instagramUrl": "",
+        "linkedinUrl": "",
+        "twitterUrl": "",
+        "youtubeUrl": "",
+        "facebookUrl": "",
+        "descripcionBreve": "A web platform to create, distribute, and analyze employer surveys mapped from skills → criteria → indicators. Built with Laravel + React + Inertia + Tailwind; includes roles/permissions, tokenized public links for respondents, dashboards, and CSV exports.",
+        "proposito": "Give academic programs actionable evidence of graduate performance and feed it back into program improvement—repeatably and at scale.",
+        "inicio": "Off-the-shelf forms lacked traceability (indicator-linked questions), role granularity (admin/coordinator/employer), and secure link distribution without accounts.",
+        "historiaBreve": "Three people, biweekly sprints (≈7) over 3.5 months. We ran four formal review cycles with the client to harden requirements, ship the core workflows, and hand over a maintainable system with complete docs.",
+        "segundaImagenUrl": "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/3_projects/SEE/img2.png",
+        "createdAt": "2025-01-01T00:00:00.000Z",
+        "updatedAt": "2025-01-01T00:00:00.000Z",
+        "areas": [ "diseno", "liderazgo", "desarrollo"]
       }
 ]

@@ -54,5 +54,12 @@
         "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/TheRADAR/design.png",
         "figmaUrl": "https://www.figma.com/design/E5ZLECQRn6bQUUPU2mrZOP/UI-The-RADAR?node-id=1-326&t=YOk3N9o2Mi01RB6f-1",
         "queHice": "Ran Design Thinking end-to-end: discovery, synthesis (personas/empathy maps), ideation, prototyping, validation. Mapped IA and core gameplay loop; designed onboarding, session flow, rewards, and progress cues. Built a hi-fi Figma prototype with component variants and tokens; prepared a handoff packet (flows, specs, copy)."
+      },
+      {
+        "id": 11,
+        "proyectoId": 11,
+        "previewUrl": "https://raw.githubusercontent.com/marcoantonnlopez/portfolioContent/master/pages/3_projects/SEE/design.png",
+        "figmaUrl": "https://www.figma.com/design/POdewhEmHcMXcAcQ8gxsUU/SEE?node-id=245-13268&t=exLbhmEM3ZLuj03U-1",
+        "queHice": "Created an Atomic Design system in Figma and mapped flows (dashboard, build, send, report). Aligned catalogs (skills→criteria→indicators→questions) with screen patterns for consistency."
       }
     ]

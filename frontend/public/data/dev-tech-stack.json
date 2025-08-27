@@ -14,13 +14,13 @@
       {
         "id": 2,
         "desarrolloId": "",
-        "disenoId": "1, 6, 2, 5, 7, 8, 9, 10",
+        "disenoId": "1, 6, 2, 5, 7, 8, 9, 10, 11",
         "tech": "Figma"
       },
       {
         "id": 3,
         "desarrolloId": "",
-        "disenoId": "1, 2, 5, 7, 10",
+        "disenoId": "1, 2, 5, 7, 10, 11",
         "tech": "Atomic design"
       },
       {
@@ -62,7 +62,7 @@
       {
         "id": 13,
         "desarrolloId": "",
-        "disenoId": "1, 5, 7, 10",
+        "disenoId": "1, 5, 7, 10, 11",
         "tech": "Design tokens"
       },
       {
@@ -114,6 +114,18 @@
         "tech": "scikit-learn"
       },
       {
+        "id": 37,
+        "desarrolloId": "11",
+        "disenoId": "",
+        "tech": "Jest"
+      },
+      {
+        "id": 38,
+        "desarrolloId": "11",
+        "disenoId": "",
+        "tech": "React"
+      },
+      {
         "id": 21,
         "desarrolloId": "5, 7",
         "disenoId": "",
@@ -163,7 +175,7 @@
       },
       {
         "id": 8,
-        "desarrolloId": "1, 2, 7, 8",
+        "desarrolloId": "1, 2, 7, 8, 11",
         "disenoId": "",
         "tech": "Git"
       },
@@ -175,7 +187,7 @@
       },
       {
         "id": 9,
-        "desarrolloId": "1, 6, 2, 7, 8",
+        "desarrolloId": "1, 6, 2, 7, 8, 11",
         "disenoId": "",
         "tech": "GitHub"
       },
@@ -226,5 +238,35 @@
         "desarrolloId": "",
         "disenoId": "10",
         "tech": "Slack"
+      },
+      {
+        "id": 39,
+        "desarrolloId": "11",
+        "disenoId": "",
+        "tech": "laravel"
+      },
+      {
+        "id": 40,
+        "desarrolloId": "11",
+        "disenoId": "",
+        "tech": "Inertia"
+      },
+      {
+        "id": 41,
+        "desarrolloId": "11",
+        "disenoId": "",
+        "tech": "Tailwind"
+      },
+      {
+        "id": 42,
+        "desarrolloId": "11",
+        "disenoId": "",
+        "tech": "Scrum tooling"
+      },
+      {
+        "id": 43,
+        "desarrolloId": "11",
+        "disenoId": "",
+        "tech": "MariaDB"
       }
 ]

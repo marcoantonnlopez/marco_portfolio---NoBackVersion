@@ -96,6 +96,16 @@
     },
     {
       "id": 20,
+      "desarrolloId": "11",
+      "texto": "Enabled secure distribution by integrating unique public tokens into routes, removing employer login friction."
+    },
+    {
+      "id": 21,
+      "desarrolloId": "11",
+      "texto": "Increased reliability by adding Jest API tests, catching regressions before client UA"
+    },
+    {
+      "id": 22,
       "desarrolloId": "",
       "texto": ""
     }

@@ -142,6 +142,21 @@
     },
     {
       "id": 29,
+      "liderazgoId": "11",
+      "texto": "Delivered a complete survey platform in 3.5 months by coordinating a 3-person team with biweekly sprints and 4 feedback cycles, reducing rework and meeting RF01–RF08 coverage."
+    },
+    {
+      "id": 30,
+      "liderazgoId": "11",
+      "texto": "Standardized the documentation stack (requirements, dev manual, infographic) with checklists, enabling clean handoff and maintainability."
+    },
+    {
+      "id": 31,
+      "liderazgoId": "11",
+      "texto": "Delivered results 3x faster than comparable class projects, leveraging lean execution and strategic automation to compress a 12-month scope into 4."
+    },
+    {
+      "id": 32,
       "liderazgoId": "",
       "texto": ""
     }

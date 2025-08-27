@@ -116,6 +116,16 @@
     },
     {
       "id": 24,
+      "disenoId": "11",
+      "texto": "Reduced ambiguity for engineers by shipping a tokenized component library mapped to requirements, accelerating screen assembly."
+    },
+    {
+      "id": 25,
+      "disenoId": "11",
+      "texto": "Improved coordinator learnability with standardized table/form patterns across catalogs and builders."
+    },
+    {
+      "id": 26,
       "disenoId": "",
       "texto": ""
     }

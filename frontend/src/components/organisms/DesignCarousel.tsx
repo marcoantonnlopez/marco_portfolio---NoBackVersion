@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import ProjectCard from "../molecules/ProjectCard";
 
 // === IDs FIJOS PARA ESTE CARRUSEL (3 proyectos a mostrar) ===
-const SELECTED_PROJECT_IDS: Array<string | number> = [7, 8, 9];
+const SELECTED_PROJECT_IDS: Array<string | number> = [7, 10, 11];
 
 interface ProjectCardProps {
   id: string | number;
@@ -151,10 +151,10 @@ export default function DesignCarousel() {
     <section className="relative py-16">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-center text-5xl font-extrabold text-white mb-4">
-          Learn. Design. Create.
+          Observe. Design. Disrupt.
         </h2>
         <p className="text-center text-gray-400 mb-12">
-          Creating new solutions is one of my passions.
+          I love fitting products so people can get what they want.
         </p>
 
         <motion.div
