@@ -299,7 +299,7 @@ export default function LeaderCarousel() {
   return (
     <section className="relative py-16" key={selectionKey}>
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-center text-5xl font-extrabold text-white mb-4">Obseerve. Lead. Change.</h2>
+        <h2 className="text-center text-5xl font-extrabold text-white mb-4">Raise. Lead. Change.</h2>
         <p className="text-center text-gray-400 mb-12">Life gave me opportunities to make things different. With love.</p>
 
         <motion.div
