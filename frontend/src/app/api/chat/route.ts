@@ -8,7 +8,7 @@ type ChatMessage = {
   text: string;
 };
 
-const GEMINI_MODEL = "gemini-2.0-flash";
+const GEMINI_MODEL = "gemini-3.8-flash";
 const MAX_HISTORY_MESSAGES = 16; // keep requests small & fast
 const MAX_MESSAGE_LENGTH = 1500;
 
