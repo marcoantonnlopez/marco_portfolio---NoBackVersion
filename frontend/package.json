@@ -12,7 +12,7 @@
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.7",
     "lucide-react": "^0.525.0",
-    "next": "15.4.1",
+    "next": "15.4.11",
     "pdfjs-dist": "^5.3.93",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -25,7 +25,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.4.1",
+    "eslint-config-next": "15.4.11",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
