@@ -5,6 +5,7 @@ import TrustSection from "../components/organisms/TrustSection";
 import LeaderCarousel from "../components/organisms/LeaderCarousel";
 import DevCarousel from "../components/organisms/DevCarousel";
 import DesignCarousel from "../components/organisms/DesignCarousel";
+import ChatTeaser from "../components/chat/ChatTeaser";
 
 const TRUST_DATA = [
   {
@@ -139,7 +140,8 @@ export default async function HomePage() {
       <div className="-mt-16 sm:-mt-20">
         <StatsBar />
       </div>
-      <PassionSection /> 
+      <ChatTeaser />
+      <PassionSection />
       {/* <TrustSection/> */}
       <TrustSection
         title={<span>Trusted by people & programs I admire.</span>}

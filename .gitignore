@@ -29,6 +29,7 @@ coverage/
 
 # --- ENTORNOS ---
 .env*
+!.env.example
 .vercel/
 
 # --- ARCHIVOS DE NEXT.JS ---

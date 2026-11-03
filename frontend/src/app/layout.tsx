@@ -3,6 +3,8 @@ import "./globals.css";
 import {Header} from "../components/organisms/Header"
 import SiteFooter from "@/components/organisms/SiteFooter";
 import { Poppins, Geist, Geist_Mono } from "next/font/google";
+import { ChatWidgetProvider } from "@/components/chat/ChatWidgetContext";
+import ChatWidget from "@/components/chat/ChatWidget";
 
 // 🚀 Llamamos al loader en módulo scope
 const poppins = Poppins({
@@ -41,12 +43,15 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className={`${geistMono.variable} antialiased`}>
-        <Header />
-        <main className=" mx-auto">{children}</main>
-        <SiteFooter
-        title="Let’s build something people want."
-        tagline="Founder energy meets product sense. Ready when you are."
-      />
+        <ChatWidgetProvider>
+          <Header />
+          <main className=" mx-auto">{children}</main>
+          <SiteFooter
+          title="Let’s build something people want."
+          tagline="Founder energy meets product sense. Ready when you are."
+        />
+          <ChatWidget />
+        </ChatWidgetProvider>
       </body>
     </html>
   );

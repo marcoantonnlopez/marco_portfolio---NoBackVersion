@@ -377,6 +377,18 @@ export default nextConfig;
 
 ---
 
+## AI Chat Widget (recruiter Q&A)
+
+A floating chat widget (bottom-right, on every page) lets visitors ask an AI assistant about Marco's projects, experience, studies, and skills. It answers only from a curated knowledge base (`frontend/src/lib/portfolio-knowledge.ts`), via a serverless endpoint (`frontend/src/app/api/chat/route.ts`) that calls the free Gemini API server-side — the API key never reaches the browser.
+
+**Setup:**
+1. Get a free key at https://aistudio.google.com/apikey.
+2. Local dev: copy `frontend/.env.example` to `frontend/.env.local` and paste the key as `GEMINI_API_KEY`.
+3. Production (Vercel): Project → Settings → Environment Variables → add `GEMINI_API_KEY`.
+4. To update what the assistant knows, edit `PORTFOLIO_KNOWLEDGE` in `frontend/src/lib/portfolio-knowledge.ts`.
+
+---
+
 ## License
 
 MIT — use and modify freely.
