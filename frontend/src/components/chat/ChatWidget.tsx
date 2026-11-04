@@ -16,16 +16,16 @@ import { useChatWidget } from "./ChatWidgetContext";
 type ApiMessage = { role: "user" | "model"; text: string };
 
 const SUGGESTED_QUESTIONS = [
-  "¿Cuál es su experiencia profesional?",
-  "Cuéntame sobre Studevs",
-  "¿Qué tecnologías domina?",
-  "¿Cómo puedo contactarlo?",
+  "What's his professional experience?",
+  "Tell me about Studevs",
+  "What technologies does he know?",
+  "How can I contact him?",
 ];
 
 const GREETING =
-  "¡Hola! Soy el asistente de Marco. Puedo contarte sobre sus proyectos, experiencia, estudios y habilidades. ¿Qué te gustaría saber?";
+  "Hi, I'm Mark, Marco's AI assistant. I can tell you about his projects, experience, education, and skills. What would you like to know?";
 
-const FALLBACK_ERROR = "Algo salió mal. Intenta de nuevo en un momento.";
+const FALLBACK_ERROR = "Something went wrong. Please try again in a moment.";
 
 /**
  * Bridges assistant-ui's runtime to the existing /api/chat endpoint, which
@@ -59,7 +59,13 @@ const chatAdapter: ChatModelAdapter = {
       if (!res.ok) {
         const data = await res.json().catch(() => null);
         return {
-          content: [{ type: "text", text: data?.error || FALLBACK_ERROR }],
+          content: [
+            {
+              type: "text",
+              text:
+                typeof data?.error === "string" ? data.error : FALLBACK_ERROR,
+            },
+          ],
         };
       }
 
@@ -134,13 +140,13 @@ function ChatThread() {
 
       <ComposerPrimitive.Root className="flex items-center gap-2 border-t border-white/10 p-3">
         <ComposerPrimitive.Input
-          placeholder="Escribe tu pregunta..."
+          placeholder="Ask Mark anything..."
           rows={1}
           className="flex-1 resize-none rounded-full bg-white/10 px-4 py-2 text-sm text-white
                      placeholder:text-white/40 outline-none focus:ring-2 focus:ring-white/30"
         />
         <ComposerPrimitive.Send
-          aria-label="Enviar"
+          aria-label="Send"
           className="rounded-full bg-white p-2 text-black transition
                      hover:scale-105 active:scale-95 disabled:opacity-40 disabled:hover:scale-100"
         >
@@ -161,7 +167,7 @@ export default function ChatWidget() {
       <motion.button
         type="button"
         onClick={toggle}
-        aria-label={isOpen ? "Cerrar chat" : "Preguntarle a mi asistente"}
+        aria-label={isOpen ? "Close chat" : "Ask Mark, Marco's assistant"}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.6, type: "spring", stiffness: 260, damping: 20 }}
@@ -171,7 +177,7 @@ export default function ChatWidget() {
       >
         {isOpen ? <X className="h-5 w-5" /> : <MessageCircle className="h-5 w-5" />}
         <span className="hidden sm:inline text-sm font-semibold">
-          {isOpen ? "Cerrar" : "Pregúntale a mi asistente"}
+          {isOpen ? "Close" : "Ask Mark"}
         </span>
       </motion.button>
 
@@ -191,13 +197,13 @@ export default function ChatWidget() {
             {/* Header */}
             <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
               <div>
-                <p className="text-sm font-semibold text-white">Asistente de Marco</p>
-                <p className="text-xs text-white/50">Responde con base en su portafolio</p>
+                <p className="text-sm font-semibold text-white">Mark</p>
+                <p className="text-xs text-white/50">Marco's AI assistant</p>
               </div>
               <button
                 type="button"
                 onClick={close}
-                aria-label="Cerrar chat"
+                aria-label="Close chat"
                 className="rounded-full p-1.5 text-white/60 hover:bg-white/10 hover:text-white transition"
               >
                 <X className="h-4 w-4" />

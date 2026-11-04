@@ -22,10 +22,10 @@ export default function ChatTeaser() {
         </div>
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-white">
-            ¿Tienes preguntas sobre lo que he hecho?
+            Got questions about what I&apos;ve built?
           </h3>
           <p className="mt-1 text-sm text-white/60">
-            Pregúntale a mi asistente de IA sobre mis proyectos, experiencia o habilidades.
+            Ask Mark, my AI assistant, about my projects, experience, or skills.
           </p>
         </div>
         <button
@@ -34,7 +34,7 @@ export default function ChatTeaser() {
           className="flex-shrink-0 rounded-full border border-white bg-white px-5 py-2.5
                      text-sm font-medium text-black transition hover:bg-transparent hover:text-white"
         >
-          Preguntar ahora
+          Ask now
         </button>
       </motion.div>
     </section>
