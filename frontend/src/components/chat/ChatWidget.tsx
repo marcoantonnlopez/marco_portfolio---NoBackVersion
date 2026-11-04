@@ -1,14 +1,19 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { MessageCircle, X, Send, Loader2 } from "lucide-react";
+import { MessageCircle, X, Send } from "lucide-react";
+import {
+  AssistantRuntimeProvider,
+  useLocalRuntime,
+  ThreadPrimitive,
+  MessagePrimitive,
+  ComposerPrimitive,
+  type ChatModelAdapter,
+} from "@assistant-ui/react";
 import { useChatWidget } from "./ChatWidgetContext";
 
-type ChatMessage = {
-  role: "user" | "model";
-  text: string;
-};
+type ApiMessage = { role: "user" | "model"; text: string };
 
 const SUGGESTED_QUESTIONS = [
   "¿Cuál es su experiencia profesional?",
@@ -17,60 +22,141 @@ const SUGGESTED_QUESTIONS = [
   "¿Cómo puedo contactarlo?",
 ];
 
-const GREETING: ChatMessage = {
-  role: "model",
-  text:
-    "¡Hola! Soy el asistente de Marco. Puedo contarte sobre sus proyectos, experiencia, estudios y habilidades. ¿Qué te gustaría saber?",
-};
+const GREETING =
+  "¡Hola! Soy el asistente de Marco. Puedo contarte sobre sus proyectos, experiencia, estudios y habilidades. ¿Qué te gustaría saber?";
 
-export default function ChatWidget() {
-  const { isOpen, close, toggle } = useChatWidget();
-  const [messages, setMessages] = useState<ChatMessage[]>([GREETING]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+const FALLBACK_ERROR = "Algo salió mal. Intenta de nuevo en un momento.";
 
-  useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, loading, isOpen]);
-
-  async function sendMessage(text: string) {
-    const trimmed = text.trim();
-    if (!trimmed || loading) return;
-
-    const nextMessages: ChatMessage[] = [...messages, { role: "user", text: trimmed }];
-    setMessages(nextMessages);
-    setInput("");
-    setError(null);
-    setLoading(true);
+/**
+ * Bridges assistant-ui's runtime to the existing /api/chat endpoint, which
+ * expects { messages: { role: "user" | "model", text: string }[] } and
+ * returns { reply: string } (see src/app/api/chat/route.ts).
+ */
+const chatAdapter: ChatModelAdapter = {
+  async run({ messages, abortSignal }) {
+    const apiMessages: ApiMessage[] = messages
+      .filter((m) => m.role === "user" || m.role === "assistant")
+      .map((m) => ({
+        role: (m.role === "assistant" ? "model" : "user") as ApiMessage["role"],
+        text: m.content
+          .filter(
+            (p): p is { type: "text"; text: string } => p.type === "text"
+          )
+          .map((p) => p.text)
+          .join("\n")
+          .trim(),
+      }))
+      .filter((m) => m.text.length > 0);
 
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: nextMessages }),
+        body: JSON.stringify({ messages: apiMessages }),
+        signal: abortSignal,
       });
-      const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data?.error || "No se pudo obtener respuesta.");
+        const data = await res.json().catch(() => null);
+        return {
+          content: [{ type: "text", text: data?.error || FALLBACK_ERROR }],
+        };
       }
 
-      setMessages((prev) => [...prev, { role: "model", text: data.reply }]);
+      const data = await res.json();
+      return { content: [{ type: "text", text: data.reply as string }] };
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Algo salió mal. Intenta de nuevo en un momento."
-      );
-    } finally {
-      setLoading(false);
+      if (err instanceof DOMException && err.name === "AbortError") throw err;
+      return { content: [{ type: "text", text: FALLBACK_ERROR }] };
     }
-  }
+  },
+};
+
+function AssistantMessage() {
+  return (
+    <MessagePrimitive.Root className="flex justify-start">
+      <div className="max-w-[85%] whitespace-pre-wrap rounded-2xl bg-white/10 px-3.5 py-2 text-sm leading-relaxed text-white">
+        <MessagePrimitive.Content />
+      </div>
+    </MessagePrimitive.Root>
+  );
+}
+
+function UserMessage() {
+  return (
+    <MessagePrimitive.Root className="flex justify-end">
+      <div className="max-w-[85%] whitespace-pre-wrap rounded-2xl bg-white px-3.5 py-2 text-sm leading-relaxed text-black">
+        <MessagePrimitive.Content />
+      </div>
+    </MessagePrimitive.Root>
+  );
+}
+
+function ChatThread() {
+  return (
+    <ThreadPrimitive.Root className="flex flex-1 flex-col overflow-hidden">
+      <ThreadPrimitive.Viewport className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+        <ThreadPrimitive.Empty>
+          <div className="flex justify-start">
+            <div className="max-w-[85%] whitespace-pre-wrap rounded-2xl bg-white/10 px-3.5 py-2 text-sm leading-relaxed text-white">
+              {GREETING}
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2 pt-3">
+            {SUGGESTED_QUESTIONS.map((q) => (
+              <ThreadPrimitive.Suggestion
+                key={q}
+                prompt={q}
+                send
+                className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5
+                           text-xs text-white/80 transition hover:bg-white/15"
+              >
+                {q}
+              </ThreadPrimitive.Suggestion>
+            ))}
+          </div>
+        </ThreadPrimitive.Empty>
+
+        <ThreadPrimitive.Messages
+          components={{ UserMessage, AssistantMessage }}
+        />
+
+        <ThreadPrimitive.If running>
+          <div className="flex justify-start">
+            <div className="flex items-center gap-1.5 rounded-2xl bg-white/10 px-3.5 py-2.5 text-sm text-white/70">
+              <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-white/60 [animation-delay:-0.3s]" />
+              <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-white/60 [animation-delay:-0.15s]" />
+              <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-white/60" />
+            </div>
+          </div>
+        </ThreadPrimitive.If>
+      </ThreadPrimitive.Viewport>
+
+      <ComposerPrimitive.Root className="flex items-center gap-2 border-t border-white/10 p-3">
+        <ComposerPrimitive.Input
+          placeholder="Escribe tu pregunta..."
+          rows={1}
+          className="flex-1 resize-none rounded-full bg-white/10 px-4 py-2 text-sm text-white
+                     placeholder:text-white/40 outline-none focus:ring-2 focus:ring-white/30"
+        />
+        <ComposerPrimitive.Send
+          aria-label="Enviar"
+          className="rounded-full bg-white p-2 text-black transition
+                     hover:scale-105 active:scale-95 disabled:opacity-40 disabled:hover:scale-100"
+        >
+          <Send className="h-4 w-4" />
+        </ComposerPrimitive.Send>
+      </ComposerPrimitive.Root>
+    </ThreadPrimitive.Root>
+  );
+}
+
+export default function ChatWidget() {
+  const { isOpen, close, toggle } = useChatWidget();
+  const runtime = useLocalRuntime(chatAdapter);
 
   return (
-    <>
+    <AssistantRuntimeProvider runtime={runtime}>
       {/* Floating trigger button */}
       <motion.button
         type="button"
@@ -118,83 +204,10 @@ export default function ChatWidget() {
               </button>
             </div>
 
-            {/* Messages */}
-            <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
-              {messages.map((m, i) => (
-                <div
-                  key={i}
-                  className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  <div
-                    className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-sm leading-relaxed ${
-                      m.role === "user"
-                        ? "bg-white text-black"
-                        : "bg-white/10 text-white"
-                    }`}
-                  >
-                    {m.text}
-                  </div>
-                </div>
-              ))}
-
-              {loading && (
-                <div className="flex justify-start">
-                  <div className="flex items-center gap-2 rounded-2xl bg-white/10 px-3.5 py-2 text-sm text-white/70">
-                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                    Pensando...
-                  </div>
-                </div>
-              )}
-
-              {error && (
-                <p className="text-xs text-red-400">{error}</p>
-              )}
-
-              {messages.length <= 1 && !loading && (
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {SUGGESTED_QUESTIONS.map((q) => (
-                    <button
-                      key={q}
-                      type="button"
-                      onClick={() => sendMessage(q)}
-                      className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5
-                                 text-xs text-white/80 hover:bg-white/15 transition"
-                    >
-                      {q}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Input */}
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                sendMessage(input);
-              }}
-              className="flex items-center gap-2 border-t border-white/10 p-3"
-            >
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Escribe tu pregunta..."
-                className="flex-1 rounded-full bg-white/10 px-4 py-2 text-sm text-white
-                           placeholder:text-white/40 outline-none focus:ring-2 focus:ring-white/30"
-              />
-              <button
-                type="submit"
-                disabled={loading || !input.trim()}
-                aria-label="Enviar"
-                className="rounded-full bg-white p-2 text-black transition
-                           hover:scale-105 active:scale-95 disabled:opacity-40 disabled:hover:scale-100"
-              >
-                <Send className="h-4 w-4" />
-              </button>
-            </form>
+            <ChatThread />
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </AssistantRuntimeProvider>
   );
 }
