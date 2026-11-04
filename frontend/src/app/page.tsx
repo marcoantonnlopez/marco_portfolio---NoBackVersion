@@ -91,19 +91,24 @@ const EXPERIENCE_DATA = [
     logoSrc:
       "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/logos/domu.png",
     logoAlt: "Domu logo",
-    title: "Platform Prompt Engineer",
-    subtitle: "Domu (YC-backed startup) · Jul–Oct 2026",
-    description: "Owned the full configuration cycle for production voice AI agents — decision logic, tools, testing, deployment — raising accuracy on sensitive call content from ~70% to ~99%. Scaled coverage from 5 to 9 deployed agents across 5 LATAM fintech/lending clients (10,000–15,000 calls/day each), driving decisions through SQL dashboards and A/B testing.",
+    company: "Domu",
+    companyMeta: "YC-backed startup · Full-time",
+    location: "San Luis Potosí, Mexico (Remote)",
     link: "https://domu.ai",
-  },
-  {
-    logoSrc:
-      "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/logos/domu.png",
-    logoAlt: "Domu logo",
-    title: "Technical Account Manager",
-    subtitle: "Domu (YC-backed startup) · Mar–Jul 2026",
-    description: "Scaled Domu's top-priority LATAM account from 5,000 to 12,000 contacts and lifted promise-to-pay conversion ~7 points (24.6% → 31.5%) by designing and running SQL-driven A/B tests. Grew a managed portfolio from 3 to 6 enterprise accounts and cut new-hire ramp-up time from 3 weeks to 1–2 weeks by automating reporting and documenting workflows.",
-    link: "https://domu.ai",
+    roles: [
+      {
+        title: "Platform Prompt Engineer",
+        dateRange: "Jul 2026 - Oct 2026 · 4 mos",
+        description:
+          "Owned the full configuration cycle for production voice AI agents — decision logic, tools, testing, deployment — raising accuracy on sensitive call content from ~70% to ~99%. Scaled coverage from 5 to 9 deployed agents across 5 LATAM fintech/lending clients (10,000–15,000 calls/day each), driving decisions through SQL dashboards and A/B testing.",
+      },
+      {
+        title: "Technical Account Manager",
+        dateRange: "Mar 2026 - Jul 2026 · 5 mos",
+        description:
+          "Scaled Domu's top-priority LATAM account from 5,000 to 12,000 contacts and lifted promise-to-pay conversion ~7 points (24.6% → 31.5%) by designing and running SQL-driven A/B tests. Grew a managed portfolio from 3 to 6 enterprise accounts and cut new-hire ramp-up time from 3 weeks to 1–2 weeks by automating reporting and documenting workflows.",
+      },
+    ],
   },
   {
     logoSrc:

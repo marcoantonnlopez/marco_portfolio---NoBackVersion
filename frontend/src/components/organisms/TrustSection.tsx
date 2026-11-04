@@ -3,13 +3,20 @@
 import React from "react";
 import clsx from "clsx";
 import { TrustItem, type TrustItemProps } from "@/components/molecules/TrustItem";
+import { TrustItemGrouped, type TrustGroupProps } from "@/components/molecules/TrustItemGrouped";
 import Heading from "@/components/atoms/Heading";
+
+type TrustEntry = TrustItemProps | TrustGroupProps;
+
+function isGrouped(item: TrustEntry): item is TrustGroupProps {
+  return "roles" in item;
+}
 
 interface TrustSectionProps {
   /** Title text or a custom heading node */
   title?: React.ReactNode;
   /** Items provided by the parent */
-  items: TrustItemProps[];
+  items: TrustEntry[];
   /** Optional extra classes for the section */
   className?: string;
   /** Fixed visual height for each item to keep them homogeneous */
@@ -39,11 +46,18 @@ export default function TrustSection({
 
         {/* Homogeneous item sizes */}
         <ul className="grid gap-3 md:grid-cols-2">
-          {items.map((item, i) => (
-            <li key={`${item.title}-${i}`} style={{ minHeight: itemMinHeightPx }}>
-              <TrustItem {...item} />
-            </li>
-          ))}
+          {items.map((item, i) => {
+            const grouped = isGrouped(item);
+            return (
+              <li
+                key={`${grouped ? item.company : item.title}-${i}`}
+                style={grouped ? undefined : { minHeight: itemMinHeightPx }}
+                className={grouped ? "md:col-span-2" : undefined}
+              >
+                {grouped ? <TrustItemGrouped {...item} /> : <TrustItem {...item} />}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
