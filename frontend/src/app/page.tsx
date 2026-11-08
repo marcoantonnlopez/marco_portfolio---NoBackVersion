@@ -6,6 +6,7 @@ import LeaderCarousel from "../components/organisms/LeaderCarousel";
 import DevCarousel from "../components/organisms/DevCarousel";
 import DesignCarousel from "../components/organisms/DesignCarousel";
 import ChatTeaser from "../components/chat/ChatTeaser";
+import IntroHero from "../components/organisms/IntroHero";
 
 const TRUST_DATA = [
   {
@@ -159,7 +160,10 @@ const EXPERIENCE_DATA = [
 export default async function HomePage() {
   return (
       <main>
-      <HeroCarousel />
+      <IntroHero />
+      <div id="home-main">
+        <HeroCarousel />
+      </div>
       <div className="-mt-16 sm:-mt-20">
         <StatsBar />
       </div>
