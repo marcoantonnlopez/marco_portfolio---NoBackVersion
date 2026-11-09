@@ -1,4 +1,3 @@
-import HeroCarousel    from "../components/organisms/HeroCarousel/HeroCarousel";
 import StatsBar        from "../components/organisms/StatsBar";
 import PassionSection from "../components/organisms/PassionSection";
 import TrustSection from "../components/organisms/TrustSection";
@@ -7,6 +6,7 @@ import DevCarousel from "../components/organisms/DevCarousel";
 import DesignCarousel from "../components/organisms/DesignCarousel";
 import ChatTeaser from "../components/chat/ChatTeaser";
 import IntroHero from "../components/organisms/IntroHero";
+import JourneySection from "../components/journey/JourneySection";
 
 const TRUST_DATA = [
   {
@@ -165,7 +165,7 @@ export default async function HomePage() {
       <div id="home-main">
         <StatsBar />
       </div>
-      <HeroCarousel />
+      <JourneySection />
       <ChatTeaser />
       <PassionSection />
       {/* <TrustSection/> */}
