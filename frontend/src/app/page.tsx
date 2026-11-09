@@ -161,12 +161,11 @@ export default async function HomePage() {
   return (
       <main>
       <IntroHero />
+      {/* "See where it led me" scrolls here */}
       <div id="home-main">
-        <HeroCarousel />
-      </div>
-      <div className="-mt-16 sm:-mt-20">
         <StatsBar />
       </div>
+      <HeroCarousel />
       <ChatTeaser />
       <PassionSection />
       {/* <TrustSection/> */}

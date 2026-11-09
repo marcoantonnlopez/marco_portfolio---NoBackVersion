@@ -44,7 +44,7 @@ export default function IntroHero() {
   };
 
   return (
-    <section ref={sectionRef} aria-label="Intro" className="relative h-[150svh] w-full bg-[#171717]">
+    <section ref={sectionRef} aria-label="Intro" className="relative h-[150svh] w-full bg-black">
       <div
         className="sticky top-0 h-[100svh] min-h-[560px] w-full overflow-hidden"
         style={{ backgroundImage: `url(${POSTER_SRC})`, backgroundSize: "cover", backgroundPosition: "center" }}
@@ -65,7 +65,7 @@ export default function IntroHero() {
         {/* Contrast + fade into the page color */}
         <div className="absolute inset-0 bg-black/25" />
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/50 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-b from-transparent via-[#171717]/70 to-[#171717]" />
+        <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-b from-transparent via-black/70 to-black" />
 
         {/* Copy */}
         <div className="absolute inset-0 flex flex-col items-start justify-end px-6 pb-16 text-left sm:items-center sm:pb-20 sm:text-center">
