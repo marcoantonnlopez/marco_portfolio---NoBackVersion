@@ -1,7 +1,7 @@
 // src/components/organisms/Header.tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { X, Menu } from "lucide-react";
 import { Logo } from "../atoms/Logo";
@@ -9,6 +9,17 @@ import { NavLink } from "../atoms/NavLink";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Transparent header at the top of the page; fades to solid once the user scrolls.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const solid = scrolled || open;
 
   const links = [
     { href: "/about-me", label: "About me" },
@@ -25,9 +36,13 @@ export function Header() {
         className={`
           fixed top-4 left-1/2 transform -translate-x-1/2
           w-[90vw] max-w-6xl
-          ${open ? "rounded-none" : "rounded-full"}    /* ← aquí el cambio */
-          bg-[#171717]/70 backdrop-blur-[50px]
-          drop-shadow-[0_0_50px_rgba(255,255,255,0.5)]
+          ${open ? "rounded-none" : "rounded-full"}
+          transition-all duration-500 ease-out
+          ${
+            solid
+              ? "bg-[#171717]/70 backdrop-blur-[50px] drop-shadow-[0_0_50px_rgba(255,255,255,0.5)]"
+              : "bg-[#171717]/0 backdrop-blur-none drop-shadow-[0_0_50px_rgba(255,255,255,0)]"
+          }
           z-50
         `}
       >
