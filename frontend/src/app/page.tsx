@@ -7,6 +7,7 @@ import DesignCarousel from "../components/organisms/DesignCarousel";
 import ChatTeaser from "../components/chat/ChatTeaser";
 import IntroHero from "../components/organisms/IntroHero";
 import JourneySection from "../components/journey/JourneySection";
+import ClosingPhoto from "../components/organisms/ClosingPhoto";
 
 const TRUST_DATA = [
   {
@@ -199,6 +200,7 @@ export default async function HomePage() {
         maxWidth="130vh"
       />
       <DesignCarousel/>
+      <ClosingPhoto />
 
     </main>
   );
