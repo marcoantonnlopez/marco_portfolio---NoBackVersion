@@ -45,16 +45,27 @@ function blocked(d: District, dx: number, dz: number) {
 const CX = DISTRICTS.reduce((a, c) => a + c.pos[0], 0) / DISTRICTS.length;
 const CZ = DISTRICTS.reduce((a, c) => a + c.pos[1], 0) / DISTRICTS.length;
 
-/** The avenue runs along -z at x = AVENUE_X; districts line up on alternating sides. */
+/**
+ * Closing shot: the landmarks gather close on both sides of an avenue, framing the copy in the
+ * middle; the districts' buildings become a skyline at the far end. Camera sits at CAM_Z looking down -z.
+ */
 const AVENUE_X = CX;
-const AVENUE_Z0 = CZ + 10;
-const AVENUE_STEP = 48;
-const AVENUE_LEN = AVENUE_STEP * DISTRICTS.length + 120;
+const CAM_Z = CZ + 52;
+const AVENUE_LEN = 260;
 
-const MERGED: [number, number][] = DISTRICTS.map((d, i) => {
-  const side = i % 2 === 0 ? -1 : 1;
-  return [AVENUE_X + side * (23 * d.zoom + 4), AVENUE_Z0 - i * AVENUE_STEP];
-});
+/** Landmark slots in the closing shot: x from the avenue center, z from the camera, rotation. */
+const LANDMARK_SLOTS: Record<LandmarkId, { x: number; z: number; rotY: number }> = {
+  thailand: { x: -24, z: -42, rotY: 0 },
+  seoul: { x: -44, z: -76, rotY: 0 },
+  saopaulo: { x: -76, z: -114, rotY: Math.PI / 2 },
+  cdmx: { x: 23, z: -40, rotY: 0 },
+  toronto: { x: 43, z: -78, rotY: 0 },
+  panama: { x: 74, z: -112, rotY: 0 },
+};
+
+/** Districts' buildings line up as a skyline behind everything. */
+const SKYLINE_X = [-78, -28, 28, 78];
+const SKYLINE: [number, number][] = DISTRICTS.map((_, i) => [AVENUE_X + SKYLINE_X[i % SKYLINE_X.length], CAM_Z - 180]);
 
 /** 0 → 1 while scrolling from the last district to the closing shot. */
 function mergeAmount(u: number) {
@@ -112,8 +123,16 @@ function DistrictBuildings({ district, seed }: { district: District; seed: numbe
   );
 }
 
+type LandmarkEntry = { key: string; id: LandmarkId; from: [number, number] };
+
+const LANDMARKS: LandmarkEntry[] = DISTRICTS.flatMap((d) =>
+  d.landmarks.map((l) => ({ key: `${d.id}-${l.id}`, id: l.id, from: [d.pos[0] + l.offset[0], d.pos[1] + l.offset[1]] as [number, number] }))
+);
+
 function Districts({ progress }: { progress: MotionValue<number> }) {
+  const { camera } = useThree();
   const groups = useRef<(THREE.Group | null)[]>([]);
+  const marks = useRef<(THREE.Group | null)[]>([]);
   // Shared materials so the whole avenue fades in together.
   const roadMat = useMemo(
     () => new THREE.MeshStandardMaterial({ color: "#101015", roughness: 0.95, transparent: true, opacity: 0, depthWrite: false }),
@@ -126,20 +145,33 @@ function Districts({ progress }: { progress: MotionValue<number> }) {
 
   useFrame(() => {
     const m = mergeAmount(progressToStop(progress.get()).u);
+    // On portrait screens bring the landmarks closer to the center so both sides stay in frame.
+    const aspect = (camera as THREE.PerspectiveCamera).aspect || 1;
+    const squeeze = aspect < 1 ? THREE.MathUtils.clamp(aspect * 0.9, 0.38, 1) : 1;
+
     DISTRICTS.forEach((d, i) => {
       const g = groups.current[i];
       if (!g) return;
-      g.position.set(
-        THREE.MathUtils.lerp(d.pos[0], MERGED[i][0], m),
-        0,
-        THREE.MathUtils.lerp(d.pos[1], MERGED[i][1], m)
-      );
+      g.position.set(THREE.MathUtils.lerp(d.pos[0], SKYLINE[i][0], m), 0, THREE.MathUtils.lerp(d.pos[1], SKYLINE[i][1], m));
     });
+
+    LANDMARKS.forEach((l, i) => {
+      const g = marks.current[i];
+      if (!g) return;
+      const slot = LANDMARK_SLOTS[l.id];
+      g.position.set(
+        THREE.MathUtils.lerp(l.from[0], AVENUE_X + slot.x * squeeze, m),
+        0,
+        THREE.MathUtils.lerp(l.from[1], CAM_Z + slot.z, m)
+      );
+      g.rotation.y = slot.rotY * m;
+    });
+
     roadMat.opacity = m;
     lineMat.opacity = m * 0.85;
   });
 
-  const dashes = useMemo(() => Array.from({ length: Math.floor(AVENUE_LEN / 8) }, (_, i) => AVENUE_Z0 + 40 - i * 8), []);
+  const dashes = useMemo(() => Array.from({ length: Math.floor((AVENUE_LEN + 30) / 8) }, (_, i) => CAM_Z + 30 - i * 8), []);
 
   return (
     <>
@@ -156,21 +188,28 @@ function Districts({ progress }: { progress: MotionValue<number> }) {
             <meshStandardMaterial color="#23232e" roughness={1} />
           </mesh>
           <DistrictBuildings district={d} seed={i} />
-          {d.landmarks.map((l) => (
-            <group key={l.id} position={[l.offset[0], 0, l.offset[1]]}>
-              <Landmark id={l.id} />
-            </group>
-          ))}
         </group>
       ))}
 
-      {/* The avenue fades in as the districts come together */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[AVENUE_X, 0.03, AVENUE_Z0 + 40 - AVENUE_LEN / 2]} material={roadMat} receiveShadow>
-        <planeGeometry args={[12, AVENUE_LEN]} />
+      {LANDMARKS.map((l, i) => (
+        <group
+          key={l.key}
+          ref={(el) => {
+            marks.current[i] = el;
+          }}
+          position={[l.from[0], 0, l.from[1]]}
+        >
+          <Landmark id={l.id} />
+        </group>
+      ))}
+
+      {/* The avenue fades in as the landmarks come together */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[AVENUE_X, 0.03, CAM_Z + 40 - AVENUE_LEN / 2]} material={roadMat} receiveShadow>
+        <planeGeometry args={[10, AVENUE_LEN]} />
       </mesh>
       {dashes.map((z) => (
         <mesh key={z} rotation={[-Math.PI / 2, 0, 0]} position={[AVENUE_X, 0.05, z]} material={lineMat}>
-          <planeGeometry args={[0.35, 3.2]} />
+          <planeGeometry args={[0.3, 3]} />
         </mesh>
       ))}
     </>
@@ -187,12 +226,12 @@ function useCameraPath() {
         const k = d.zoom * (1 + d.lookY / 18);
         return new THREE.Vector3(d.pos[0] - 15 * k, d.lookY + 8 * k, d.pos[1] + 24 * k);
       }),
-      new THREE.Vector3(AVENUE_X, 11, AVENUE_Z0 + 42), // closing: front and center, down the avenue
+      new THREE.Vector3(AVENUE_X, 9, CAM_Z + 35), // closing: front and center, down the avenue
     ];
     const targets = [
       new THREE.Vector3(CX, 0, CZ),
       ...STOPS.map(({ district: d }) => new THREE.Vector3(d.pos[0], d.lookY * 0.8, d.pos[1])),
-      new THREE.Vector3(AVENUE_X, -4, AVENUE_Z0 - 140),
+      new THREE.Vector3(AVENUE_X, 15, CAM_Z - 200),
     ];
     return {
       pos: new THREE.CatmullRomCurve3(positions, false, "centripetal"),
@@ -217,7 +256,7 @@ function CameraRig({ progress }: { progress: MotionValue<number> }) {
 
     // Pull back a bit on narrow (portrait) screens so landmarks fit.
     const aspect = (camera as THREE.PerspectiveCamera).aspect || 1;
-    if (aspect < 1) tmpP.lerp(tmpL, -(1 / aspect - 1) * 0.45 * (1 - mergeAmount(u) * 0.7));
+    if (aspect < 1) tmpP.lerp(tmpL, -(1 / aspect - 1) * 0.45 * (1 - mergeAmount(u)));
 
     if (!ready.current) {
       curPos.current.copy(tmpP);
@@ -237,8 +276,8 @@ function CameraRig({ progress }: { progress: MotionValue<number> }) {
       const avenue = mergeAmount(u); // long view down the avenue
       // Portrait screens sit the camera further back, so push the fog back too.
       const reach = aspect < 1 ? 1 + (1 / aspect - 1) * 0.6 : 1;
-      fog.near = THREE.MathUtils.lerp(THREE.MathUtils.lerp(35, 140, open), 45, avenue) * reach;
-      fog.far = THREE.MathUtils.lerp(THREE.MathUtils.lerp(130, 420, open), 300, avenue) * reach;
+      fog.near = THREE.MathUtils.lerp(THREE.MathUtils.lerp(35, 140, open), 70, avenue) * reach;
+      fog.far = THREE.MathUtils.lerp(THREE.MathUtils.lerp(130, 420, open), 330, avenue) * reach;
     }
   });
 

@@ -25,7 +25,7 @@ export default function ChatTeaser() {
   };
 
   return (
-    <section className="relative z-10 bg-black px-4 pb-14">
+    <section className="relative z-10 flex min-h-[100svh] items-center bg-black px-4 py-14">
       <motion.div
         ref={cardRef}
         onPointerMove={onMove}
@@ -34,7 +34,7 @@ export default function ChatTeaser() {
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.6 }}
         style={{ "--mx": "50%", "--my": "50%" } as React.CSSProperties}
-        className="group relative mx-auto max-w-3xl rounded-2xl bg-white/10 p-px"
+        className="group relative mx-auto w-full max-w-3xl rounded-2xl bg-white/10 p-px"
       >
         {/* Edge light that follows the pointer */}
         <div
