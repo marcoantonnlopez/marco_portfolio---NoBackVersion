@@ -150,7 +150,7 @@ export default function JourneySection() {
         <div className="pointer-events-none absolute inset-0 mx-auto flex max-w-6xl flex-col justify-end px-6 pb-16 sm:pb-20">
           <AnimatePresence mode="wait">
             {phase.kind !== "between" && (
-              <motion.div key={key} {...fade} className="pointer-events-auto">
+              <motion.div key={key} {...fade} className={`pointer-events-auto ${phase.kind === "outro" ? "sm:self-center" : ""}`}>
                 {phase.kind === "intro" && <IntroBlock />}
                 {phase.kind === "city" && <StopCard index={phase.index} />}
                 {phase.kind === "outro" && <OutroCard />}

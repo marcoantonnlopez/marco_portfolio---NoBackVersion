@@ -5,7 +5,7 @@ import { useLayoutEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import type { MotionValue } from "framer-motion";
-import { DISTRICTS, STOPS, progressToStop, type District, type LandmarkId } from "./cities";
+import { DISTRICTS, STOPS, STOP_COUNT, progressToStop, type District, type LandmarkId } from "./cities";
 import { Landmark } from "./Landmarks";
 
 /* ---------------- helpers ---------------- */
@@ -40,39 +40,55 @@ function blocked(d: District, dx: number, dz: number) {
   return d.landmarks.some((l) => blockedByLandmark(l.id, dx - l.offset[0], dz - l.offset[1]));
 }
 
-/* ---------------- filler city ---------------- */
+/* ---------------- layout: scattered districts → one avenue ---------------- */
 
-function Buildings() {
+const CX = DISTRICTS.reduce((a, c) => a + c.pos[0], 0) / DISTRICTS.length;
+const CZ = DISTRICTS.reduce((a, c) => a + c.pos[1], 0) / DISTRICTS.length;
+
+/** The avenue runs along -z at x = AVENUE_X; districts line up on alternating sides. */
+const AVENUE_X = CX;
+const AVENUE_Z0 = CZ + 10;
+const AVENUE_STEP = 48;
+const AVENUE_LEN = AVENUE_STEP * DISTRICTS.length + 120;
+
+const MERGED: [number, number][] = DISTRICTS.map((d, i) => {
+  const side = i % 2 === 0 ? -1 : 1;
+  return [AVENUE_X + side * (23 * d.zoom + 4), AVENUE_Z0 - i * AVENUE_STEP];
+});
+
+/** 0 → 1 while scrolling from the last district to the closing shot. */
+function mergeAmount(u: number) {
+  return THREE.MathUtils.smoothstep(u, STOP_COUNT - 2 + 0.12, STOP_COUNT - 1 - 0.1);
+}
+
+/* ---------------- a district: pad + filler buildings + landmarks ---------------- */
+
+const PALETTE = ["#4a4d5c", "#565a6b", "#3e4150", "#626677", "#4f5568"].map((h) => new THREE.Color(h));
+
+function DistrictBuildings({ district, seed }: { district: District; seed: number }) {
   const ref = useRef<THREE.InstancedMesh>(null);
 
   const items = useMemo(() => {
     const out: { p: THREE.Vector3; s: THREE.Vector3; c: THREE.Color }[] = [];
-    const palette = ["#4a4d5c", "#565a6b", "#3e4150", "#626677", "#4f5568"].map((h) => new THREE.Color(h));
-    DISTRICTS.forEach((city, ci) => {
-      const rand = rng(1000 + ci * 97);
-      let placed = 0;
-      let tries = 0;
-      while (placed < city.density && tries < city.density * 12) {
-        tries++;
-        const ang = rand() * Math.PI * 2;
-        const rad = 4 + rand() * 18 * city.zoom;
-        const dx = Math.cos(ang) * rad;
-        const dz = Math.sin(ang) * rad;
-        if (blocked(city, dx, dz)) continue;
-        const w = 1.4 + rand() * 2.4;
-        const d = 1.4 + rand() * 2.4;
-        // taller near the center, shorter at the edge
-        const h = 1 + rand() * city.maxHeight * Math.max(0.15, 1 - rad / (26 * city.zoom));
-        out.push({
-          p: new THREE.Vector3(city.pos[0] + dx, h / 2, city.pos[1] + dz),
-          s: new THREE.Vector3(w, h, d),
-          c: palette[Math.floor(rand() * palette.length)],
-        });
-        placed++;
-      }
-    });
+    const rand = rng(1000 + seed * 97);
+    let placed = 0;
+    let tries = 0;
+    while (placed < district.density && tries < district.density * 12) {
+      tries++;
+      const ang = rand() * Math.PI * 2;
+      const rad = 4 + rand() * 18 * district.zoom;
+      const dx = Math.cos(ang) * rad;
+      const dz = Math.sin(ang) * rad;
+      if (blocked(district, dx, dz)) continue;
+      const w = 1.4 + rand() * 2.4;
+      const d = 1.4 + rand() * 2.4;
+      // taller near the center, shorter at the edge
+      const h = 1 + rand() * district.maxHeight * Math.max(0.15, 1 - rad / (26 * district.zoom));
+      out.push({ p: new THREE.Vector3(dx, h / 2, dz), s: new THREE.Vector3(w, h, d), c: PALETTE[Math.floor(rand() * PALETTE.length)] });
+      placed++;
+    }
     return out;
-  }, []);
+  }, [district, seed]);
 
   useLayoutEffect(() => {
     const mesh = ref.current;
@@ -96,28 +112,87 @@ function Buildings() {
   );
 }
 
+function Districts({ progress }: { progress: MotionValue<number> }) {
+  const groups = useRef<(THREE.Group | null)[]>([]);
+  // Shared materials so the whole avenue fades in together.
+  const roadMat = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: "#101015", roughness: 0.95, transparent: true, opacity: 0, depthWrite: false }),
+    []
+  );
+  const lineMat = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: "#e9e4d8", transparent: true, opacity: 0, depthWrite: false }),
+    []
+  );
+
+  useFrame(() => {
+    const m = mergeAmount(progressToStop(progress.get()).u);
+    DISTRICTS.forEach((d, i) => {
+      const g = groups.current[i];
+      if (!g) return;
+      g.position.set(
+        THREE.MathUtils.lerp(d.pos[0], MERGED[i][0], m),
+        0,
+        THREE.MathUtils.lerp(d.pos[1], MERGED[i][1], m)
+      );
+    });
+    roadMat.opacity = m;
+    lineMat.opacity = m * 0.85;
+  });
+
+  const dashes = useMemo(() => Array.from({ length: Math.floor(AVENUE_LEN / 8) }, (_, i) => AVENUE_Z0 + 40 - i * 8), []);
+
+  return (
+    <>
+      {DISTRICTS.map((d, i) => (
+        <group
+          key={d.id}
+          ref={(el) => {
+            groups.current[i] = el;
+          }}
+          position={[d.pos[0], 0, d.pos[1]]}
+        >
+          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]} receiveShadow>
+            <circleGeometry args={[23 * d.zoom, 28]} />
+            <meshStandardMaterial color="#23232e" roughness={1} />
+          </mesh>
+          <DistrictBuildings district={d} seed={i} />
+          {d.landmarks.map((l) => (
+            <group key={l.id} position={[l.offset[0], 0, l.offset[1]]}>
+              <Landmark id={l.id} />
+            </group>
+          ))}
+        </group>
+      ))}
+
+      {/* The avenue fades in as the districts come together */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[AVENUE_X, 0.03, AVENUE_Z0 + 40 - AVENUE_LEN / 2]} material={roadMat} receiveShadow>
+        <planeGeometry args={[12, AVENUE_LEN]} />
+      </mesh>
+      {dashes.map((z) => (
+        <mesh key={z} rotation={[-Math.PI / 2, 0, 0]} position={[AVENUE_X, 0.05, z]} material={lineMat}>
+          <planeGeometry args={[0.35, 3.2]} />
+        </mesh>
+      ))}
+    </>
+  );
+}
+
 /* ---------------- camera rig ---------------- */
 
 function useCameraPath() {
   return useMemo(() => {
-    const cx = DISTRICTS.reduce((a, c) => a + c.pos[0], 0) / DISTRICTS.length;
-    const cz = DISTRICTS.reduce((a, c) => a + c.pos[1], 0) / DISTRICTS.length;
-    // Opening and closing shots both frame the whole city.
-    const overview = new THREE.Vector3(cx - 35, 105, cz + 125);
-    const overviewEnd = new THREE.Vector3(cx + 25, 120, cz + 140);
-
     const positions = [
-      overview,
+      new THREE.Vector3(CX - 35, 105, CZ + 125), // opening: the whole city from above
       ...STOPS.map(({ district: d }) => {
         const k = d.zoom * (1 + d.lookY / 18);
         return new THREE.Vector3(d.pos[0] - 15 * k, d.lookY + 8 * k, d.pos[1] + 24 * k);
       }),
-      overviewEnd,
+      new THREE.Vector3(AVENUE_X, 11, AVENUE_Z0 + 42), // closing: front and center, down the avenue
     ];
     const targets = [
-      new THREE.Vector3(cx, 0, cz),
+      new THREE.Vector3(CX, 0, CZ),
       ...STOPS.map(({ district: d }) => new THREE.Vector3(d.pos[0], d.lookY * 0.8, d.pos[1])),
-      new THREE.Vector3(cx, 0, cz),
+      new THREE.Vector3(AVENUE_X, -4, AVENUE_Z0 - 140),
     ];
     return {
       pos: new THREE.CatmullRomCurve3(positions, false, "centripetal"),
@@ -136,13 +211,13 @@ function CameraRig({ progress }: { progress: MotionValue<number> }) {
   const tmpL = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((_, dt) => {
-    const { t } = progressToStop(progress.get());
+    const { t, u } = progressToStop(progress.get());
     path.pos.getPoint(t, tmpP);
     path.look.getPoint(t, tmpL);
 
     // Pull back a bit on narrow (portrait) screens so landmarks fit.
     const aspect = (camera as THREE.PerspectiveCamera).aspect || 1;
-    if (aspect < 1) tmpP.lerp(tmpL, -(1 / aspect - 1) * 0.45);
+    if (aspect < 1) tmpP.lerp(tmpL, -(1 / aspect - 1) * 0.45 * (1 - mergeAmount(u) * 0.7));
 
     if (!ready.current) {
       curPos.current.copy(tmpP);
@@ -156,15 +231,14 @@ function CameraRig({ progress }: { progress: MotionValue<number> }) {
     camera.position.copy(curPos.current);
     camera.lookAt(curLook.current);
 
-    // Open the fog up for the final wide shot.
     const fog = scene.fog as THREE.Fog | null;
     if (fog) {
-      // wide at the opening and closing overviews, tighter between cities
-      const wide = Math.max(1 - THREE.MathUtils.smoothstep(t, 0, 0.16), THREE.MathUtils.smoothstep(t, 0.8, 1));
+      const open = 1 - THREE.MathUtils.smoothstep(t, 0, 0.16); // wide opening shot
+      const avenue = mergeAmount(u); // long view down the avenue
       // Portrait screens sit the camera further back, so push the fog back too.
       const reach = aspect < 1 ? 1 + (1 / aspect - 1) * 0.6 : 1;
-      fog.near = THREE.MathUtils.lerp(35, 140, wide) * reach;
-      fog.far = THREE.MathUtils.lerp(130, 420, wide) * reach;
+      fog.near = THREE.MathUtils.lerp(THREE.MathUtils.lerp(35, 140, open), 45, avenue) * reach;
+      fog.far = THREE.MathUtils.lerp(THREE.MathUtils.lerp(130, 420, open), 300, avenue) * reach;
     }
   });
 
@@ -200,27 +274,12 @@ export default function CityScene({ progress }: { progress: MotionValue<number> 
         shadow-camera-far={500}
       />
 
-      {/* ground + district pads */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[80, 0, -20]} receiveShadow>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[CX, 0, CZ - 40]} receiveShadow>
         <planeGeometry args={[900, 900]} />
         <meshStandardMaterial color="#191921" roughness={1} />
       </mesh>
-      {DISTRICTS.map((c) => (
-        <mesh key={c.id} rotation={[-Math.PI / 2, 0, 0]} position={[c.pos[0], 0.01, c.pos[1]]} receiveShadow>
-          <circleGeometry args={[23 * c.zoom, 28]} />
-          <meshStandardMaterial color="#23232e" roughness={1} />
-        </mesh>
-      ))}
 
-      <Buildings />
-      {DISTRICTS.flatMap((d) =>
-        d.landmarks.map((l) => (
-          <group key={`${d.id}-${l.id}`} position={[d.pos[0] + l.offset[0], 0, d.pos[1] + l.offset[1]]}>
-            <Landmark id={l.id} />
-          </group>
-        ))
-      )}
-
+      <Districts progress={progress} />
       <CameraRig progress={progress} />
     </Canvas>
   );
