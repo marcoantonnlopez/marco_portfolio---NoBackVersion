@@ -42,7 +42,7 @@ export default function IntroHero() {
       <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-b from-transparent via-[#171717]/70 to-[#171717]" />
 
       {/* Copy */}
-      <div className="absolute inset-0 flex flex-col items-center justify-end px-6 pb-16 text-center sm:pb-20">
+      <div className="absolute inset-0 flex flex-col items-start justify-end px-6 pb-16 text-left sm:items-center sm:pb-20 sm:text-center">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
