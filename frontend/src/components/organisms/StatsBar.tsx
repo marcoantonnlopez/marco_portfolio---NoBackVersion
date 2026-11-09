@@ -2,8 +2,8 @@ import { StatsItem } from "../molecules/StatsItem";
 
 const stats = [
   { value: "+10", label: "Projects and MVPs shipped" },
-  { value: "2",   label: "International experiences" },
-  { value: "5",   label: "Professional experiences" },
+  { value: "4",   label: "Countries worked & studied abroad" },
+  { value: "6",   label: "Professional experiences" },
   { value: "+10", label: "Awards earned" },
 ];
 
