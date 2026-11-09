@@ -127,7 +127,7 @@ function SequenceSection({
               {title}
             </Heading>
           ) : (
-            <div className="mb-10 text-center text-4xl font-bold sm:text-5xl">{title}</div>
+            <div className="mb-6 text-center text-3xl font-bold sm:mb-10 sm:text-5xl">{title}</div>
           )}
 
           <div className="relative flex min-h-[360px] flex-col justify-center">
