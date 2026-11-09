@@ -25,7 +25,7 @@ export default function ChatTeaser() {
   };
 
   return (
-    <section className="relative z-10 flex min-h-[100svh] items-center bg-black px-4 py-14">
+    <section className="relative z-10 flex min-h-[40svh] items-center bg-black px-4 py-14">
       <motion.div
         ref={cardRef}
         onPointerMove={onMove}
