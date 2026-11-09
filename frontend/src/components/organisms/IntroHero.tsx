@@ -47,7 +47,7 @@ export default function IntroHero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-          className="font-serif text-5xl leading-tight tracking-tight text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.45)] sm:text-6xl md:text-7xl"
+          className="text-5xl font-extrabold leading-[1.1] tracking-tight text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.45)] sm:text-6xl md:text-7xl"
         >
           For the love of living.
         </motion.h1>
@@ -67,10 +67,10 @@ export default function IntroHero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="group mt-8 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/5 px-6 py-3 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-white hover:text-black sm:text-base"
+          className="mt-8 inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-black shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
         >
           See where it led me
-          <ArrowDown size={18} className="transition-transform group-hover:translate-y-0.5" />
+          <ArrowDown className="h-4 w-4" />
         </motion.button>
       </div>
     </section>
