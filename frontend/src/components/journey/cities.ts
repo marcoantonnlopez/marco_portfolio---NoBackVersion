@@ -1,50 +1,130 @@
 // frontend/src/components/journey/cities.ts
-// Edit names / notes here. Leave `note` empty when there's nothing to say yet.
+// The 3D journey: districts are experiences (not a city tour). Edit copy here.
 
-export type LandmarkId = "cdmx" | "toronto" | "ny" | "sf" | "seoul" | "thailand" | "saopaulo" | "panama";
+export type LandmarkId = "cdmx" | "toronto" | "seoul" | "thailand" | "saopaulo" | "panama";
 
-export type City = {
-  id: LandmarkId;
-  name: string;
-  note: string;
-  /** Position on the ground plane (x, z). */
+export type District = {
+  id: string;
+  /** Center on the ground plane (x, z). */
   pos: [number, number];
-  /** Height the camera looks at (roughly half the landmark). */
+  /** Landmarks placed in this district, offset from its center (x, z). */
+  landmarks: { id: LandmarkId; offset: [number, number] }[];
+  /** Height the camera looks at. */
   lookY: number;
-  /** Surrounding generic buildings. */
+  /** Camera distance multiplier (bigger districts need more room). */
+  zoom: number;
   density: number;
   maxHeight: number;
 };
 
-export const CITIES: City[] = [
-  { id: "cdmx", name: "Mexico City", note: "", pos: [0, 0], lookY: 8, density: 46, maxHeight: 7 },
+export type StopCopy = {
+  eyebrow: string;
+  title: string;
+  body: string;
+  tag: string;
+};
+
+export type Stop = { district: District; copy: StopCopy };
+
+const ASIA: District = {
+  id: "asia",
+  pos: [0, 0],
+  landmarks: [
+    { id: "seoul", offset: [-9, -2] },
+    { id: "thailand", offset: [11, 5] },
+  ],
+  lookY: 9,
+  zoom: 1.5,
+  density: 46,
+  maxHeight: 9,
+};
+
+const CDMX: District = {
+  id: "cdmx",
+  pos: [52, -34],
+  landmarks: [{ id: "cdmx", offset: [0, 0] }],
+  lookY: 9,
+  zoom: 1.1,
+  density: 50,
+  maxHeight: 8,
+};
+
+const LATAM: District = {
+  id: "latam",
+  pos: [104, -6],
+  landmarks: [
+    { id: "saopaulo", offset: [-6, 2] },
+    { id: "panama", offset: [12, -11] },
+  ],
+  lookY: 10,
+  zoom: 1.45,
+  density: 70,
+  maxHeight: 15,
+};
+
+const TORONTO: District = {
+  id: "toronto",
+  pos: [154, -40],
+  landmarks: [{ id: "toronto", offset: [0, 0] }],
+  lookY: 15,
+  zoom: 1.2,
+  density: 44,
+  maxHeight: 12,
+};
+
+export const DISTRICTS: District[] = [ASIA, CDMX, LATAM, TORONTO];
+
+export const INTRO_COPY = {
+  title: "I'm Marco López, a dream builder.",
+  roles: "Product Designer & AI Engineer · Leader, developer and designer · English & Spanish",
+};
+
+export const STOPS: Stop[] = [
   {
-    id: "toronto",
-    name: "Toronto",
-    note: "Global research internship · Mitacs @ York University",
-    pos: [42, -32],
-    lookY: 14,
-    density: 40,
-    maxHeight: 12,
+    district: ASIA,
+    copy: {
+      eyebrow: "Across borders",
+      title: "It led me across borders.",
+      body: "A semester in Seoul, research in Toronto, work in São Paulo and Panama.",
+      tag: "Dankook University · Global Business semester",
+    },
   },
-  { id: "ny", name: "New York", note: "", pos: [86, -8], lookY: 14, density: 60, maxHeight: 16 },
-  { id: "sf", name: "San Francisco", note: "Domu · YC-backed startup", pos: [124, -44], lookY: 6, density: 26, maxHeight: 8 },
   {
-    id: "seoul",
-    name: "Seoul",
-    note: "International semester · Dankook University",
-    pos: [166, -18],
-    lookY: 10,
-    density: 44,
-    maxHeight: 11,
+    district: CDMX,
+    copy: {
+      eyebrow: "Leader",
+      title: "I lead with heart.",
+      body: "Communities, teams and programs built around people, not titles.",
+      tag: "TrepCamp · Highest investment potential project",
+    },
   },
-  { id: "thailand", name: "Thailand", note: "", pos: [204, -54], lookY: 7, density: 24, maxHeight: 5 },
-  { id: "saopaulo", name: "São Paulo", note: "Work trip · Domu", pos: [244, -26], lookY: 8, density: 64, maxHeight: 15 },
-  { id: "panama", name: "Panama City", note: "Work trip · Domu", pos: [282, -62], lookY: 12, density: 44, maxHeight: 14 },
+  {
+    district: LATAM,
+    copy: {
+      eyebrow: "Developer",
+      title: "I ship what I dream.",
+      body: "From hackathon MVPs to AI voice agents handling thousands of calls a day.",
+      tag: "Domu · YC-backed startup · LATAM",
+    },
+  },
+  {
+    district: TORONTO,
+    copy: {
+      eyebrow: "Designer",
+      title: "I make it useful and beautiful.",
+      body: "Product thinking, design systems and decisions backed by data.",
+      tag: "Mitacs @ York University · Head of UI Design",
+    },
+  },
 ];
 
-/** Camera stops: overview → each city → final overview. */
-export const STOP_COUNT = CITIES.length + 2;
+export const OUTRO_COPY = {
+  title: "Leader. Developer. Designer.",
+  body: "Explore the projects behind each one.",
+};
+
+/** Camera stops: opening overview → each district → closing overview. */
+export const STOP_COUNT = STOPS.length + 2;
 
 const smooth = (f: number) => f * f * (3 - 2 * f);
 

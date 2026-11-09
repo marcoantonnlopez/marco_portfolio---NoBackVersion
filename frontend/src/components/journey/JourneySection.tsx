@@ -5,8 +5,8 @@ import { Component, useRef, useState, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
-import { ArrowRight, Github, Linkedin, MapPin } from "lucide-react";
-import { CITIES, STOP_COUNT, progressToStop } from "./cities";
+import { ArrowRight, Github, Linkedin } from "lucide-react";
+import { INTRO_COPY, OUTRO_COPY, STOPS, STOP_COUNT, progressToStop } from "./cities";
 import { useProjectCounts } from "@/lib/useProjectCounts";
 
 const CityScene = dynamic(() => import("./CityScene"), { ssr: false });
@@ -35,28 +35,35 @@ const fade = {
 
 /* ---------- copy blocks ---------- */
 
-function Headline() {
+function IntroBlock() {
   return (
     <div className="max-w-3xl">
-      <h2 className="text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-        I turn ideas
-        <br />
-        into products.
-      </h2>
-      <p className="mt-4 text-sm uppercase tracking-widest text-white/60">Scroll through the places that shaped me</p>
+      <h2 className="text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">{INTRO_COPY.title}</h2>
+      <p className="mt-5 max-w-2xl text-base text-white/80 sm:text-lg">{INTRO_COPY.roles}</p>
     </div>
   );
 }
 
-function IntroCard() {
+function StopCard({ index }: { index: number }) {
+  const { copy } = STOPS[index];
+  return (
+    <div className="max-w-xl rounded-2xl border border-white/15 bg-black/45 px-6 py-5 backdrop-blur-md">
+      <span className="text-xs uppercase tracking-widest text-white/60">{copy.eyebrow}</span>
+      <h3 className="mt-1 text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl">{copy.title}</h3>
+      <p className="mt-2 text-sm text-white/80 sm:text-base">{copy.body}</p>
+      <span className="mt-4 inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs text-white/85">
+        {copy.tag}
+      </span>
+    </div>
+  );
+}
+
+function OutroCard() {
   const counts = useProjectCounts();
   return (
     <div className="max-w-xl rounded-2xl border border-white/10 bg-black/45 p-6 backdrop-blur-md sm:p-8">
-      <h2 className="text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
-        I&apos;m Marco López,
-        <br />
-        a dream builder.
-      </h2>
+      <h2 className="text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">{OUTRO_COPY.title}</h2>
+      <p className="mt-2 text-white/80">{OUTRO_COPY.body}</p>
 
       <div className="mt-5 flex items-center gap-4 text-white/80">
         <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 hover:text-white">
@@ -93,19 +100,6 @@ function IntroCard() {
   );
 }
 
-function CityChip({ index }: { index: number }) {
-  const city = CITIES[index];
-  return (
-    <div className="inline-flex max-w-md flex-col rounded-2xl border border-white/15 bg-black/45 px-5 py-4 backdrop-blur-md">
-      <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/60">
-        <MapPin className="h-3.5 w-3.5" /> Stop {index + 1} of {CITIES.length}
-      </span>
-      <span className="mt-1 text-3xl font-extrabold tracking-tight sm:text-4xl">{city.name}</span>
-      {city.note && <span className="mt-1 text-sm text-white/75 sm:text-base">{city.note}</span>}
-    </div>
-  );
-}
-
 /* ---------- section ---------- */
 
 export default function JourneySection() {
@@ -120,7 +114,7 @@ export default function JourneySection() {
     let next: Phase;
     if (u < 0.45) next = { kind: "intro" };
     else if (u > STOP_COUNT - 1.45) next = { kind: "outro" };
-    else if (k >= 1 && k <= CITIES.length && Math.abs(u - k) < 0.42) next = { kind: "city", index: k - 1 };
+    else if (k >= 1 && k <= STOPS.length && Math.abs(u - k) < 0.42) next = { kind: "city", index: k - 1 };
     else next = { kind: "between" };
     setPhase((prev) =>
       prev.kind === next.kind && (prev.kind !== "city" || (next.kind === "city" && prev.index === next.index)) ? prev : next
@@ -131,8 +125,11 @@ export default function JourneySection() {
   if (reduceMotion) {
     return (
       <section className="mx-auto flex max-w-6xl flex-col gap-12 bg-black px-6 py-24 text-white">
-        <Headline />
-        <IntroCard />
+        <IntroBlock />
+        {STOPS.map((_, i) => (
+          <StopCard key={i} index={i} />
+        ))}
+        <OutroCard />
       </section>
     );
   }
@@ -140,7 +137,7 @@ export default function JourneySection() {
   const key = phase.kind === "city" ? `city-${phase.index}` : phase.kind;
 
   return (
-    <section ref={ref} aria-label="My journey" className="relative h-[700svh] bg-black text-white">
+    <section ref={ref} aria-label="My journey" className="relative h-[600svh] bg-black text-white">
       <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
         <SceneBoundary>
           <CityScene progress={scrollYProgress} />
@@ -154,9 +151,9 @@ export default function JourneySection() {
           <AnimatePresence mode="wait">
             {phase.kind !== "between" && (
               <motion.div key={key} {...fade} className="pointer-events-auto">
-                {phase.kind === "intro" && <Headline />}
-                {phase.kind === "city" && <CityChip index={phase.index} />}
-                {phase.kind === "outro" && <IntroCard />}
+                {phase.kind === "intro" && <IntroBlock />}
+                {phase.kind === "city" && <StopCard index={phase.index} />}
+                {phase.kind === "outro" && <OutroCard />}
               </motion.div>
             )}
           </AnimatePresence>

@@ -2,7 +2,6 @@
 // Procedural low-poly landmarks (no external models → tiny download, one consistent style).
 "use client";
 
-import { useMemo } from "react";
 import * as THREE from "three";
 import type { LandmarkId } from "./cities";
 
@@ -101,65 +100,6 @@ function Angel() {
   );
 }
 
-/* ---------- New York: Empire State ---------- */
-function EmpireState() {
-  return (
-    <group>
-      <Box p={[0, 1.5, 0]} s={[8, 3, 8]} color={C.concrete} />
-      <Box p={[0, 10, 0]} s={[5.5, 14, 5.5]} color={C.concrete} />
-      <Box p={[0, 19.5, 0]} s={[4.2, 5, 4.2]} color={C.white} />
-      <Box p={[0, 23.2, 0]} s={[2.8, 2.4, 2.8]} color={C.white} />
-      <Cyl p={[0, 25.6, 0]} rt={0.8} rb={1.1} h={2.4} color={C.gold} seg={8} />
-      <Cyl p={[0, 29, 0]} rt={0.06} rb={0.35} h={4.6} color={C.white} seg={6} />
-    </group>
-  );
-}
-
-/* ---------- San Francisco: Golden Gate ---------- */
-function GoldenGate() {
-  const span = 34;
-  const towerX = 11;
-  const cable = useMemo(() => {
-    const pts: THREE.Vector3[] = [];
-    for (let i = 0; i <= 40; i++) {
-      const x = -span / 2 + (span * i) / 40;
-      const a = Math.abs(x);
-      // sag between towers, rise toward anchors outside them
-      const y = a <= towerX ? 4.6 + 9 * (a / towerX) ** 2 : 13.6 - 9.6 * ((a - towerX) / (span / 2 - towerX));
-      pts.push(new THREE.Vector3(x, y, 0));
-    }
-    return new THREE.CatmullRomCurve3(pts);
-  }, []);
-
-  const Tower = ({ x }: { x: number }) => (
-    <group position={[x, 0, 0]}>
-      <Box p={[0, 7, -1.1]} s={[0.7, 14, 0.7]} color={C.red} />
-      <Box p={[0, 7, 1.1]} s={[0.7, 14, 0.7]} color={C.red} />
-      {[6, 10, 13.6].map((y) => (
-        <Box key={y} p={[0, y, 0]} s={[0.6, 0.6, 2.9]} color={C.red} />
-      ))}
-    </group>
-  );
-
-  return (
-    <group>
-      <mesh position={[0, 0.03, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <planeGeometry args={[60, 22]} />
-        <meshStandardMaterial color={C.water} roughness={0.3} metalness={0.2} />
-      </mesh>
-      <Box p={[0, 4, 0]} s={[span, 0.5, 2.6]} color={C.red} />
-      <Tower x={-towerX} />
-      <Tower x={towerX} />
-      {[-1.1, 1.1].map((z) => (
-        <mesh key={z} position={[0, 0, z]}>
-          <tubeGeometry args={[cable, 60, 0.09, 5, false]} />
-          <Mat color={C.red} />
-        </mesh>
-      ))}
-    </group>
-  );
-}
-
 /* ---------- Thailand: Wat Arun-style prang ---------- */
 function Prang({ scale = 1 }: { scale?: number }) {
   return (
@@ -244,10 +184,6 @@ export function Landmark({ id }: { id: LandmarkId }) {
       return <NSeoulTower />;
     case "cdmx":
       return <Angel />;
-    case "ny":
-      return <EmpireState />;
-    case "sf":
-      return <GoldenGate />;
     case "thailand":
       return <WatArun />;
     case "saopaulo":
