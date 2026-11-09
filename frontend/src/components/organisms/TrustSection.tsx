@@ -115,9 +115,9 @@ function SequenceSection({
     <section
       ref={ref}
       className={clsx("relative bg-black", className)}
-      style={{ height: `calc(${items.length} * 60svh + 100svh)` }}
+      style={{ height: `calc(${items.length} * 60svh + 110svh)` }}
     >
-      <div className="sticky top-0 flex h-[100svh] flex-col justify-start overflow-hidden pt-[16svh]">
+      <div className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden pb-[4svh] pt-[10svh]">
         <div
           className={clsx("mx-auto w-full px-4", !maxWidth && "max-w-6xl")}
           style={maxWidth ? { maxWidth: `min(${maxWidth}, 100%)` } : undefined}
@@ -130,7 +130,7 @@ function SequenceSection({
             <div className="mb-10 text-center text-4xl font-bold sm:text-5xl">{title}</div>
           )}
 
-          <div className="relative min-h-[360px]">
+          <div className="relative flex min-h-[360px] flex-col justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
