@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import clsx from "clsx";
 import { TrustItem, type TrustItemProps } from "@/components/molecules/TrustItem";
 import { TrustItemGrouped, type TrustGroupProps } from "@/components/molecules/TrustItemGrouped";
@@ -21,8 +22,11 @@ interface TrustSectionProps {
   className?: string;
   /** Fixed visual height for each item to keep them homogeneous */
   itemMinHeightPx?: number; // default 112
-  /** "grid" (2 columns) or "stack" (one card per row, revealed one at a time while scrolling) */
-  layout?: "grid" | "stack";
+  /**
+   * "grid": 2 columns. "stack": one card per row.
+   * "sequence": pinned while scrolling, showing one card at a time (the next replaces the previous).
+   */
+  layout?: "grid" | "stack" | "sequence";
   /** Optional max width for the content, e.g. "130vh" */
   maxWidth?: string;
 }
@@ -36,6 +40,10 @@ export default function TrustSection({
   maxWidth,
 }: TrustSectionProps) {
   const stack = layout === "stack";
+
+  if (layout === "sequence") {
+    return <SequenceSection title={title} items={items} className={className} maxWidth={maxWidth} />;
+  }
   return (
     <section className={clsx("relative isolate bg-black py-16", className)}>
       <div
@@ -69,6 +77,89 @@ export default function TrustSection({
             );
           })}
         </ul>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- "sequence": one card at a time while scrolling ---------- */
+
+function renderEntry(item: TrustEntry) {
+  return isGrouped(item) ? <TrustItemGrouped {...item} /> : <TrustItem {...item} />;
+}
+
+function SequenceSection({
+  title,
+  items,
+  className,
+  maxWidth,
+}: {
+  title: React.ReactNode;
+  items: TrustEntry[];
+  className?: string;
+  maxWidth?: string;
+}) {
+  const ref = useRef<HTMLElement>(null);
+  const [active, setActive] = useState(0);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+
+  useMotionValueEvent(scrollYProgress, "change", (p) => {
+    const i = Math.min(items.length - 1, Math.max(0, Math.floor(p * items.length)));
+    setActive((prev) => (prev === i ? prev : i));
+  });
+
+  const item = items[active];
+
+  return (
+    // ~60vh of scroll per card; the stage stays pinned while they swap.
+    <section
+      ref={ref}
+      className={clsx("relative bg-black", className)}
+      style={{ height: `calc(${items.length} * 60svh + 100svh)` }}
+    >
+      <div className="sticky top-0 flex h-[100svh] flex-col justify-start overflow-hidden pt-[16svh]">
+        <div
+          className={clsx("mx-auto w-full px-4", !maxWidth && "max-w-6xl")}
+          style={maxWidth ? { maxWidth: `min(${maxWidth}, 100%)` } : undefined}
+        >
+          {typeof title === "string" ? (
+            <Heading level={2} className="mb-10 font-extrabold leading-tight tracking-tight text-white">
+              {title}
+            </Heading>
+          ) : (
+            <div className="mb-10 text-center text-4xl font-bold sm:text-5xl">{title}</div>
+          )}
+
+          <div className="relative min-h-[360px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 40, filter: "blur(6px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -40, filter: "blur(6px)" }}
+                transition={{ duration: 0.45, ease: "easeOut" }}
+              >
+                {renderEntry(item)}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Progress */}
+          <div className="mt-8 flex items-center justify-center gap-2" aria-hidden="true">
+            {items.map((_, i) => (
+              <span
+                key={i}
+                className={clsx(
+                  "h-1.5 rounded-full transition-all duration-300",
+                  i === active ? "w-6 bg-white" : "w-1.5 bg-white/30"
+                )}
+              />
+            ))}
+          </div>
+          <p className="mt-3 text-center text-xs text-white/50">
+            {active + 1} / {items.length}
+          </p>
+        </div>
       </div>
     </section>
   );

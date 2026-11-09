@@ -113,8 +113,8 @@ const EXPERIENCE_DATA = [
   },
   {
     logoSrc:
-      "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/logos/globalset.svg",
-    logoAlt: "GlobalSet",
+      "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/logos/globalset.png",
+    logoAlt: "GlobalSet logo",
     title: "Technical Support Engineer, Internal Systems",
     subtitle: "GlobalSet · Oct 2025 - Mar 2026 · Remote",
     description:
@@ -195,7 +195,7 @@ export default async function HomePage() {
       <TrustSection
         title={<span>Companies I have collaborated with.</span>}
         items={EXPERIENCE_DATA}
-        layout="stack"
+        layout="sequence"
         maxWidth="130vh"
       />
       <DesignCarousel/>
