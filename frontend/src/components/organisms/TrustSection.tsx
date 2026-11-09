@@ -21,6 +21,10 @@ interface TrustSectionProps {
   className?: string;
   /** Fixed visual height for each item to keep them homogeneous */
   itemMinHeightPx?: number; // default 112
+  /** "grid" (2 columns) or "stack" (one card per row, revealed one at a time while scrolling) */
+  layout?: "grid" | "stack";
+  /** Optional max width for the content, e.g. "130vh" */
+  maxWidth?: string;
 }
 
 export default function TrustSection({
@@ -28,10 +32,16 @@ export default function TrustSection({
   items,
   className,
   itemMinHeightPx = 112,
+  layout = "grid",
+  maxWidth,
 }: TrustSectionProps) {
+  const stack = layout === "stack";
   return (
     <section className={clsx("relative isolate bg-black py-16", className)}>
-      <div className="mx-auto max-w-6xl px-4">
+      <div
+        className={clsx("mx-auto px-4", !maxWidth && "max-w-6xl")}
+        style={maxWidth ? { maxWidth: `min(${maxWidth}, 100%)` } : undefined}
+      >
         {/* Title styled like card headings */}
         {typeof title === "string" ? (
           <Heading level={2}
@@ -45,14 +55,14 @@ export default function TrustSection({
         )}
 
         {/* Homogeneous item sizes */}
-        <ul className="grid gap-3 md:grid-cols-2">
+        <ul className={stack ? "flex flex-col gap-6" : "grid gap-3 md:grid-cols-2"}>
           {items.map((item, i) => {
             const grouped = isGrouped(item);
             return (
               <li
                 key={`${grouped ? item.company : item.title}-${i}`}
-                style={grouped ? undefined : { minHeight: itemMinHeightPx }}
-                className={grouped ? "md:col-span-2" : undefined}
+                style={grouped || stack ? undefined : { minHeight: itemMinHeightPx }}
+                className={grouped && !stack ? "md:col-span-2" : undefined}
               >
                 {grouped ? <TrustItemGrouped {...item} /> : <TrustItem {...item} />}
               </li>

@@ -13,11 +13,21 @@ export interface TrustItemProps {
   title: string;
   subtitle?: string;
   description: string;
-  link: string;
+  /** Optional: without a link the card isn't clickable and hides "Visit". */
+  link?: string;
   /** opcional: chip arriba a la derecha (e.g. "Press", "Award") */
   badge?: string;
   /** opcional: tags debajo del texto (e.g. ["YC alum", "Featured"]) */
   tags?: string[];
+}
+
+function CardShell({ link, label, className, children }: { link?: string; label: string; className: string; children: React.ReactNode }) {
+  if (!link) return <div className={className}>{children}</div>;
+  return (
+    <Link href={link} target="_blank" rel="noopener noreferrer" aria-label={label} className={className}>
+      {children}
+    </Link>
+  );
 }
 
 export function TrustItem({
@@ -38,11 +48,9 @@ export function TrustItem({
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
     >
-      <Link
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Visitar ${title}`}
+      <CardShell
+        link={link}
+        label={`Visit ${title}`}
         className="
           group grid grid-cols-1 sm:grid-cols-[auto_1px_1fr] items-center sm:items-start gap-y-4 sm:gap-y-0 sm:gap-x-6
           rounded-2xl bg-white/5 ring-1 ring-white/10 p-4 md:p-5
@@ -81,10 +89,12 @@ export function TrustItem({
                 <p className="text-white/70 text-sm mt-0.5">{subtitle}</p>
               )}
             </div>
-            <span className="hidden sm:inline-flex items-center gap-1 text-xs text-white/70 group-hover:text-white">
-              Visit{" "}
-              <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </span>
+            {link && (
+              <span className="hidden sm:inline-flex items-center gap-1 text-xs text-white/70 group-hover:text-white">
+                Visit{" "}
+                <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </span>
+            )}
           </div>
 
           <p className="text-white/90 text-sm mt-2">{description}</p>
@@ -103,12 +113,14 @@ export function TrustItem({
           )}
 
           {/* CTA móvil */}
-          <span className="mt-3 inline-flex sm:hidden items-center gap-1 text-sm text-white/80 group-hover:text-white">
-            Visit{" "}
-            <ExternalLink className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </span>
+          {link && (
+            <span className="mt-3 inline-flex sm:hidden items-center gap-1 text-sm text-white/80 group-hover:text-white">
+              Visit{" "}
+              <ExternalLink className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </span>
+          )}
         </div>
-      </Link>
+      </CardShell>
     </motion.div>
   );
 }

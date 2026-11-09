@@ -101,59 +101,71 @@ const EXPERIENCE_DATA = [
         title: "Platform Prompt Engineer",
         dateRange: "Jul 2026 - Oct 2026 · 4 mos",
         description:
-          "Owned the full configuration cycle for production voice AI agents — decision logic, tools, testing, deployment — raising accuracy on sensitive call content from ~70% to ~99%. Scaled coverage from 5 to 9 deployed agents across 5 LATAM fintech/lending clients (10,000–15,000 calls/day each), driving decisions through SQL dashboards and A/B testing.",
+          "Raised accuracy on sensitive voice AI conversations from ~70% to ~99%, and on tasks like date calculations from 60% to 98%, by building agent tool calling, call-state detection and automated evaluation. Kept up to 14 production agents running for LATAM fintech and lending clients, with the busiest peaking at ~45,000 calls a day, and guided configuration decisions with SQL-driven A/B tests.",
       },
       {
         title: "Technical Account Manager",
         dateRange: "Mar 2026 - Jul 2026 · 5 mos",
         description:
-          "Scaled Domu's top-priority LATAM account from 5,000 to 12,000 contacts and lifted promise-to-pay conversion ~7 points (24.6% → 31.5%) by designing and running SQL-driven A/B tests. Grew a managed portfolio from 3 to 6 enterprise accounts and cut new-hire ramp-up time from 3 weeks to 1–2 weeks by automating reporting and documenting workflows.",
+          "Lifted promise-to-pay conversion ~7 points (24.6% → 31.5%) on Domu's top-priority LATAM account with SQL-driven A/B tests while scaling outreach from 5,000 to 12,000 contacts. Nearly doubled right-party contact (~4% → 7–8%) with time-of-day greetings, and automated daily reporting for ~15,000 calls a day per client, removing the need for a dedicated reporting hire.",
       },
     ],
+  },
+  {
+    logoSrc:
+      "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/logos/globalset.svg",
+    logoAlt: "GlobalSet",
+    title: "Technical Support Engineer, Internal Systems",
+    subtitle: "GlobalSet · Oct 2025 - Mar 2026 · Remote",
+    description:
+      "Moved internal financial-system workflows and screens from a legacy codebase to a new platform as part of a six-person engineering team, resolving ~3 tickets a week with no regressions across QA and production. Built database tables, SQL queries and frontend-to-backend connections, and documented ~25 screens and features to speed up knowledge transfer.",
   },
   {
     logoSrc:
       "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/logos/aiaPartners.svg",
     logoAlt: "AIA logo",
     title: "Frontend Developer",
-    subtitle: "AIA Partners",
-    description: "Increased project efficiency by creating mockups for new projects using Figma, based on atomic design principles. Collaborated with the CEO to develop a compelling business model for TESLAIA, resulting in a presentation that attracted investor interest. Helped to develop a new investor dashboard feature by designing and implementing web solutions with Vue3, HTML, CSS, and JavaScript, enhancing user engagement by 25%.",
+    subtitle: "AIA Partners · Jun 2023 - Oct 2023",
+    description:
+      "Designed and built a new investor dashboard feature in Vue 3 that lifted engagement ~25%. Worked directly with the CEO to shape and present the TESLAIA business model, which drew investor interest, and sped up new projects with Figma mockups based on Atomic Design.",
     link: "https://www.aiapartner.com/es-MX",
   },
   {
     logoSrc:
       "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/logos/lassondeYorkU.svg",
     logoAlt: "Lassonde logo",
-    title: "Global internship, Head of UI design",
-    subtitle: "Mitacs @YorkU Lassonde School of engineering",
-    description: " Increased team productivity by 30% by implementing SCRUM methodologies across the project, using tools like, Jira, Slack, Confluence, and Figma,  Improved user acceptance by 40% through a comprehensive UX process for a mobile gaming app, including creating buyer personas and high-fidelity prototypes",
+    title: "Global Research Intern · Head of UI Design",
+    subtitle: "Mitacs @ York University, Lassonde School of Engineering · Toronto · 100% scholarship",
+    description:
+      "Led UI design for a mobile game during a 3-month research internship in Toronto. Lifted user acceptance ~40% through a full UX process, from buyer personas to high-fidelity prototypes, and raised team productivity ~30% by running Scrum with Jira, Confluence, Slack and Figma.",
     link: "https://lassonde.yorku.ca/",
   },
   {
-    logoSrc: "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/logos/trepcamp.svg",    
+    logoSrc: "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/logos/trepcamp.svg",
     logoAlt: "Trepcamp logo",
     title: "Web Development Freelancer",
-    subtitle: "Trepcamp",
-    description: "Expanded audience by translating the website and database from Spanish to English, enabling accessibility for non Spanish-speaking users, using HTML, CSS, PHP and mySQL.",
+    subtitle: "TrepCamp",
+    description:
+      "Opened the platform to non-Spanish-speaking users by translating the website and its database from Spanish to English with HTML, CSS, PHP and MySQL.",
     link: "https://www.trepcamp.org/",
   },
   {
     logoSrc:
       "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/logos/cityu.svg",
     logoAlt: "CityU logo",
-    title: "Fullstack developer",
-    subtitle: "UASLP - City University of Seattle",
-    description: "Improved administrative efficiency for a dual-degree program serving ~100 students by refactoring internal contract generation workflows using PHP and MySQL, reducing manual workload for staff by 60% and streamlining PDF output",
+    title: "Full-stack Developer",
+    subtitle: "UASLP · City University of Seattle dual-degree program",
+    description:
+      "Cut staff's manual workload ~60% for a dual-degree program serving ~100 students by refactoring contract-generation workflows and PDF output with PHP and MySQL.",
     link: "https://www.cityu.edu/",
   },
   {
     logoSrc: "https://cdn.jsdelivr.net/gh/marcoantonnlopez/portfolioContent@master/pages/1_Home/logos/aiesec.svg",
     logoAlt: "AIESEC logo",
-    title: "Marketing intern",
+    title: "Marketing Intern",
     subtitle: "AIESEC",
-    description: "Content creator and strategy analyst",
+    description: "Created content and analyzed marketing strategy for the local chapter.",
     link: "https://aiesec.org",
-    meta: "Community",
   },
 ];
 
@@ -183,6 +195,8 @@ export default async function HomePage() {
       <TrustSection
         title={<span>Companies I have collaborated with.</span>}
         items={EXPERIENCE_DATA}
+        layout="stack"
+        maxWidth="130vh"
       />
       <DesignCarousel/>
 
